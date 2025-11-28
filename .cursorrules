@@ -1,0 +1,199 @@
+# Hotel Corona - Cursor IDE Project Rules
+
+## Project Overview
+Hotel Corona is a luxury coastal hotel website built with Next.js 14+, TypeScript, and Tailwind CSS. The site features a coastal castle aesthetic with elegant animations and conversion-optimized booking flows.
+
+## Tech Stack
+- **Framework**: Next.js 14+ (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS with custom color palette
+- **Animations**: Framer Motion
+- **Image Optimization**: Next.js Image component
+
+## Color Palette - Coastal Castle Elegance
+```
+Coastal:
+- cream: #e9d9c3 (Primary background)
+- sand: #d1c4a8 (Secondary background)
+- gold-light: #b39a6b (Accent highlights)
+- gold: #c4a65a (Primary accent)
+- bronze: #8a6e3d (Dark accent/text)
+
+Accent:
+- burgundy: #7d2e2e (CTAs)
+- dark-brown: #3d2817 (Dark text/borders)
+```
+
+## Typography Standards
+- **Headings**: Playfair Display (serif)
+- **Body Text**: Montserrat (sans-serif)
+- **Font Weights**: 400 (regular), 600 (semibold), 700 (bold)
+
+## Code Style Guidelines
+
+### TypeScript
+- Always use TypeScript strict mode
+- Define interfaces for all props and data structures
+- Avoid `any` type - use `unknown` or proper types
+- Use const assertions for constant objects
+- Prefer type inference when obvious
+
+### React Components
+- Use functional components with TypeScript
+- Prefer named exports for components
+- Use React.FC for component typing when props include children
+- Keep components under 300 lines - split if larger
+- Co-locate related components and types
+
+### File Naming Conventions
+- Components: PascalCase (e.g., `HeroSection.tsx`)
+- Utilities: camelCase (e.g., `utils.ts`)
+- Constants: camelCase file, UPPER_SNAKE_CASE for exports
+- Pages: lowercase with hyphens (e.g., `[slug]/page.tsx`)
+
+### Component Structure
+```typescript
+// 1. Imports (external, then internal)
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/Button';
+
+// 2. Types/Interfaces
+interface ComponentProps {
+  title: string;
+  // ...
+}
+
+// 3. Constants (if any)
+const ANIMATION_DURATION = 0.3;
+
+// 4. Component
+export const Component = ({ title }: ComponentProps) => {
+  // Hooks first
+  // Event handlers
+  // Render
+  return <div>{title}</div>;
+};
+```
+
+### Styling Guidelines
+- Use Tailwind utility classes first
+- Create custom utilities in `globals.css` for repeated patterns
+- Follow mobile-first responsive design
+- Use Tailwind's custom color names (coastal-cream, accent-burgundy)
+- Maintain consistent spacing scale (4, 8, 12, 16, 24, 32, 48, 64)
+
+### Animation Standards
+- Use Framer Motion for complex animations
+- Transition duration: 300-400ms for hover effects
+- Use `ease-in-out` or custom easing for smooth animations
+- Implement scroll-triggered animations with Intersection Observer
+- Keep animations subtle and purposeful
+
+### Image Optimization
+- Always use Next.js Image component
+- Provide width and height props
+- Use `priority` for above-the-fold images
+- Use `loading="lazy"` for below-the-fold images
+- Provide descriptive alt text for accessibility
+
+### Accessibility Requirements
+- Maintain WCAG AA color contrast minimum
+- Include ARIA labels for interactive elements
+- Ensure keyboard navigation works
+- Add visible focus states
+- Use semantic HTML elements
+
+## Key Features Implementation
+
+### Loading Overlay
+- Display on initial page load only
+- Minimum 1.5s display time
+- Fade-in/fade-out animations
+- Logo centered on coastal gradient background
+
+### Booking Bar
+- Hidden on page load
+- Appears after 300px scroll
+- Fixed to top with backdrop-blur
+- Inline date pickers (not modals)
+- Mobile: Collapsible with floating button
+
+### Performance Standards
+- Lighthouse score: 90+ on all metrics
+- Initial JS bundle: <200KB
+- First Contentful Paint: <1.5s
+- Time to Interactive: <3.5s
+
+## API Integration Patterns
+- Use Next.js API routes for server-side logic
+- Implement proper error handling with try-catch
+- Return consistent response formats
+- Add loading states for all async operations
+- Implement optimistic updates where appropriate
+
+## Testing Guidelines
+- Test responsive behavior at all breakpoints
+- Verify accessibility with keyboard navigation
+- Check loading states and error states
+- Test form validations
+- Verify image lazy loading
+
+## Git Commit Conventions
+```
+feat: Add new feature
+fix: Bug fix
+style: Formatting changes
+refactor: Code restructuring
+docs: Documentation updates
+perf: Performance improvements
+test: Test additions/updates
+```
+
+## Don't Do This
+- ❌ Never use inline styles (use Tailwind classes)
+- ❌ Don't create example/placeholder code
+- ❌ Don't run dev servers (assume they're running)
+- ❌ Don't use `any` type in TypeScript
+- ❌ Don't hardcode content that should be in constants
+- ❌ Don't skip alt text on images
+- ❌ Don't use harsh black shadows (use warm tones)
+
+## Do This
+- ✅ Use semantic HTML elements
+- ✅ Implement proper TypeScript types
+- ✅ Follow the established color palette
+- ✅ Add hover states to all interactive elements
+- ✅ Optimize images and implement lazy loading
+- ✅ Maintain consistent spacing and typography
+- ✅ Test on mobile and desktop viewports
+- ✅ Write clean, maintainable code
+
+## Folder Structure
+```
+/app - Next.js pages (App Router)
+/components
+  /layout - Header, Footer, BookingBar, LoadingOverlay
+  /sections - Page sections (Hero, Welcome, Testimonials, etc.)
+  /ui - Reusable UI components (Button, Card, Input, etc.)
+/lib - Utilities and constants
+/public/images - Static assets
+```
+
+## Environment Setup
+- Node.js: 18.x or higher
+- Package manager: npm (primary), pnpm (alternative)
+- IDE: Cursor or VS Code with TypeScript and Tailwind extensions
+
+## Deployment
+- Platform: Vercel (optimized)
+- Build command: `npm run build`
+- Environment: Production-ready configuration
+- See VERCEL_DEPLOYMENT_CHECKLIST.md for details
+
+## Additional Resources
+- PROJECT_STATUS.md - Current project status
+- DESIGN_FIXES.md - Design improvements log
+- UI_UX_IMPROVEMENTS_SUMMARY.md - UX enhancement details
+- DEPLOYMENT_GUIDE.md - Full deployment instructions
+
