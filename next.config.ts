@@ -27,12 +27,8 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   
   // Performance & Bundle Optimizations
-  swcMinify: true,
   poweredByHeader: false,
   reactStrictMode: true,
-  
-  // Optimize CSS
-  optimizeFonts: true,
   
   // Experimental Features for Better Performance
   experimental: {

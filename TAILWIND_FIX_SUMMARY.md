@@ -80,3 +80,4 @@ All standard Tailwind utility classes now work:
 ## Next Steps
 Your Tailwind CSS setup is now complete and functional. All standard and custom classes should work as expected. If you need to add more custom colors, fonts, or other theme extensions, edit the `tailwind.config.ts` file in the `theme.extend` section.
 
+

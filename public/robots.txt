@@ -1,11 +1,9 @@
-# Hotel Corona - Robots.txt
+# *
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+# Host
+Host: https://hotelcorona.com
 
-# Disallow admin or private routes if any
-# User-agent: *
-# Disallow: /admin/
-
+# Sitemaps
+Sitemap: https://hotelcorona.com/sitemap.xml

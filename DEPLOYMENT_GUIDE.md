@@ -243,3 +243,4 @@ Set alerts in Vercel for:
 **Next.js Version**: 16.0.5
 **Deployment Platform**: Vercel
 
+
