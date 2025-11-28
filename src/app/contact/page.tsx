@@ -1,0 +1,374 @@
+'use client';
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import { HOTEL_INFO } from '@/lib/constants';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+
+const faqs = [
+  {
+    question: "What are the check-in and check-out times?",
+    answer: "Check-in is at 2:00 PM and check-out is at 12:00 PM. Early check-in and late check-out are available upon request and subject to availability."
+  },
+  {
+    question: "Is breakfast included in the room rate?",
+    answer: "Breakfast is available for an additional 450₽ per person. We offer a variety of continental and hot breakfast options in our restaurant."
+  },
+  {
+    question: "How far is the hotel from the beach?",
+    answer: "Hotel Korona is located just 150 meters from the pristine pebble beach. It's a short 2-minute walk to crystal-clear waters."
+  },
+  {
+    question: "Do you have parking facilities?",
+    answer: "Yes, we offer free on-site parking for all our guests. The parking area is secure and monitored 24/7."
+  },
+  {
+    question: "Are pets allowed at the hotel?",
+    answer: "We welcome well-behaved pets in select rooms. Please contact us in advance to arrange pet-friendly accommodations. Additional cleaning fees may apply."
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept cash (Russian Rubles), bank transfers, and major credit cards. A 30% deposit is required to confirm your booking."
+  },
+  {
+    question: "Is there airport transfer available?",
+    answer: "Yes, we offer airport transfer services from Simferopol Airport for 3,000₽ one-way. Please book at least 24 hours in advance."
+  },
+  {
+    question: "Do rooms have air conditioning?",
+    answer: "Yes, all our rooms are equipped with individual climate control air conditioning units for your comfort."
+  }
+];
+
+export default function ContactPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', subject: '', message: '' });
+  };
+
+  return (
+    <div className="min-h-screen bg-midnight">
+      {/* Hero Section */}
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1920&q=80"
+            alt="Contact Hotel Korona"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-midnight/70 to-midnight" />
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Get in Touch</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6">
+              Contact <span className="text-gold">Us</span>
+            </h1>
+            <p className="text-xl text-ivory/80 max-w-2xl mx-auto">
+              We&apos;re here to help. Reach out to us for reservations, inquiries, or any assistance.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Cards */}
+      <section className="py-16 bg-navy">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              { 
+                icon: '📞', 
+                title: 'Phone', 
+                content: HOTEL_INFO.contact.phone,
+                href: `tel:${HOTEL_INFO.contact.phone}`,
+                action: 'Call Now'
+              },
+              { 
+                icon: '✉️', 
+                title: 'Email', 
+                content: HOTEL_INFO.contact.email,
+                href: `mailto:${HOTEL_INFO.contact.email}`,
+                action: 'Send Email'
+              },
+              { 
+                icon: '📍', 
+                title: 'Address', 
+                content: HOTEL_INFO.location.address,
+                href: `https://maps.google.com/?q=${encodeURIComponent(HOTEL_INFO.location.address)}`,
+                action: 'Get Directions'
+              },
+            ].map((item, index) => (
+              <motion.a
+                key={index}
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-slate/50 rounded-2xl p-8 text-center border border-gold/10 hover:border-gold/30 transition-all duration-300 group"
+              >
+                <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 group-hover:bg-gold/20 transition-colors">
+                  {item.icon}
+                </div>
+                <h3 className="font-serif text-lg font-semibold text-gold mb-2">{item.title}</h3>
+                <p className="text-ivory mb-4">{item.content}</p>
+                <span className="text-gold text-sm group-hover:underline">{item.action} →</span>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Contact Form & Map */}
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
+            <motion.div
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="bg-slate/30 rounded-2xl p-8 border border-gold/10"
+            >
+              <h2 className="font-serif text-2xl font-bold text-ivory mb-2">Send Us a Message</h2>
+              <p className="text-steel mb-8">We&apos;ll get back to you within 24 hours</p>
+
+              {isSubmitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12"
+                >
+                  <div className="text-5xl mb-4">✅</div>
+                  <h3 className="font-serif text-xl text-gold mb-2">Message Sent!</h3>
+                  <p className="text-steel">Thank you for contacting us. We&apos;ll respond shortly.</p>
+                  <Button 
+                    variant="secondary" 
+                    className="mt-6"
+                    onClick={() => setIsSubmitted(false)}
+                  >
+                    Send Another Message
+                  </Button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Input
+                      label="Full Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      required
+                      placeholder="Your name"
+                    />
+                    <Input
+                      label="Email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      required
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-ivory mb-2">
+                      Subject <span className="text-gold">*</span>
+                    </label>
+                    <select
+                      value={formData.subject}
+                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                      required
+                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="reservation">Reservation Inquiry</option>
+                      <option value="general">General Question</option>
+                      <option value="feedback">Feedback</option>
+                      <option value="event">Event Inquiry</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-ivory mb-2">
+                      Message <span className="text-gold">*</span>
+                    </label>
+                    <textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      required
+                      rows={5}
+                      placeholder="How can we help you?"
+                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors resize-none"
+                    />
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    variant="primary" 
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
+              )}
+            </motion.div>
+
+            {/* Map & Additional Info */}
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              {/* Map Placeholder */}
+              <div className="bg-slate/30 rounded-2xl overflow-hidden border border-gold/10 h-64 relative">
+                <Image
+                  src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=800&q=80"
+                  alt="Map location"
+                  fill
+                  className="object-cover opacity-50"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <a 
+                    href={`https://maps.google.com/?q=${HOTEL_INFO.location.coordinates.lat},${HOTEL_INFO.location.coordinates.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gold text-midnight px-6 py-3 rounded-lg font-semibold hover:bg-gold-light transition-colors"
+                  >
+                    📍 View on Google Maps
+                  </a>
+                </div>
+              </div>
+
+              {/* Business Hours */}
+              <div className="bg-slate/30 rounded-2xl p-6 border border-gold/10">
+                <h3 className="font-serif text-lg font-semibold text-gold mb-4">Business Hours</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-steel">Reception</span>
+                    <span className="text-ivory">24/7</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-steel">Restaurant</span>
+                    <span className="text-ivory">7:00 AM - 11:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-steel">Pool</span>
+                    <span className="text-ivory">8:00 AM - 10:00 PM</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-steel">Beach Access</span>
+                    <span className="text-ivory">Sunrise - Sunset</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* WhatsApp */}
+              <a
+                href={`https://wa.me/${HOTEL_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 bg-emerald p-4 rounded-xl text-ivory font-semibold hover:opacity-90 transition-opacity"
+              >
+                <span className="text-2xl">💬</span>
+                Chat with us on WhatsApp
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-midnight">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-serif text-3xl font-bold text-ivory mb-4">
+              Frequently Asked <span className="text-gold">Questions</span>
+            </h2>
+            <p className="text-steel max-w-xl mx-auto">
+              Find answers to common questions about your stay at Hotel Korona
+            </p>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="bg-slate/30 rounded-xl border border-gold/10 overflow-hidden"
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full flex items-center justify-between p-5 text-left"
+                >
+                  <span className="font-medium text-ivory">{faq.question}</span>
+                  <motion.div
+                    animate={{ rotate: openFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDownIcon className="w-5 h-5 text-gold" />
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {openFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-5 pb-5 text-steel">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
