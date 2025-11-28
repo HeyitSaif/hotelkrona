@@ -56,16 +56,30 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      return;
+    }
+    
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('Contact form error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  const inputClasses = "w-full px-4 py-3 bg-deep-bronze/50 border border-gold/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors placeholder:text-sand/50";
+  const labelClasses = "block text-sm font-medium text-ivory mb-2";
+
   return (
-    <div className="min-h-screen bg-midnight">
+    <div className="min-h-screen bg-charcoal">
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -77,7 +91,7 @@ export default function ContactPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-midnight/70 to-midnight" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/70 to-charcoal" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -92,10 +106,10 @@ export default function ContactPage() {
               <div className="w-12 h-px bg-gold" />
             </div>
             
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6 text-shadow-strong">
               Contact <span className="text-gold">Us</span>
             </h1>
-            <p className="text-xl text-ivory/80 max-w-2xl mx-auto">
+            <p className="text-xl text-ivory/90 max-w-2xl mx-auto text-shadow">
               We&apos;re here to help. Reach out to us for reservations, inquiries, or any assistance.
             </p>
           </motion.div>
@@ -103,8 +117,19 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Cards */}
-      <section className="py-16 bg-navy">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-deep-bronze relative">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+           <div 
+             className="absolute inset-0"
+             style={{
+               backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
+               backgroundSize: '40px 40px'
+             }}
+           />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             {[
               { 
@@ -137,7 +162,7 @@ export default function ContactPage() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-slate/50 rounded-2xl p-8 text-center border border-gold/10 hover:border-gold/30 transition-all duration-300 group"
+                className="glass-morphism-dark rounded-2xl p-8 text-center border border-gold/10 hover:border-gold/30 transition-all duration-300 group"
               >
                 <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 group-hover:bg-gold/20 transition-colors">
                   {item.icon}
@@ -156,10 +181,10 @@ export default function ContactPage() {
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="bg-slate/30 rounded-2xl p-8 border border-gold/10"
+              className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
             >
               <h2 className="font-serif text-2xl font-bold text-ivory mb-2">Send Us a Message</h2>
-              <p className="text-steel mb-8">We&apos;ll get back to you within 24 hours</p>
+              <p className="text-sand mb-8">We&apos;ll get back to you within 24 hours</p>
 
               {isSubmitted ? (
                 <motion.div
@@ -169,7 +194,7 @@ export default function ContactPage() {
                 >
                   <div className="text-5xl mb-4">✅</div>
                   <h3 className="font-serif text-xl text-gold mb-2">Message Sent!</h3>
-                  <p className="text-steel">Thank you for contacting us. We&apos;ll respond shortly.</p>
+                  <p className="text-sand">Thank you for contacting us. We&apos;ll respond shortly.</p>
                   <Button 
                     variant="secondary" 
                     className="mt-6"
@@ -187,6 +212,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       required
                       placeholder="Your name"
+                      className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
                     />
                     <Input
                       label="Email"
@@ -195,30 +221,31 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       required
                       placeholder="your@email.com"
+                      className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-ivory mb-2">
+                    <label className={labelClasses}>
                       Subject <span className="text-gold">*</span>
                     </label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({...formData, subject: e.target.value})}
                       required
-                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors"
+                      className={inputClasses}
                     >
-                      <option value="">Select a subject</option>
-                      <option value="reservation">Reservation Inquiry</option>
-                      <option value="general">General Question</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="event">Event Inquiry</option>
-                      <option value="other">Other</option>
+                      <option value="" className="bg-deep-bronze">Select a subject</option>
+                      <option value="reservation" className="bg-deep-bronze">Reservation Inquiry</option>
+                      <option value="general" className="bg-deep-bronze">General Question</option>
+                      <option value="feedback" className="bg-deep-bronze">Feedback</option>
+                      <option value="event" className="bg-deep-bronze">Event Inquiry</option>
+                      <option value="other" className="bg-deep-bronze">Other</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-ivory mb-2">
+                    <label className={labelClasses}>
                       Message <span className="text-gold">*</span>
                     </label>
                     <textarea
@@ -227,17 +254,29 @@ export default function ContactPage() {
                       required
                       rows={5}
                       placeholder="How can we help you?"
-                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors resize-none"
+                      className={`${inputClasses} resize-none`}
                     />
                   </div>
 
                   <Button 
                     type="submit" 
                     variant="primary" 
-                    className="w-full"
+                    className="w-full disabled:opacity-60"
                     disabled={isSubmitting}
+                    aria-busy={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-3 justify-center">
+                        <motion.span
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          className="inline-block"
+                        >
+                          ⏳
+                        </motion.span>
+                        Sending...
+                      </span>
+                    ) : 'Send Message'}
                   </Button>
                 </form>
               )}
@@ -251,19 +290,19 @@ export default function ContactPage() {
               className="space-y-8"
             >
               {/* Map Placeholder */}
-              <div className="bg-slate/30 rounded-2xl overflow-hidden border border-gold/10 h-64 relative">
+              <div className="bg-deep-bronze/50 rounded-2xl overflow-hidden border border-gold/10 h-64 relative group">
                 <Image
                   src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=800&q=80"
                   alt="Map location"
                   fill
-                  className="object-cover opacity-50"
+                  className="object-cover opacity-50 group-hover:opacity-70 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <a 
                     href={`https://maps.google.com/?q=${HOTEL_INFO.location.coordinates.lat},${HOTEL_INFO.location.coordinates.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gold text-midnight px-6 py-3 rounded-lg font-semibold hover:bg-gold-light transition-colors"
+                    className="bg-gold text-deep-bronze px-6 py-3 rounded-lg font-semibold hover:bg-gold-light transition-colors shadow-lg transform hover:scale-105"
                   >
                     📍 View on Google Maps
                   </a>
@@ -271,23 +310,23 @@ export default function ContactPage() {
               </div>
 
               {/* Business Hours */}
-              <div className="bg-slate/30 rounded-2xl p-6 border border-gold/10">
+              <div className="glass-morphism-dark rounded-2xl p-6 border border-gold/10">
                 <h3 className="font-serif text-lg font-semibold text-gold mb-4">Business Hours</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-steel">Reception</span>
+                    <span className="text-sand">Reception</span>
                     <span className="text-ivory">24/7</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-steel">Restaurant</span>
+                    <span className="text-sand">Restaurant</span>
                     <span className="text-ivory">7:00 AM - 11:00 PM</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-steel">Pool</span>
+                    <span className="text-sand">Pool</span>
                     <span className="text-ivory">8:00 AM - 10:00 PM</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-steel">Beach Access</span>
+                    <span className="text-sand">Beach Access</span>
                     <span className="text-ivory">Sunrise - Sunset</span>
                   </div>
                 </div>
@@ -298,7 +337,7 @@ export default function ContactPage() {
                 href={`https://wa.me/${HOTEL_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 bg-emerald p-4 rounded-xl text-ivory font-semibold hover:opacity-90 transition-opacity"
+                className="flex items-center justify-center gap-3 bg-[#25D366] p-4 rounded-xl text-white font-semibold hover:opacity-90 transition-all shadow-lg hover:shadow-[#25D366]/30"
               >
                 <span className="text-2xl">💬</span>
                 Chat with us on WhatsApp
@@ -309,7 +348,7 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-midnight">
+      <section className="py-16 bg-charcoal">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -321,7 +360,7 @@ export default function ContactPage() {
             <h2 className="font-serif text-3xl font-bold text-ivory mb-4">
               Frequently Asked <span className="text-gold">Questions</span>
             </h2>
-            <p className="text-steel max-w-xl mx-auto">
+            <p className="text-sand max-w-xl mx-auto">
               Find answers to common questions about your stay at Hotel Korona
             </p>
           </motion.div>
@@ -334,7 +373,7 @@ export default function ContactPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="bg-slate/30 rounded-xl border border-gold/10 overflow-hidden"
+                className="bg-deep-bronze/30 rounded-xl border border-gold/10 overflow-hidden hover:border-gold/30 transition-colors"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -357,7 +396,7 @@ export default function ContactPage() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 pb-5 text-steel">
+                      <p className="px-5 pb-5 text-sand leading-relaxed">
                         {faq.answer}
                       </p>
                     </motion.div>
@@ -371,4 +410,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

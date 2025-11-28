@@ -53,10 +53,18 @@ export default function RootLayout({
           fontFamily: 'var(--font-lora), Georgia, serif',
         }}
       >
+        {/* Skip to main content link for accessibility */}
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] bg-gold text-deep-bronze px-6 py-3 rounded-lg font-bold shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+        >
+          Skip to main content
+        </a>
+        
         <LoadingOverlay />
         <Header />
         <BookingBar />
-        <main className="min-h-screen">
+        <main id="main-content" className="min-h-screen" role="main">
           {children}
         </main>
         <Footer />

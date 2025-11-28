@@ -35,11 +35,11 @@ const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-sand relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-sand relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gold/10 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -49,74 +49,84 @@ const TestimonialsSection: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="w-12 h-px bg-gold" />
-            <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Testimonials</span>
-            <div className="w-12 h-px bg-gold" />
+          <div className="flex items-center justify-center space-x-6 mb-6">
+            <div className="w-16 h-px bg-gold-darker" />
+            <span className="text-gold-darker text-sm tracking-[0.15em] uppercase font-sans font-bold">Testimonials</span>
+            <div className="w-16 h-px bg-gold-darker" />
           </div>
           
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-dark-brown mb-6">
-            What Our <span className="text-gold">Guests Say</span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-deep-bronze mb-6">
+            What Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-dark to-gold">Guests Say</span>
           </h2>
-          <p className="text-lg text-bronze max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-bronze-dark max-w-2xl mx-auto font-light">
             Real experiences from real travelers who have discovered the magic of Hotel Korona
           </p>
         </motion.div>
 
         {/* Testimonials Carousel */}
         <div
-          className="relative max-w-4xl mx-auto"
+          className="relative max-w-5xl mx-auto px-8 md:px-16"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-visible">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="w-full"
               >
-                <Card variant="default" className="text-center p-8 md:p-12 bg-white">
-                  <CardContent>
-                    {/* Quote marks */}
-                    <div className="text-6xl md:text-7xl text-gold/30 font-serif leading-none mb-4">"</div>
-                    
+                <Card variant="light" className="text-center p-10 md:p-16 bg-white/95 backdrop-blur-xl shadow-elevated border-elegant relative">
+                  {/* Large quote mark background */}
+                  <div className="absolute top-8 left-8 text-9xl text-gold-dark/10 font-serif leading-none select-none pointer-events-none">
+                    &ldquo;
+                  </div>
+                  
+                  <CardContent className="relative z-10">
                     {/* Quote */}
-                    <blockquote className="text-lg md:text-xl text-dark-brown leading-relaxed mb-8">
-                      {TESTIMONIALS[currentIndex].quote}
+                    <blockquote className="text-xl md:text-2xl lg:text-3xl text-deep-bronze leading-relaxed mb-10 font-serif italic">
+                      &ldquo;{TESTIMONIALS[currentIndex].quote}&rdquo;
                     </blockquote>
 
                     {/* Rating */}
-                    <div className="flex justify-center mb-6">
+                    <div className="flex justify-center mb-8 space-x-1">
                       {[...Array(TESTIMONIALS[currentIndex].rating)].map((_, i) => (
-                        <span key={i} className="text-gold text-xl mx-0.5">★</span>
+                        <motion.span 
+                          key={i} 
+                          className="text-gold-darker text-2xl"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.3 + (i * 0.1) }}
+                        >
+                          ★
+                        </motion.span>
                       ))}
                     </div>
 
                     {/* Divider */}
-                    <div className="gold-line gold-line-center mb-6" />
+                    <div className="w-24 h-px bg-gradient-to-r from-transparent via-gold-dark to-transparent mx-auto mb-8" />
 
                     {/* Author */}
-                    <div className="space-y-1">
-                      <p className="font-serif text-xl font-semibold text-gold">
+                    <div className="space-y-2">
+                      <p className="font-serif text-2xl font-bold text-deep-bronze">
                         {TESTIMONIALS[currentIndex].author}
                       </p>
-                      <p className="text-bronze text-sm">
+                      <p className="text-gold-darker text-sm uppercase tracking-widest font-semibold">
                         {TESTIMONIALS[currentIndex].stayType}
                       </p>
                     </div>
 
                     {/* Highlights */}
-                    <div className="mt-6 flex flex-wrap justify-center gap-2">
+                    <div className="mt-8 flex flex-wrap justify-center gap-3">
                       {TESTIMONIALS[currentIndex].highlights.map((highlight, index) => (
                         <span
                           key={index}
-                          className="text-xs px-3 py-1 bg-gold/20 text-gold rounded-full border border-gold/40"
+                          className="text-[10px] px-4 py-1.5 bg-gold/20 text-gold-darker rounded-full border-[1.5px] border-gold-dark/30 uppercase tracking-wide font-bold"
                         >
                           {highlight}
                         </span>
@@ -131,30 +141,30 @@ const TestimonialsSection: React.FC = () => {
           {/* Navigation Arrows */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 md:-left-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border border-gold rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-dark-brown transition-all duration-300 shadow-lg"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white border-[1.5px] border-gold-dark/40 rounded-full flex items-center justify-center text-gold-darker hover:bg-gold hover:text-deep-bronze transition-all duration-300 shadow-elegant hover:shadow-gold z-20 group"
             aria-label="Previous testimonial"
           >
-            <ChevronLeftIcon className="w-5 h-5" />
+            <ChevronLeftIcon className="w-6 h-6 group-hover:-translate-x-0.5 transition-transform" />
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-0 md:-right-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white border border-gold rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-dark-brown transition-all duration-300 shadow-lg"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 w-14 h-14 bg-white border-[1.5px] border-gold-dark/40 rounded-full flex items-center justify-center text-gold-darker hover:bg-gold hover:text-deep-bronze transition-all duration-300 shadow-elegant hover:shadow-gold z-20 group"
             aria-label="Next testimonial"
           >
-            <ChevronRightIcon className="w-5 h-5" />
+            <ChevronRightIcon className="w-6 h-6 group-hover:translate-x-0.5 transition-transform" />
           </button>
 
           {/* Dot Indicators */}
-          <div className="flex justify-center mt-8 space-x-3">
+          <div className="flex justify-center mt-12 space-x-4">
             {TESTIMONIALS.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-1.5 rounded-full transition-all duration-500 ${
                   currentIndex === index
-                    ? 'bg-gold w-8'
-                    : 'bg-gold/30 hover:bg-gold/60'
+                    ? 'bg-gold-darker w-12'
+                    : 'bg-gold-dark/30 w-2 hover:bg-gold-dark/50'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
@@ -168,7 +178,7 @@ const TestimonialsSection: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gold-dark/40 pt-16"
         >
           {[
             { number: "98%", label: "Guest Satisfaction" },
@@ -182,12 +192,12 @@ const TestimonialsSection: React.FC = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center p-6 bg-cream backdrop-blur-sm rounded-xl border border-gold shadow-medium"
+              className="text-center group"
             >
-              <div className="font-serif text-3xl md:text-4xl font-bold text-gold mb-2">
+              <div className="font-serif text-4xl md:text-5xl font-bold text-deep-bronze mb-2 group-hover:text-gold-dark transition-colors duration-300">
                 {stat.number}
               </div>
-              <div className="text-bronze text-sm uppercase tracking-wide">
+              <div className="text-bronze-dark text-xs uppercase tracking-[0.15em] font-bold">
                 {stat.label}
               </div>
             </motion.div>

@@ -56,7 +56,7 @@ export default function RoomsPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-cream" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -74,7 +74,7 @@ export default function RoomsPage() {
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
               Our <span className="text-gold">Rooms</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto text-shadow-light">
+            <p className="text-xl text-white/95 max-w-2xl mx-auto text-shadow-light font-medium">
               Choose your perfect accommodation from our collection of 8 unique room types,
               each designed for comfort and elegance
             </p>
@@ -83,8 +83,18 @@ export default function RoomsPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-16 bg-cream">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-cream relative">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+           <div 
+             className="absolute inset-0"
+             style={{
+               backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
+               backgroundSize: '60px 60px'
+             }}
+           />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           {/* Intro Text */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -92,10 +102,10 @@ export default function RoomsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-dark-brown mb-4">
+            <h2 className="font-serif text-3xl font-bold text-dark-brown mb-4">
               Discover Our Accommodations
             </h2>
-            <p className="text-bronze max-w-3xl mx-auto">
+            <p className="text-bronze max-w-3xl mx-auto text-lg">
               From budget-friendly rooms with garden views to luxury duplex suites with panoramic sea vistas,
               every accommodation at Hotel Korona offers the perfect blend of comfort, style, and authentic
               Crimean hospitality.
@@ -107,20 +117,20 @@ export default function RoomsPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white backdrop-blur-sm rounded-xl p-6 mb-10 border border-gold shadow-medium"
+            className="glass-morphism-light rounded-xl p-6 mb-10 border border-gold/30 shadow-medium sticky top-24 z-20"
           >
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center space-x-2">
                 <AdjustmentsHorizontalIcon className="w-5 h-5 text-gold" />
-                <span className="font-medium text-dark-brown">Filter & Sort:</span>
+                <span className="font-medium text-dark-brown uppercase tracking-wide text-sm">Filter & Sort:</span>
               </div>
 
               {/* Category Filter */}
-              <div className="flex-1 min-w-48">
+              <div className="flex-1 min-w-[200px]">
                 <select
                   value={filterCategory}
                   onChange={(e) => setFilterCategory(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-white border border-sand rounded-lg text-bronze focus:outline-none focus:border-gold transition-colors"
+                  className="input-coastal cursor-pointer hover:border-gold transition-colors"
                 >
                   {categories.map(category => (
                     <option key={category.value} value={category.value}>
@@ -131,11 +141,11 @@ export default function RoomsPage() {
               </div>
 
               {/* Sort By */}
-              <div className="flex-1 min-w-48">
+              <div className="flex-1 min-w-[200px]">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as 'price' | 'size' | 'guests')}
-                  className="w-full px-4 py-2.5 bg-white border border-sand rounded-lg text-bronze focus:outline-none focus:border-gold transition-colors"
+                  className="input-coastal cursor-pointer hover:border-gold transition-colors"
                 >
                   <option value="price">Sort by Price</option>
                   <option value="size">Sort by Size</option>
@@ -144,22 +154,30 @@ export default function RoomsPage() {
               </div>
 
               {/* Balcony Filter */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3 bg-white px-4 py-2.5 rounded-lg border border-sand">
                 <input
                   type="checkbox"
                   id="balcony-filter"
                   checked={showBalconyOnly}
                   onChange={(e) => setShowBalconyOnly(e.target.checked)}
-                  className="w-4 h-4 rounded border-sand bg-white text-gold focus:ring-gold focus:ring-offset-cream"
+                  className="w-5 h-5 rounded border-sand text-gold focus:ring-gold focus:ring-offset-cream cursor-pointer accent-gold"
                 />
-                <label htmlFor="balcony-filter" className="text-dark-brown text-sm">
+                <label htmlFor="balcony-filter" className="text-dark-brown text-sm font-medium cursor-pointer select-none">
                   Balcony Only
                 </label>
               </div>
             </div>
 
-            <div className="mt-4 text-sm text-bronze">
-              Showing {filteredRooms.length} of {ROOM_TYPES.length} rooms
+            <div className="mt-4 text-sm text-bronze flex justify-between items-center border-t border-sand/30 pt-3">
+              <span>Showing {filteredRooms.length} of {ROOM_TYPES.length} rooms</span>
+              {(filterCategory !== 'all' || showBalconyOnly) && (
+                <button 
+                  onClick={() => { setFilterCategory('all'); setShowBalconyOnly(false); }}
+                  className="text-gold hover:text-dark-brown transition-colors font-medium text-xs uppercase"
+                >
+                  Reset Filters
+                </button>
+              )}
             </div>
           </motion.div>
 
@@ -176,16 +194,18 @@ export default function RoomsPage() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center bg-white backdrop-blur-sm rounded-2xl p-10 border border-gold shadow-large"
+            className="text-center bg-white rounded-2xl p-10 border border-gold shadow-large relative overflow-hidden"
           >
-            <h3 className="font-serif text-2xl font-bold text-dark-brown mb-4">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-gold-light to-gold" />
+            
+            <h3 className="font-serif text-2xl font-bold text-dark-brown mb-4 relative z-10">
               Find your perfect room and book today
             </h3>
-            <p className="text-bronze mb-8 max-w-2xl mx-auto">
+            <p className="text-bronze mb-8 max-w-2xl mx-auto relative z-10">
               Need help choosing? Our team is ready to assist you in finding the perfect
               accommodation for your stay. Contact us for personalized recommendations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <Button size="lg" variant="primary">
                 Book Now
               </Button>
@@ -201,7 +221,7 @@ export default function RoomsPage() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-16 bg-white rounded-2xl p-8 border border-gold shadow-large"
+            className="mt-16 bg-sand/20 rounded-2xl p-8 border border-gold/20"
           >
             <h3 className="font-serif text-xl font-bold text-gold mb-8 text-center">
               Standard Room Amenities
@@ -224,16 +244,16 @@ export default function RoomsPage() {
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="text-center"
+                  className="text-center group"
                 >
-                  <div className="text-2xl mb-2">{amenity.icon}</div>
-                  <div className="text-xs text-dark-brown font-medium">
+                  <div className="text-2xl mb-2 transform group-hover:scale-110 transition-transform">{amenity.icon}</div>
+                  <div className="text-xs text-dark-brown font-medium group-hover:text-gold transition-colors">
                     {amenity.name}
                   </div>
                 </motion.div>
               ))}
             </div>
-            <p className="text-center text-sm text-bronze mt-8">
+            <p className="text-center text-sm text-bronze mt-8 italic">
               * Equipment in rooms may slightly differ from photos. Please specify specific
               configuration when booking.
             </p>

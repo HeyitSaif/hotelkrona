@@ -60,7 +60,7 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-midnight">
+    <div className="min-h-screen bg-charcoal">
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -72,7 +72,7 @@ export default function GalleryPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-midnight/70 to-midnight" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/70 to-charcoal" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -87,10 +87,10 @@ export default function GalleryPage() {
               <div className="w-12 h-px bg-gold" />
             </div>
             
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6 text-shadow-strong">
               Our <span className="text-gold">Gallery</span>
             </h1>
-            <p className="text-xl text-ivory/80 max-w-2xl mx-auto">
+            <p className="text-xl text-ivory/90 max-w-2xl mx-auto text-shadow">
               Explore the beauty of Hotel Korona through our collection of photos
             </p>
           </motion.div>
@@ -98,17 +98,17 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="py-8 bg-navy sticky top-0 z-20">
+      <section className="py-8 bg-deep-bronze sticky top-20 z-20 border-b border-gold/10 shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setFilter(cat.id)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   filter === cat.id
-                    ? 'bg-gold text-midnight'
-                    : 'bg-slate/50 text-ivory hover:bg-slate'
+                    ? 'bg-gold text-deep-bronze shadow-gold transform scale-105'
+                    : 'bg-charcoal/50 text-sand hover:bg-charcoal hover:text-gold border border-gold/10'
                 }`}
               >
                 {cat.label}
@@ -119,7 +119,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-12 bg-navy">
+      <section className="py-12 bg-deep-bronze min-h-[50vh]">
         <div className="container mx-auto px-4">
           <motion.div 
             layout
@@ -134,7 +134,7 @@ export default function GalleryPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.4 }}
-                  className={`relative overflow-hidden rounded-xl cursor-pointer group ${
+                  className={`relative overflow-hidden rounded-xl cursor-pointer group border border-gold/10 ${
                     index % 5 === 0 ? 'md:col-span-2 md:row-span-2' : ''
                   }`}
                   onClick={() => openLightbox(index)}
@@ -144,14 +144,14 @@ export default function GalleryPage() {
                       src={image.src}
                       alt={image.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
-                    <div className="absolute inset-0 bg-midnight/0 group-hover:bg-midnight/50 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="text-center">
-                        <div className="text-2xl mb-2">🔍</div>
-                        <p className="text-ivory font-medium">{image.title}</p>
+                      <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div className="text-3xl mb-2 text-gold">🔍</div>
+                        <p className="text-ivory font-serif text-lg tracking-wide">{image.title}</p>
                       </div>
                     </div>
                   </div>
@@ -169,13 +169,13 @@ export default function GalleryPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-midnight/95 backdrop-blur-xl flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-charcoal/95 backdrop-blur-xl flex items-center justify-center"
             onClick={closeLightbox}
           >
             {/* Close button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-6 right-6 w-12 h-12 bg-slate/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-midnight transition-all z-10"
+              className="absolute top-6 right-6 w-12 h-12 bg-deep-bronze/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-deep-bronze transition-all z-10 border border-gold/20"
             >
               <XMarkIcon className="w-6 h-6" />
             </button>
@@ -183,13 +183,13 @@ export default function GalleryPage() {
             {/* Navigation */}
             <button
               onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-midnight transition-all"
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-deep-bronze/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-deep-bronze transition-all border border-gold/20"
             >
               <ChevronLeftIcon className="w-6 h-6" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); goToNext(); }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-slate/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-midnight transition-all"
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-deep-bronze/50 rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-deep-bronze transition-all border border-gold/20"
             >
               <ChevronRightIcon className="w-6 h-6" />
             </button>
@@ -200,23 +200,23 @@ export default function GalleryPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-[90vw] h-[80vh] max-w-6xl"
+              className="relative w-[90vw] h-[80vh] max-w-6xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
                 src={filteredImages[selectedImage].src}
                 alt={filteredImages[selectedImage].title}
                 fill
-                className="object-contain"
+                className="object-contain rounded-lg"
                 sizes="90vw"
                 priority
               />
             </motion.div>
 
             {/* Caption */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center bg-deep-bronze/80 px-6 py-3 rounded-full border border-gold/20 backdrop-blur-sm">
               <p className="text-gold font-serif text-xl">{filteredImages[selectedImage].title}</p>
-              <p className="text-steel text-sm mt-1">
+              <p className="text-sand text-sm mt-1">
                 {selectedImage + 1} / {filteredImages.length}
               </p>
             </div>
@@ -226,4 +226,3 @@ export default function GalleryPage() {
     </div>
   );
 }
-

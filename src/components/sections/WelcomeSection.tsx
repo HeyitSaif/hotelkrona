@@ -8,9 +8,9 @@ import Button from '@/components/ui/Button';
 
 const WelcomeSection: React.FC = () => {
   return (
-    <section id="welcome" className="py-24 bg-cream relative overflow-hidden">
+    <section id="welcome" className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div 
           className="absolute inset-0"
           style={{
@@ -21,13 +21,13 @@ const WelcomeSection: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
           {/* Left Column - Content */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-8"
           >
             {/* Section Label */}
@@ -39,7 +39,7 @@ const WelcomeSection: React.FC = () => {
               className="flex items-center space-x-4"
             >
               <div className="gold-line" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">About Us</span>
+              <span className="text-gold-darker text-sm tracking-[0.15em] uppercase font-sans font-bold">About Us</span>
             </motion.div>
 
             <motion.h2
@@ -47,9 +47,9 @@ const WelcomeSection: React.FC = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-dark-brown leading-tight"
+              className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-deep-bronze leading-tight"
             >
-              Welcome to Hotel Korona – <span className="text-gold">Your Seaside Castle</span>
+              Welcome to Hotel Korona – <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-dark to-gold">Your Seaside Castle</span>
             </motion.h2>
 
             <motion.div
@@ -57,7 +57,7 @@ const WelcomeSection: React.FC = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-5 text-bronze leading-relaxed"
+              className="space-y-6 text-bronze-dark leading-relaxed text-lg"
             >
               <p>
                 Nestled in the picturesque resort town of Utyos, perfectly positioned between
@@ -85,10 +85,10 @@ const WelcomeSection: React.FC = () => {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="pt-4"
+              className="pt-6"
             >
               <Link href="/rooms">
-                <Button size="lg" variant="primary">
+                <Button size="lg" variant="primary" className="shadow-gold hover:shadow-glow">
                   Explore Our Rooms
                 </Button>
               </Link>
@@ -99,22 +99,22 @@ const WelcomeSection: React.FC = () => {
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="relative"
           >
-            <div className="relative">
+            <div className="relative group">
               {/* Main image */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden shadow-elevated aspect-[4/3] border-[1.5px] border-sand-dark">
                 <Image
                   src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80"
                   alt="Hotel Korona Gardens"
-                  width={600}
-                  height={450}
-                  className="w-full object-cover aspect-[4/3]"
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
 
               {/* Floating stats card */}
@@ -123,27 +123,27 @@ const WelcomeSection: React.FC = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute -bottom-6 -left-6 md:left-auto md:-right-6 bg-white backdrop-blur-xl rounded-xl p-6 shadow-2xl border border-gold"
+                className="absolute -bottom-8 -left-8 md:-left-12 bg-white/95 backdrop-blur-xl rounded-xl p-6 shadow-elevated border-[1.5px] border-gold-dark max-w-sm hidden sm:block"
               >
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-gold">150m</div>
-                    <div className="text-xs text-bronze uppercase tracking-wide">to Beach</div>
+                <div className="grid grid-cols-3 gap-6 text-center divide-x divide-gold-dark/30">
+                  <div className="px-2">
+                    <div className="text-2xl md:text-3xl font-bold text-gold-darker font-serif">150m</div>
+                    <div className="text-[10px] text-bronze-dark uppercase tracking-widest font-bold mt-1">to Beach</div>
                   </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-gold">3</div>
-                    <div className="text-xs text-bronze uppercase tracking-wide">Restaurants</div>
+                  <div className="px-2">
+                    <div className="text-2xl md:text-3xl font-bold text-gold-darker font-serif">3</div>
+                    <div className="text-[10px] text-bronze-dark uppercase tracking-widest font-bold mt-1">Restaurants</div>
                   </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold text-gold">24/7</div>
-                    <div className="text-xs text-bronze uppercase tracking-wide">Service</div>
+                  <div className="px-2">
+                    <div className="text-2xl md:text-3xl font-bold text-gold-darker font-serif">24/7</div>
+                    <div className="text-[10px] text-bronze-dark uppercase tracking-widest font-bold mt-1">Service</div>
                   </div>
                 </div>
               </motion.div>
 
               {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-gold/20 rounded-2xl -z-10" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-gold/10 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -right-6 w-32 h-32 border-[1.5px] border-gold-dark/30 rounded-2xl -z-10" />
+              <div className="absolute -bottom-6 -left-6 w-40 h-40 border-[1.5px] border-gold-dark/20 rounded-2xl -z-10" />
             </div>
           </motion.div>
         </div>
@@ -154,9 +154,9 @@ const WelcomeSection: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-24"
+          className="mt-32"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
               { icon: "🏖️", label: "Beachfront", desc: "150m to sea" },
               { icon: "👑", label: "Castle Design", desc: "Unique architecture" },
@@ -171,11 +171,12 @@ const WelcomeSection: React.FC = () => {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center p-6 bg-white rounded-xl border border-sand hover:border-gold transition-all duration-300 group shadow-medium"
+                whileHover={{ y: -5 }}
+                className="text-center p-6 bg-white rounded-xl border-[1.5px] border-sand-dark hover:border-gold-dark transition-all duration-300 group shadow-elegant hover:shadow-hover-elegant"
               >
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-                <div className="text-sm font-semibold text-dark-brown mb-1">{feature.label}</div>
-                <div className="text-xs text-bronze">{feature.desc}</div>
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-sm">{feature.icon}</div>
+                <div className="text-sm font-bold text-deep-bronze mb-1 uppercase tracking-wide">{feature.label}</div>
+                <div className="text-xs text-bronze-dark">{feature.desc}</div>
               </motion.div>
             ))}
           </div>

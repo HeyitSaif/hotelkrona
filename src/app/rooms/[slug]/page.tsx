@@ -29,10 +29,10 @@ export default function RoomDetailPage() {
 
   if (!room) {
     return (
-      <div className="min-h-screen bg-midnight flex items-center justify-center">
+      <div className="min-h-screen bg-charcoal flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-serif text-4xl text-ivory mb-4">Room Not Found</h1>
-          <p className="text-steel mb-8">The room you&apos;re looking for doesn&apos;t exist.</p>
+          <p className="text-sand mb-8">The room you&apos;re looking for doesn&apos;t exist.</p>
           <Link href="/rooms">
             <Button variant="primary">View All Rooms</Button>
           </Link>
@@ -55,22 +55,22 @@ export default function RoomDetailPage() {
   const similarRooms = ROOM_TYPES.filter(r => r.id !== room.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-midnight">
+    <div className="min-h-screen bg-charcoal">
       {/* Breadcrumb */}
-      <div className="bg-navy/50 py-4">
+      <div className="bg-deep-bronze/50 py-4 border-b border-gold/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-steel hover:text-gold transition-colors">Home</Link>
-            <span className="text-steel">/</span>
-            <Link href="/rooms" className="text-steel hover:text-gold transition-colors">Rooms</Link>
-            <span className="text-steel">/</span>
-            <span className="text-gold">{room.nameEn}</span>
+            <Link href="/" className="text-sand hover:text-gold transition-colors">Home</Link>
+            <span className="text-sand/50">/</span>
+            <Link href="/rooms" className="text-sand hover:text-gold transition-colors">Rooms</Link>
+            <span className="text-sand/50">/</span>
+            <span className="text-gold font-medium">{room.nameEn}</span>
           </div>
         </div>
       </div>
 
       {/* Image Gallery */}
-      <section className="relative h-[60vh] overflow-hidden">
+      <section className="relative h-[60vh] overflow-hidden bg-black">
         <motion.div
           key={currentImage}
           initial={{ opacity: 0 }}
@@ -86,19 +86,19 @@ export default function RoomDetailPage() {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-midnight/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal/30" />
         </motion.div>
 
         {/* Navigation Arrows */}
         <button
           onClick={prevImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-midnight/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-midnight transition-all z-10"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-charcoal/50 backdrop-blur-sm rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-deep-bronze transition-all z-10 border border-gold/20"
         >
           <ChevronLeftIcon className="w-6 h-6" />
         </button>
         <button
           onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-midnight/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-midnight transition-all z-10"
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-charcoal/50 backdrop-blur-sm rounded-full flex items-center justify-center text-ivory hover:bg-gold hover:text-deep-bronze transition-all z-10 border border-gold/20"
         >
           <ChevronRightIcon className="w-6 h-6" />
         </button>
@@ -109,7 +109,7 @@ export default function RoomDetailPage() {
             <button
               key={index}
               onClick={() => setCurrentImage(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 currentImage === index ? 'bg-gold w-6' : 'bg-ivory/50 hover:bg-ivory'
               }`}
             />
@@ -122,8 +122,8 @@ export default function RoomDetailPage() {
             <button
               key={index}
               onClick={() => setCurrentImage(index)}
-              className={`w-16 h-12 rounded-lg overflow-hidden border-2 transition-all ${
-                currentImage === index ? 'border-gold' : 'border-transparent opacity-60 hover:opacity-100'
+              className={`w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                currentImage === index ? 'border-gold scale-110' : 'border-transparent opacity-60 hover:opacity-100'
               }`}
             >
               <Image
@@ -139,7 +139,7 @@ export default function RoomDetailPage() {
       </section>
 
       {/* Room Details */}
-      <section className="py-16 bg-navy">
+      <section className="py-16 bg-deep-bronze">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content */}
@@ -153,27 +153,27 @@ export default function RoomDetailPage() {
                 <h1 className="font-serif text-3xl md:text-4xl font-bold text-ivory mb-2">
                   {room.nameEn}
                 </h1>
-                <p className="text-gold font-medium mb-6">{room.nameRu}</p>
+                <p className="text-gold font-medium mb-6 font-sans tracking-wide">{room.nameRu}</p>
 
-                <div className="flex flex-wrap gap-6 text-ivory/80">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap gap-4 md:gap-6 text-sand text-sm md:text-base">
+                  <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
                     <span className="text-gold">🛏️</span>
                     <span>{room.beds}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
                     <span className="text-gold">👥</span>
                     <span>Up to {room.maxGuests} guests</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
                     <span className="text-gold">📐</span>
                     <span>{room.size}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
                     <span className="text-gold">🏔️</span>
                     <span>{room.viewType} View</span>
                   </div>
                   {room.balcony && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
                       <span className="text-gold">🌅</span>
                       <span>Private Balcony</span>
                     </div>
@@ -186,13 +186,13 @@ export default function RoomDetailPage() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="bg-slate/30 rounded-2xl p-8 border border-gold/10"
+                className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
               >
-                <h2 className="font-serif text-xl text-gold mb-4">About This Room</h2>
-                <p className="text-ivory/80 leading-relaxed mb-4">
+                <h2 className="font-serif text-2xl text-gold mb-4">About This Room</h2>
+                <p className="text-sand leading-relaxed mb-6 text-lg">
                   {room.description}
                 </p>
-                <p className="text-steel text-sm">
+                <p className="text-ivory/60 text-sm italic">
                   Note: Equipment in rooms may slightly differ from photos. Please specify specific 
                   configuration when booking.
                 </p>
@@ -203,14 +203,14 @@ export default function RoomDetailPage() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="bg-slate/30 rounded-2xl p-8 border border-gold/10"
+                className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
               >
-                <h2 className="font-serif text-xl text-gold mb-6">Room Amenities</h2>
+                <h2 className="font-serif text-2xl text-gold mb-6">Room Amenities</h2>
                 <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
                   {ROOM_AMENITIES.map((amenity, index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-2xl mb-2">{amenity.icon}</div>
-                      <div className="text-xs text-ivory">{amenity.name}</div>
+                    <div key={index} className="text-center group">
+                      <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{amenity.icon}</div>
+                      <div className="text-xs text-sand font-medium">{amenity.name}</div>
                     </div>
                   ))}
                 </div>
@@ -223,39 +223,39 @@ export default function RoomDetailPage() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="bg-slate/50 rounded-2xl p-6 border border-gold/20 sticky top-24"
+                className="bg-charcoal rounded-2xl p-6 border border-gold/20 sticky top-24 shadow-gold"
               >
-                <div className="text-center mb-6">
-                  <div className="text-sm text-steel mb-1">Starting from</div>
-                  <div className="text-3xl font-bold text-gold">{formatPrice(room.price)}</div>
-                  <div className="text-sm text-steel">per night</div>
+                <div className="text-center mb-6 pb-6 border-b border-gold/10">
+                  <div className="text-sm text-sand mb-1 uppercase tracking-widest">Starting from</div>
+                  <div className="text-4xl font-bold text-gold font-serif">{formatPrice(room.price)}</div>
+                  <div className="text-sm text-sand">per night</div>
                 </div>
 
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="block text-sm text-ivory mb-2">Check-in</label>
+                    <label className="block text-sm font-medium text-ivory mb-2">Check-in</label>
                     <input
                       type="date"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
                       min={today}
-                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold"
+                      className="w-full px-4 py-3 bg-deep-bronze/50 border border-gold/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-ivory mb-2">Check-out</label>
+                    <label className="block text-sm font-medium text-ivory mb-2">Check-out</label>
                     <input
                       type="date"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
                       min={checkIn || today}
-                      className="w-full px-4 py-3 bg-midnight border border-steel/30 rounded-lg text-ivory focus:outline-none focus:border-gold"
+                      className="w-full px-4 py-3 bg-deep-bronze/50 border border-gold/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors"
                     />
                   </div>
                 </div>
 
                 <Link href={`/booking?room=${room.id}&checkIn=${checkIn}&checkOut=${checkOut}`}>
-                  <Button variant="primary" className="w-full mb-4">
+                  <Button variant="primary" className="w-full mb-4 py-4 text-lg">
                     Book Now
                   </Button>
                 </Link>
@@ -266,15 +266,15 @@ export default function RoomDetailPage() {
                   </Button>
                 </Link>
 
-                <div className="mt-6 pt-6 border-t border-gold/20 space-y-3 text-sm">
-                  <div className="flex items-center gap-2 text-steel">
-                    <span>✓</span> Free cancellation (7+ days)
+                <div className="mt-6 pt-6 border-t border-gold/10 space-y-3 text-sm">
+                  <div className="flex items-center gap-3 text-sand">
+                    <span className="text-gold">✓</span> Free cancellation (7+ days)
                   </div>
-                  <div className="flex items-center gap-2 text-steel">
-                    <span>✓</span> Instant confirmation
+                  <div className="flex items-center gap-3 text-sand">
+                    <span className="text-gold">✓</span> Instant confirmation
                   </div>
-                  <div className="flex items-center gap-2 text-steel">
-                    <span>✓</span> Best rate guaranteed
+                  <div className="flex items-center gap-3 text-sand">
+                    <span className="text-gold">✓</span> Best rate guaranteed
                   </div>
                 </div>
               </motion.div>
@@ -284,7 +284,7 @@ export default function RoomDetailPage() {
       </section>
 
       {/* Similar Rooms */}
-      <section className="py-16 bg-midnight">
+      <section className="py-16 bg-charcoal">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -292,33 +292,33 @@ export default function RoomDetailPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-serif text-2xl font-bold text-ivory mb-8">
+            <h2 className="font-serif text-3xl font-bold text-ivory mb-8 border-l-4 border-gold pl-4">
               More <span className="text-gold">Rooms</span>
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-8">
               {similarRooms.map((similarRoom) => (
                 <Link key={similarRoom.id} href={`/rooms/${slugify(similarRoom.nameEn)}`}>
-                  <div className="group bg-slate/30 rounded-xl overflow-hidden border border-gold/10 hover:border-gold/30 transition-all">
+                  <div className="group bg-deep-bronze/30 rounded-xl overflow-hidden border border-gold/10 hover:border-gold/40 transition-all duration-300 shadow-lg hover:shadow-gold/10">
                     <div className="relative aspect-[4/3]">
                       <Image
                         src={roomGalleryImages[Math.floor(Math.random() * roomGalleryImages.length)]}
                         alt={similarRoom.nameEn}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
-                      <div className="absolute bottom-3 left-3 bg-gold text-midnight px-3 py-1 rounded text-sm font-semibold">
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                      <div className="absolute bottom-4 left-4 bg-gold/90 backdrop-blur-sm text-deep-bronze px-3 py-1 rounded text-sm font-bold shadow-md">
                         {formatPrice(similarRoom.price)}/night
                       </div>
                     </div>
-                    <div className="p-4">
-                      <h3 className="font-serif text-lg text-ivory group-hover:text-gold transition-colors">
+                    <div className="p-6">
+                      <h3 className="font-serif text-xl text-ivory group-hover:text-gold transition-colors mb-3">
                         {similarRoom.nameEn}
                       </h3>
-                      <div className="flex gap-4 text-sm text-steel mt-2">
-                        <span>{similarRoom.beds}</span>
-                        <span>•</span>
-                        <span>{similarRoom.size}</span>
+                      <div className="flex gap-4 text-sm text-sand">
+                        <span className="flex items-center gap-1">🛏️ {similarRoom.beds}</span>
+                        <span className="flex items-center gap-1">📐 {similarRoom.size}</span>
                       </div>
                     </div>
                   </div>
@@ -331,4 +331,3 @@ export default function RoomDetailPage() {
     </div>
   );
 }
-

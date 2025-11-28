@@ -39,12 +39,12 @@ const roomImages: Record<string, string> = {
 };
 
 const categoryLabels: Record<string, { label: string; color: string }> = {
-  budget: { label: 'Value', color: 'bg-emerald/20 text-emerald border border-emerald/30' },
-  standard: { label: 'Standard', color: 'bg-sand text-bronze border border-gold/30' },
-  'standard-plus': { label: 'Superior', color: 'bg-gold/20 text-gold border border-gold' },
-  'mid-luxury': { label: 'Semi-Luxury', color: 'bg-gold/30 text-dark-brown border border-gold' },
-  suite: { label: 'Suite', color: 'bg-burgundy/20 text-white border border-burgundy/30' },
-  luxury: { label: 'Luxury', color: 'bg-gradient-to-r from-gold to-gold-light text-dark-brown border border-gold' },
+  budget: { label: 'Value', color: 'bg-sage/20 text-teal-elegant border-sage/40' },
+  standard: { label: 'Standard', color: 'bg-sand/30 text-bronze-dark border-sand-dark' },
+  'standard-plus': { label: 'Superior', color: 'bg-gold/20 text-gold-darker border-gold-dark' },
+  'mid-luxury': { label: 'Semi-Luxury', color: 'bg-gold/30 text-gold-darker border-gold-dark' },
+  suite: { label: 'Suite', color: 'bg-burgundy/20 text-burgundy border-burgundy/50' },
+  luxury: { label: 'Luxury', color: 'bg-gradient-to-r from-gold-dark to-gold text-deep-bronze border-gold-dark shadow-gold' },
 };
 
 const RoomCard: React.FC<RoomCardProps> = ({ room, index = 0 }) => {
@@ -61,7 +61,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, index = 0 }) => {
     >
       <Card
         variant="elevated"
-        className="h-full flex flex-col overflow-hidden group"
+        className="h-full flex flex-col overflow-hidden group hover:shadow-elevated transition-all duration-500"
       >
         {/* Room Image */}
         <div className="relative -mx-6 -mt-6 mb-4 overflow-hidden">
@@ -70,107 +70,95 @@ const RoomCard: React.FC<RoomCardProps> = ({ room, index = 0 }) => {
               src={imageUrl}
               alt={room.nameEn}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className="object-cover transition-transform duration-1000 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent opacity-80" />
 
             {/* Category Badge */}
             <div className="absolute top-4 left-4 z-10">
-              <span className={`px-3 py-1.5 rounded-full text-xs font-semibold shadow-medium ${categoryStyle.color}`}>
+              <span className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg border-[1.5px] ${categoryStyle.color}`}>
                 {categoryStyle.label}
               </span>
             </div>
 
             {/* Price Badge */}
-            <div className="absolute bottom-4 left-4 bg-gold text-dark-brown px-4 py-2 rounded-lg shadow-medium z-10">
-              <div className="text-xs font-medium opacity-80">From</div>
-              <div className="text-lg font-bold">{formatPrice(room.price)}</div>
-              <div className="text-xs opacity-80">per night</div>
+            <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-lg shadow-lg z-10 border-[1.5px] border-gold-dark/40">
+              <div className="text-[10px] font-bold uppercase tracking-wide text-bronze-dark">From</div>
+              <div className="text-xl font-serif font-bold text-gold-darker">{formatPrice(room.price)}</div>
             </div>
 
             {/* Availability */}
-            <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-dark-brown px-3 py-1.5 rounded-full text-xs font-medium border border-gold shadow-medium z-10">
-              {room.availableUnits} available
+            <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-[10px] font-semibold border-[1.5px] border-white/30 shadow-lg z-10">
+              {room.availableUnits} left
             </div>
           </div>
         </div>
 
         <CardHeader>
-          <CardTitle className="text-xl group-hover:text-gold transition-colors duration-300">
+          <CardTitle className="text-xl md:text-2xl group-hover:text-gold-dark transition-colors duration-300 line-clamp-1">
             {room.nameEn}
           </CardTitle>
-          <p className="text-sm text-gold/80 font-medium">{room.nameRu}</p>
+          <p className="text-xs text-gold-darker font-semibold uppercase tracking-wider">{room.nameRu}</p>
         </CardHeader>
 
-        <CardContent className="flex-1 space-y-4 p-5">
-          <p className="text-bronze text-sm leading-relaxed line-clamp-3">
+        <CardContent className="flex-1 space-y-5 p-5 pt-0">
+          <p className="text-bronze-dark text-sm leading-relaxed line-clamp-3">
             {room.description}
           </p>
 
           {/* Room Details */}
-          <div className="grid grid-cols-2 gap-3 text-sm">
+          <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-sm pt-2 border-t border-sand-dark/40">
             <div className="flex items-center space-x-2">
-              <span className="text-gold">🛏️</span>
-              <span className="text-bronze">{room.beds}</span>
+              <span className="text-lg">🛏️</span>
+              <span className="text-deep-bronze font-semibold text-xs">{room.beds}</span>
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-gold">👥</span>
-              <span className="text-bronze">Up to {room.maxGuests}</span>
+              <span className="text-lg">👥</span>
+              <span className="text-deep-bronze font-semibold text-xs">Up to {room.maxGuests}</span>
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-gold">📐</span>
-              <span className="text-bronze">{room.size}</span>
+              <span className="text-lg">📐</span>
+              <span className="text-deep-bronze font-semibold text-xs">{room.size}</span>
             </div>
 
             <div className="flex items-center space-x-2">
-              <span className="text-gold">🏔️</span>
-              <span className="text-bronze">{room.viewType}</span>
+              <span className="text-lg">🏔️</span>
+              <span className="text-deep-bronze font-semibold text-xs">{room.viewType}</span>
             </div>
           </div>
 
           {/* Features */}
           <div className="flex flex-wrap gap-2">
             {room.balcony && (
-              <span className="text-xs px-3 py-1 bg-gold/20 text-gold rounded-full border border-gold/40">
-                🌅 Balcony
+              <span className="text-[10px] px-2 py-1.5 bg-gold/30 text-gold-darker rounded-md border-[1.5px] border-gold-dark/40 font-bold uppercase tracking-wide">
+                Balcony
               </span>
             )}
-            <span className="text-xs px-3 py-1 bg-sand text-bronze rounded-full border border-gold/30">
-              ❄️ A/C
+            <span className="text-[10px] px-2 py-1.5 bg-sand/40 text-bronze-dark rounded-md border-[1.5px] border-sand-dark font-bold uppercase tracking-wide">
+              WiFi
             </span>
-            <span className="text-xs px-3 py-1 bg-sand text-bronze rounded-full border border-gold/30">
-              📶 WiFi
+            <span className="text-[10px] px-2 py-1.5 bg-sand/40 text-bronze-dark rounded-md border-[1.5px] border-sand-dark font-bold uppercase tracking-wide">
+              A/C
             </span>
           </div>
         </CardContent>
 
-        <CardFooter className="pt-4 px-5 pb-5">
-          <div className="w-full space-y-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <div className="text-xl font-bold text-gold">
-                  {formatPrice(room.price)}
-                </div>
-                <div className="text-xs text-bronze">per night</div>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <Link href={`/rooms/${slugify(room.nameEn)}`} className="flex-1">
-                <Button size="sm" variant="secondary" className="w-full">
-                  View Details
-                </Button>
-              </Link>
-              <Link href="/booking" className="flex-1">
-                <Button size="sm" variant="primary" className="w-full">
-                  Book Now
-                </Button>
-              </Link>
-            </div>
+        <CardFooter className="pt-4 px-5 pb-6 bg-cream-dark/30">
+          <div className="w-full flex gap-3">
+            <Link href={`/rooms/${slugify(room.nameEn)}`} className="flex-1">
+              <Button size="sm" variant="outline" className="w-full !border-gold-dark !text-gold-darker hover:!bg-gold hover:!text-deep-bronze">
+                Details
+              </Button>
+            </Link>
+            <Link href="/booking" className="flex-1">
+              <Button size="sm" variant="primary" className="w-full shadow-gold">
+                Book
+              </Button>
+            </Link>
           </div>
         </CardFooter>
       </Card>

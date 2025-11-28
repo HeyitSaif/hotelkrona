@@ -4,36 +4,48 @@ import { cn } from '@/lib/utils';
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-  variant?: 'dark' | 'light';
+  variant?: 'light' | 'dark';
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', label, error, variant = 'dark', ...props }, ref) => {
-    const inputStyles = 'input-coastal';
+  ({ className, type = 'text', label, error, variant = 'light', ...props }, ref) => {
+    const labelColor = variant === 'dark' ? 'text-ivory' : 'text-deep-bronze';
+    const inputId = props.id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const errorId = error ? `${inputId}-error` : undefined;
     
     return (
-      <div className="space-y-2">
+      <div className="space-y-2 w-full">
         {label && (
-          <label className={cn(
-            "block text-sm font-medium text-dark-brown"
-          )}>
+          <label 
+            htmlFor={inputId}
+            className={cn(
+              "block text-sm font-semibold tracking-wide uppercase text-xs",
+              labelColor
+            )}
+          >
             {label}
-            {props.required && <span className="text-gold ml-1">*</span>}
+            {props.required && <span className="text-gold-dark ml-1" aria-label="required">*</span>}
           </label>
         )}
         <input
+          id={inputId}
           type={type}
           className={cn(
-            inputStyles,
-            "w-full",
-            error && "border-burgundy focus:ring-burgundy focus:border-burgundy",
+            "input-coastal w-full min-h-[48px] transition-all duration-300",
+            error && "!border-burgundy focus:!ring-burgundy focus:!border-burgundy",
+            variant === 'dark' && "bg-deep-bronze/50 border-gold-light/40 text-ivory placeholder:text-warm-gray",
             className
           )}
           ref={ref}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={errorId}
           {...props}
         />
         {error && (
-          <p className="text-sm text-burgundy">{error}</p>
+          <p id={errorId} className="text-sm text-burgundy font-semibold flex items-center gap-2" role="alert">
+            <span aria-hidden="true">⚠️</span>
+            {error}
+          </p>
         )}
       </div>
     );

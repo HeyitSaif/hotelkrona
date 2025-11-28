@@ -15,7 +15,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1800); // Slightly longer for dramatic effect
+    }, 1800);
 
     const checkPageLoad = () => {
       if (document.readyState === 'complete') {
@@ -49,7 +49,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-cream via-sand to-cream"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-cream via-sand to-cream"
         >
           {/* Subtle animated background pattern */}
           <div className="absolute inset-0 opacity-5">
@@ -64,12 +64,12 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
 
           {/* Animated glow effect */}
           <motion.div
-            className="absolute w-96 h-96 rounded-full"
+            className="absolute w-[400px] h-[400px] rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(196,166,90,0.2) 0%, transparent 70%)',
             }}
             animate={{
-              scale: [1, 1.2, 1],
+              scale: [1, 1.3, 1],
               opacity: [0.5, 0.8, 0.5],
             }}
             transition={{
@@ -89,15 +89,15 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
                 ease: "easeOut",
                 delay: 0.2
               }}
-              className="mb-8 relative"
+              className="mb-10 relative"
             >
               {/* Glow behind logo */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
-                  className="w-40 h-40 rounded-full bg-gold/20 blur-2xl"
+                  className="w-48 h-48 rounded-full bg-gold/20 blur-3xl"
                   animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.3, 0.5, 0.3],
+                    scale: [1, 1.4, 1],
+                    opacity: [0.3, 0.6, 0.3],
                   }}
                   transition={{
                     duration: 2,
@@ -126,7 +126,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
                 ease: "easeOut",
                 delay: 0.5
               }}
-              className="font-serif text-4xl md:text-5xl font-bold text-dark-brown mb-3"
+              className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-dark-brown mb-4"
             >
               Hotel Korona
             </motion.h1>
@@ -140,7 +140,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
                 ease: "easeOut",
                 delay: 0.7
               }}
-              className="font-sans text-gold tracking-[0.3em] uppercase text-sm"
+              className="font-sans text-gold tracking-[0.4em] uppercase text-xs md:text-sm font-bold"
             >
               Coastal Castle Elegance
             </motion.p>
@@ -154,7 +154,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
                 ease: "easeOut",
                 delay: 0.9
               }}
-              className="gold-line gold-line-center mt-8"
+              className="w-20 h-1 bg-gradient-to-r from-gold to-gold-light rounded-full mx-auto mt-10"
             />
 
             {/* Loading dots */}
@@ -166,21 +166,21 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
                 ease: "easeOut",
                 delay: 1.1
               }}
-              className="mt-10"
+              className="mt-12"
             >
-              <div className="flex justify-center space-x-2">
+              <div className="flex justify-center space-x-3">
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}
-                    className="w-2 h-2 bg-gold rounded-full"
+                    className="w-2.5 h-2.5 bg-gold rounded-full"
                     animate={{
                       opacity: [0.3, 1, 0.3],
-                      scale: [0.8, 1.2, 0.8]
+                      scale: [0.8, 1.3, 0.8]
                     }}
                     transition={{
-                      duration: 1.2,
+                      duration: 1.5,
                       repeat: Infinity,
-                      delay: i * 0.15,
+                      delay: i * 0.2,
                       ease: "easeInOut"
                     }}
                   />
@@ -190,10 +190,10 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({ onLoadingComplete }) =>
           </div>
 
           {/* Corner decorations */}
-          <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-gold/20" />
-          <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-gold/20" />
-          <div className="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-gold/20" />
-          <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-gold/20" />
+          <div className="absolute top-12 left-12 w-20 h-20 border-l-2 border-t-2 border-gold/20 hidden md:block" />
+          <div className="absolute top-12 right-12 w-20 h-20 border-r-2 border-t-2 border-gold/20 hidden md:block" />
+          <div className="absolute bottom-12 left-12 w-20 h-20 border-l-2 border-b-2 border-gold/20 hidden md:block" />
+          <div className="absolute bottom-12 right-12 w-20 h-20 border-r-2 border-b-2 border-gold/20 hidden md:block" />
         </motion.div>
       )}
     </AnimatePresence>

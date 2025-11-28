@@ -15,9 +15,9 @@ const restaurantImages: Record<string, string> = {
 
 const RestaurantsSection: React.FC = () => {
   return (
-    <section className="py-24 bg-cream relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-cream-dark relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div 
           className="absolute inset-0"
           style={{
@@ -34,25 +34,25 @@ const RestaurantsSection: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="w-12 h-px bg-gold" />
-            <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Culinary Excellence</span>
-            <div className="w-12 h-px bg-gold" />
+          <div className="flex items-center justify-center space-x-6 mb-6">
+            <div className="w-16 h-px bg-gold-darker" />
+            <span className="text-gold-darker text-sm tracking-[0.15em] uppercase font-sans font-bold">Culinary Excellence</span>
+            <div className="w-16 h-px bg-gold-darker" />
           </div>
           
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-dark-brown mb-6">
-            Experience Our <span className="text-gold">Culinary World</span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-deep-bronze mb-6">
+            Experience Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-dark to-gold">Culinary World</span>
           </h2>
-          <p className="text-lg text-bronze max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-bronze-dark max-w-2xl mx-auto leading-relaxed font-light">
             Three unique dining concepts for every taste, each offering an authentic journey
             through different culinary traditions
           </p>
         </motion.div>
 
         {/* Restaurants Grid */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 mb-20">
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 mb-24">
           {RESTAURANTS.map((restaurant, index) => (
             <motion.div
               key={restaurant.id}
@@ -62,23 +62,23 @@ const RestaurantsSection: React.FC = () => {
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="w-full"
             >
-              <Card variant="elevated" className="h-full group overflow-hidden flex flex-col">
+              <Card variant="elevated" className="h-full group overflow-hidden flex flex-col hover:shadow-elevated transition-all duration-500">
                 {/* Restaurant Image */}
-                <div className="relative mb-6 -mx-6 -mt-6 overflow-hidden rounded-t-xl">
-                  <div className="aspect-[16/10] relative">
+                <div className="relative mb-6 -mx-6 -mt-6 overflow-hidden rounded-t-xl border-b border-sand-dark">
+                  <div className="aspect-[4/3] relative">
                     <Image
                       src={restaurantImages[restaurant.id] || restaurantImages.romanov}
                       alt={restaurant.name}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                     {/* Cuisine Badge */}
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="bg-gold text-dark-brown px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide shadow-medium">
+                      <span className="bg-white/95 backdrop-blur-md text-deep-bronze px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg border-[1.5px] border-gold-dark/40">
                         {restaurant.cuisine.split(' ')[0]}
                       </span>
                     </div>
@@ -86,9 +86,9 @@ const RestaurantsSection: React.FC = () => {
                     {/* Signature Feature */}
                     {restaurant.signature && (
                       <div className="absolute bottom-4 left-4 right-4 z-10">
-                        <div className="bg-white/95 backdrop-blur-sm rounded-lg px-4 py-2 border border-gold shadow-medium">
-                          <p className="text-sm text-gold font-medium flex items-center">
-                            <span className="mr-2">⭐</span>
+                        <div className="bg-black/70 backdrop-blur-md rounded-lg px-4 py-2 border-[1.5px] border-white/20 shadow-lg">
+                          <p className="text-xs text-gold-light font-semibold flex items-center uppercase tracking-wide">
+                            <span className="mr-2 text-lg">⭐</span>
                             {restaurant.signature}
                           </p>
                         </div>
@@ -97,30 +97,30 @@ const RestaurantsSection: React.FC = () => {
                   </div>
                 </div>
 
-                <CardHeader className="px-0">
-                  <CardTitle className="text-2xl mb-2 group-hover:text-gold transition-colors duration-300">
+                <CardHeader className="px-0 pb-2">
+                  <CardTitle className="text-2xl md:text-3xl mb-2 group-hover:text-gold-dark transition-colors duration-300 font-serif">
                     {restaurant.name}
                   </CardTitle>
-                  <p className="text-gold font-medium text-sm">{restaurant.cuisine}</p>
+                  <p className="text-gold-darker font-semibold text-sm uppercase tracking-widest">{restaurant.cuisine}</p>
                 </CardHeader>
 
-                <CardContent className="space-y-5 px-0 flex-1">
-                  <p className="text-bronze leading-relaxed text-sm">
+                <CardContent className="space-y-6 px-0 flex-1">
+                  <p className="text-bronze-dark leading-relaxed text-sm font-light">
                     {restaurant.description}
                   </p>
 
-                  <div className="space-y-2 pt-2">
-                    <p className="text-xs font-medium text-gold uppercase tracking-wide">Atmosphere</p>
-                    <p className="text-sm text-bronze italic leading-relaxed">
-                      {restaurant.atmosphere}
+                  <div className="space-y-2 pt-2 border-t border-sand-dark/40">
+                    <p className="text-xs font-bold text-gold-darker uppercase tracking-widest mt-4">Atmosphere</p>
+                    <p className="text-sm text-deep-bronze italic leading-relaxed font-serif">
+                      &quot;{restaurant.atmosphere}&quot;
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 pt-4">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {restaurant.keywords.map((keyword, idx) => (
                       <span
                         key={idx}
-                        className="text-xs px-3 py-1.5 bg-sand text-bronze rounded-full border border-gold/30"
+                        className="text-[10px] px-3 py-1.5 bg-sand/40 text-bronze-dark rounded-full border-[1.5px] border-gold-dark/30 uppercase tracking-wide font-bold"
                       >
                         {keyword}
                       </span>
@@ -138,18 +138,20 @@ const RestaurantsSection: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <div className="bg-white backdrop-blur-sm rounded-2xl p-10 md:p-12 lg:p-16 border border-gold shadow-large max-w-5xl mx-auto">
-            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-dark-brown mb-6">
+          <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-10 md:p-16 border-[1.5px] border-gold-dark shadow-gold max-w-5xl mx-auto relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-dark" />
+            
+            <h3 className="font-serif text-3xl md:text-4xl font-bold text-deep-bronze mb-6">
               Taste the World at Hotel Korona
             </h3>
-            <p className="text-lg text-bronze mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-bronze-dark mb-10 max-w-2xl mx-auto leading-relaxed">
               From imperial Russian cuisine to soulful Central Asian dishes and vibrant Georgian flavors,
               our restaurants offer an unforgettable culinary journey without leaving the hotel.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="primary">
+              <Button size="lg" variant="primary" className="shadow-gold hover:shadow-glow">
                 Make a Reservation
               </Button>
               <Button size="lg" variant="secondary">
@@ -172,12 +174,12 @@ const RestaurantsSection: React.FC = () => {
             { icon: "🥂", title: "Special Events", desc: "Private dining experiences for celebrations and occasions" },
             { icon: "👨‍🍳", title: "Expert Chefs", desc: "Authentic recipes prepared by experienced culinary masters" }
           ].map((feature, index) => (
-            <div key={index} className="p-8 bg-white rounded-xl border border-gold/30 shadow-medium">
-              <div className="text-5xl mb-6">{feature.icon}</div>
-              <h4 className="font-serif text-xl font-semibold text-gold mb-3">
+            <div key={index} className="p-8 bg-white rounded-xl border-[1.5px] border-sand-dark shadow-elegant hover:shadow-hover-elegant transition-all duration-300 group hover:-translate-y-1">
+              <div className="text-5xl mb-6 filter drop-shadow-sm group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+              <h4 className="font-serif text-xl font-semibold text-gold-darker mb-3 group-hover:text-deep-bronze transition-colors">
                 {feature.title}
               </h4>
-              <p className="text-sm text-bronze leading-relaxed">
+              <p className="text-sm text-bronze-dark leading-relaxed">
                 {feature.desc}
               </p>
             </div>

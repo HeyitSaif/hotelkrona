@@ -29,13 +29,9 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle booking submission
-    console.log('Booking data:', { checkIn, checkOut, adults, children });
-    // Redirect to booking page with params
     window.location.href = `/booking?checkIn=${checkIn}&checkOut=${checkOut}&adults=${adults}&children=${children}`;
   };
 
-  // Get minimum date (today)
   const today = new Date().toISOString().split('T')[0];
 
   return (
@@ -46,23 +42,23 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className={`fixed top-0 left-0 right-0 z-30 ${className}`}
+          className={`fixed top-20 md:top-0 left-0 right-0 z-40 ${className}`}
         >
           {/* Desktop Booking Bar */}
-          <div className="hidden md:block bg-white backdrop-blur-xl border-b border-gold shadow-lg">
-            <div className="container mx-auto px-4 py-4">
-              <form onSubmit={handleSubmit} className="flex items-center gap-4">
+          <div className="hidden md:block bg-white/95 backdrop-blur-xl border-b border-gold shadow-xl">
+            <div className="container mx-auto px-4 py-5">
+              <form onSubmit={handleSubmit} className="flex items-end gap-4">
                 {/* Check-in */}
                 <div className="flex-1">
-                  <label className="block text-xs text-gold mb-1 font-medium tracking-wide uppercase">Check-in</label>
+                  <label className="block text-xs text-gold mb-2 font-bold tracking-widest uppercase">Check-in</label>
                   <div className="relative">
-                    <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold" />
+                    <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold pointer-events-none" />
                     <input
                       type="date"
                       value={checkIn}
                       onChange={(e) => setCheckIn(e.target.value)}
                       min={today}
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all"
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all min-h-[48px]"
                       required
                     />
                   </div>
@@ -70,15 +66,15 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
 
                 {/* Check-out */}
                 <div className="flex-1">
-                  <label className="block text-xs text-gold mb-1 font-medium tracking-wide uppercase">Check-out</label>
+                  <label className="block text-xs text-gold mb-2 font-bold tracking-widest uppercase">Check-out</label>
                   <div className="relative">
-                    <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold" />
+                    <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold pointer-events-none" />
                     <input
                       type="date"
                       value={checkOut}
                       onChange={(e) => setCheckOut(e.target.value)}
                       min={checkIn || today}
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all"
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all min-h-[48px]"
                       required
                     />
                   </div>
@@ -86,9 +82,9 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
 
                 {/* Guests */}
                 <div className="flex-1">
-                  <label className="block text-xs text-gold mb-1 font-medium tracking-wide uppercase">Guests</label>
+                  <label className="block text-xs text-gold mb-2 font-bold tracking-widest uppercase">Guests</label>
                   <div className="relative">
-                    <UsersIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold" />
+                    <UsersIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gold pointer-events-none" />
                     <select
                       value={`${adults}-${children}`}
                       onChange={(e) => {
@@ -96,7 +92,7 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                         setAdults(a);
                         setChildren(c);
                       }}
-                      className="w-full pl-10 pr-10 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-all appearance-none cursor-pointer"
+                      className="w-full pl-10 pr-10 py-3 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all appearance-none cursor-pointer min-h-[48px]"
                     >
                       <option value="1-0">1 Adult</option>
                       <option value="2-0">2 Adults</option>
@@ -110,8 +106,8 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                   </div>
                 </div>
 
-                <div className="pt-5">
-                  <Button type="submit" size="lg" variant="primary">
+                <div>
+                  <Button type="submit" size="lg" variant="primary" className="shadow-lg hover:shadow-xl whitespace-nowrap">
                     Check Availability
                   </Button>
                 </div>
@@ -119,21 +115,23 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
             </div>
           </div>
 
-          {/* Mobile Booking Bar */}
-          <div className="md:hidden bg-white backdrop-blur-xl border-b border-gold shadow-lg">
-            <div className="container mx-auto px-4 py-3">
-              <div className="flex items-center justify-between">
-                <span className="text-dark-brown font-medium">
+          {/* Mobile Booking Bar - Improved */}
+          <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-gold shadow-xl">
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex items-center justify-between min-h-[48px]">
+                <span className="text-dark-brown font-bold uppercase tracking-wide text-sm">
                   Book Your Stay
                 </span>
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="flex items-center space-x-2 text-gold font-medium"
+                  className="flex items-center space-x-2 text-gold font-semibold min-h-[44px] px-4 py-2 rounded-lg hover:bg-sand/30 transition-colors"
+                  aria-label={isExpanded ? "Close booking form" : "Open booking form"}
+                  aria-expanded={isExpanded}
                 >
-                  <span>Quick Book</span>
+                  <span className="text-sm uppercase tracking-wide">Quick Book</span>
                   <motion.div
                     animate={{ rotate: isExpanded ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <ChevronDownIcon className="w-5 h-5" />
                   </motion.div>
@@ -149,34 +147,34 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <form onSubmit={handleSubmit} className="pt-4 space-y-3">
-                      <div className="grid grid-cols-2 gap-3">
+                    <form onSubmit={handleSubmit} className="pt-6 space-y-5 pb-2">
+                      <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs text-gold mb-1 font-medium">Check-in</label>
+                          <label className="block text-xs text-gold mb-2 font-bold uppercase tracking-wider">Check-in</label>
                           <input
                             type="date"
                             value={checkIn}
                             onChange={(e) => setCheckIn(e.target.value)}
                             min={today}
-                            className="w-full px-3 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold text-sm"
+                            className="w-full px-4 py-3.5 bg-white border-2 border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 text-sm min-h-[52px]"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-xs text-gold mb-1 font-medium">Check-out</label>
+                          <label className="block text-xs text-gold mb-2 font-bold uppercase tracking-wider">Check-out</label>
                           <input
                             type="date"
                             value={checkOut}
                             onChange={(e) => setCheckOut(e.target.value)}
                             min={checkIn || today}
-                            className="w-full px-3 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold text-sm"
+                            className="w-full px-4 py-3.5 bg-white border-2 border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 text-sm min-h-[52px]"
                             required
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs text-gold mb-1 font-medium">Guests</label>
+                        <label className="block text-xs text-gold mb-2 font-bold uppercase tracking-wider">Guests</label>
                         <select
                           value={`${adults}-${children}`}
                           onChange={(e) => {
@@ -184,7 +182,7 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                             setAdults(a);
                             setChildren(c);
                           }}
-                          className="w-full px-3 py-2.5 bg-white border border-sand text-bronze rounded-lg focus:outline-none focus:border-gold text-sm"
+                          className="w-full px-4 py-3.5 bg-white border-2 border-sand text-bronze rounded-lg focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 text-sm appearance-none cursor-pointer min-h-[52px]"
                         >
                           <option value="1-0">1 Adult</option>
                           <option value="2-0">2 Adults</option>
@@ -195,7 +193,7 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                         </select>
                       </div>
 
-                      <Button type="submit" size="md" variant="primary" className="w-full">
+                      <Button type="submit" size="lg" variant="primary" className="w-full shadow-lg py-4">
                         Check Availability
                       </Button>
                     </form>

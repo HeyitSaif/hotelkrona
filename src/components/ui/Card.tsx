@@ -9,17 +9,17 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, variant = 'default', ...props }, ref) => {
     const variants = {
-      default: "card-coastal",
-      glass: "glass-morphism-light",
-      elevated: "card-elevated",
-      light: "bg-white border border-sand/30 shadow-soft"
+      default: "card-coastal hover:shadow-elevated",
+      glass: "glass-morphism-light hover:shadow-elevated",
+      elevated: "card-elevated hover:shadow-elevated",
+      light: "bg-white border-[1.5px] border-sand-dark shadow-elegant hover:shadow-hover-elegant hover:-translate-y-1"
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "rounded-xl p-6 md:p-8 transition-all duration-400",
+          "rounded-xl p-6 md:p-8 transition-all duration-500",
           variants[variant],
           className
         )}
@@ -52,7 +52,7 @@ export const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "font-serif text-xl font-semibold text-dark-brown leading-tight tracking-tight",
+      "font-serif text-xl font-semibold text-deep-bronze leading-tight tracking-tight transition-colors duration-300",
       className
     )}
     {...props}
@@ -68,7 +68,7 @@ export const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-bronze text-sm leading-relaxed", className)}
+    className={cn("text-bronze-dark text-sm leading-relaxed", className)}
     {...props}
   />
 ));
@@ -78,7 +78,7 @@ export const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("text-bronze space-y-4", className)} {...props} />
+  <div ref={ref} className={cn("text-bronze-dark space-y-4", className)} {...props} />
 ));
 CardContent.displayName = "CardContent";
 
@@ -88,7 +88,7 @@ export const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center pt-4 mt-4 border-t border-gold/30", className)}
+    className={cn("flex items-center pt-4 mt-4 border-t border-gold-dark/40", className)}
     {...props}
   />
 ));
