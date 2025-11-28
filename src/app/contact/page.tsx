@@ -75,7 +75,7 @@ export default function ContactPage() {
     }
   };
 
-  const inputClasses = "w-full px-4 py-3 bg-deep-bronze/50 border border-gold/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors placeholder:text-sand/50";
+  const inputClasses = "w-full px-4 py-3 bg-deep-bronze/50 border border-gold-dark/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors placeholder:text-sand/50";
   const labelClasses = "block text-sm font-medium text-ivory mb-2";
 
   return (
@@ -102,7 +102,7 @@ export default function ContactPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Get in Touch</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Get in Touch</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -162,14 +162,14 @@ export default function ContactPage() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 text-center border border-gold/10 hover:border-gold/30 transition-all duration-300 group"
+                className="glass-morphism-dark rounded-2xl p-8 text-center border border-gold-dark/10 hover:border-gold-dark/30 transition-all duration-300 group"
               >
                 <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 group-hover:bg-gold/20 transition-colors">
                   {item.icon}
                 </div>
-                <h3 className="font-serif text-lg font-semibold text-gold mb-2">{item.title}</h3>
+                <h3 className="font-serif text-lg font-semibold text-gold-darker mb-2">{item.title}</h3>
                 <p className="text-ivory mb-4">{item.content}</p>
-                <span className="text-gold text-sm group-hover:underline">{item.action} →</span>
+                <span className="text-gold-darker text-sm group-hover:underline">{item.action} →</span>
               </motion.a>
             ))}
           </div>
@@ -181,7 +181,7 @@ export default function ContactPage() {
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
+              className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10"
             >
               <h2 className="font-serif text-2xl font-bold text-ivory mb-2">Send Us a Message</h2>
               <p className="text-sand mb-8">We&apos;ll get back to you within 24 hours</p>
@@ -193,7 +193,7 @@ export default function ContactPage() {
                   className="text-center py-12"
                 >
                   <div className="text-5xl mb-4">✅</div>
-                  <h3 className="font-serif text-xl text-gold mb-2">Message Sent!</h3>
+                  <h3 className="font-serif text-xl text-gold-darker mb-2">Message Sent!</h3>
                   <p className="text-sand">Thank you for contacting us. We&apos;ll respond shortly.</p>
                   <Button 
                     variant="secondary" 
@@ -212,7 +212,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                       required
                       placeholder="Your name"
-                      className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
+                      className="bg-deep-bronze/50 border-gold-dark/20 text-ivory placeholder:text-sand/50"
                     />
                     <Input
                       label="Email"
@@ -221,7 +221,7 @@ export default function ContactPage() {
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       required
                       placeholder="your@email.com"
-                      className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
+                      className="bg-deep-bronze/50 border-gold-dark/20 text-ivory placeholder:text-sand/50"
                     />
                   </div>
                   
@@ -290,7 +290,7 @@ export default function ContactPage() {
               className="space-y-8"
             >
               {/* Map Placeholder */}
-              <div className="bg-deep-bronze/50 rounded-2xl overflow-hidden border border-gold/10 h-64 relative group">
+              <div className="bg-deep-bronze/50 rounded-2xl overflow-hidden border border-gold-dark/10 h-64 relative group">
                 <Image
                   src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=800&q=80"
                   alt="Map location"
@@ -310,8 +310,8 @@ export default function ContactPage() {
               </div>
 
               {/* Business Hours */}
-              <div className="glass-morphism-dark rounded-2xl p-6 border border-gold/10">
-                <h3 className="font-serif text-lg font-semibold text-gold mb-4">Business Hours</h3>
+              <div className="glass-morphism-dark rounded-2xl p-6 border border-gold-dark/10">
+                <h3 className="font-serif text-lg font-semibold text-gold-darker mb-4">Business Hours</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-sand">Reception</span>
@@ -373,7 +373,7 @@ export default function ContactPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="bg-deep-bronze/30 rounded-xl border border-gold/10 overflow-hidden hover:border-gold/30 transition-colors"
+                className="bg-deep-bronze/30 rounded-xl border border-gold-dark/10 overflow-hidden hover:border-gold-dark/30 transition-colors"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}

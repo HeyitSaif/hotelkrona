@@ -83,7 +83,7 @@ export default function GalleryPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Photo Gallery</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Photo Gallery</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -108,7 +108,7 @@ export default function GalleryPage() {
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   filter === cat.id
                     ? 'bg-gold text-deep-bronze shadow-gold transform scale-105'
-                    : 'bg-charcoal/50 text-sand hover:bg-charcoal hover:text-gold border border-gold/10'
+                    : 'bg-charcoal/50 text-sand hover:bg-charcoal hover:text-gold-darker border border-gold/10'
                 }`}
               >
                 {cat.label}
@@ -215,7 +215,7 @@ export default function GalleryPage() {
 
             {/* Caption */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center bg-deep-bronze/80 px-6 py-3 rounded-full border border-gold/20 backdrop-blur-sm">
-              <p className="text-gold font-serif text-xl">{filteredImages[selectedImage].title}</p>
+              <p className="text-gold-darker font-serif text-xl">{filteredImages[selectedImage].title}</p>
               <p className="text-sand text-sm mt-1">
                 {selectedImage + 1} / {filteredImages.length}
               </p>

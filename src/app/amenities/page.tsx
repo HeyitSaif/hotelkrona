@@ -83,7 +83,7 @@ export default function AmenitiesPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Hotel Facilities</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Hotel Facilities</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -124,7 +124,7 @@ export default function AmenitiesPage() {
             >
               {/* Image */}
               <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl border border-gold/10">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl border border-gold-dark/10">
                   <Image
                     src={category.image}
                     alt={category.title}
@@ -135,8 +135,8 @@ export default function AmenitiesPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
                 </div>
                 {/* Floating highlight card */}
-                <div className="absolute -bottom-6 left-6 right-6 glass-morphism-dark rounded-xl p-4 border border-gold/20 shadow-large">
-                  <div className="text-gold font-semibold mb-1">{category.highlight.title}</div>
+                <div className="absolute -bottom-6 left-6 right-6 glass-morphism-dark rounded-xl p-4 border border-gold-dark/20 shadow-large">
+                  <div className="text-gold-darker font-semibold mb-1">{category.highlight.title}</div>
                   <div className="text-sand text-sm">{category.highlight.desc}</div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function AmenitiesPage() {
               {/* Content */}
               <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl bg-gold/10 p-3 rounded-lg border border-gold/20">{category.icon}</span>
+                  <span className="text-4xl bg-gold/10 p-3 rounded-lg border border-gold-dark/20">{category.icon}</span>
                   <h2 className="font-serif text-2xl md:text-3xl font-bold text-ivory">
                     {category.title}
                   </h2>
@@ -192,12 +192,12 @@ export default function AmenitiesPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 border border-gold/10 text-center hover:border-gold/30 transition-all duration-300 group"
+                className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10 text-center hover:border-gold-dark/30 transition-all duration-300 group"
               >
                 <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
                   {restaurant.id === 'romanov' ? '🍷' : restaurant.id === 'uzbek-tatar' ? '🥘' : '🍇'}
                 </div>
-                <h3 className="font-serif text-xl text-gold mb-2">{restaurant.name}</h3>
+                <h3 className="font-serif text-xl text-gold-darker mb-2">{restaurant.name}</h3>
                 <p className="text-sand font-medium text-sm mb-4 uppercase tracking-wide">{restaurant.cuisine}</p>
                 <p className="text-ivory/70 text-sm italic">{restaurant.atmosphere}</p>
               </motion.div>

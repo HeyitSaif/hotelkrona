@@ -30,15 +30,15 @@ export default function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
-              <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Our Story</span>
-              <div className="w-12 h-px bg-gold" />
+              <div className="w-12 h-px bg-gold-light" />
+              <span className="text-gold-light text-sm tracking-[0.15em] uppercase font-sans font-bold">Our Story</span>
+              <div className="w-12 h-px bg-gold-light" />
             </div>
             
-            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6 text-shadow-strong">
-              About <span className="text-gold">Hotel Korona</span>
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
+              About <span className="text-gold-light">Hotel Korona</span>
             </h1>
-            <p className="text-xl text-ivory/90 max-w-2xl mx-auto text-shadow">
+            <p className="text-xl text-ivory max-w-2xl mx-auto" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
               Where castle elegance meets coastal beauty on the shores of Crimea
             </p>
           </motion.div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl border border-gold/20 group">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl border border-gold-dark/20 group">
                 <Image
                   src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80"
                   alt="Hotel Korona exterior"
@@ -104,8 +104,8 @@ export default function AboutPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-gold/20 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-gold/20 rounded-2xl -z-10" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-gold-dark/20 rounded-2xl -z-10" />
+              <div className="absolute -top-6 -left-6 w-32 h-32 border-2 border-gold-dark/20 rounded-2xl -z-10" />
             </motion.div>
           </div>
         </div>
@@ -154,10 +154,10 @@ export default function AboutPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 border border-gold/10 text-center hover:border-gold/30 transition-all duration-300 group"
+                className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10 text-center hover:border-gold-dark/30 transition-all duration-300 group"
               >
                 <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                <h3 className="font-serif text-xl text-gold mb-3">{item.title}</h3>
+                <h3 className="font-serif text-xl text-gold-darker mb-3">{item.title}</h3>
                 <p className="text-sand leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
@@ -193,10 +193,10 @@ export default function AboutPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center bg-charcoal/30 p-6 rounded-xl border border-gold/5 hover:border-gold/20 transition-all duration-300"
+                className="text-center bg-charcoal/30 p-6 rounded-xl border border-gold-dark/5 hover:border-gold-dark/20 transition-all duration-300"
               >
                 <div className="text-4xl mb-3">{item.icon}</div>
-                <h3 className="font-serif text-lg text-gold mb-2">{item.value}</h3>
+                <h3 className="font-serif text-lg text-gold-darker mb-2">{item.value}</h3>
                 <p className="text-sand text-sm">{item.desc}</p>
               </motion.div>
             ))}
@@ -207,7 +207,7 @@ export default function AboutPage() {
       {/* Stats */}
       <section className="py-16 bg-charcoal relative">
         <div className="container mx-auto px-4">
-          <div className="glass-morphism-dark rounded-2xl p-12 border border-gold/20 shadow-glow">
+          <div className="glass-morphism-dark rounded-2xl p-12 border border-gold-dark/20 shadow-glow">
             <div className="grid md:grid-cols-4 gap-8 text-center">
               {[
                 { number: '10+', label: 'Years of Service' },
@@ -222,7 +222,7 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="font-serif text-4xl md:text-5xl font-bold text-gold mb-2">
+                  <div className="font-serif text-4xl md:text-5xl font-bold text-gold-darker mb-2">
                     {stat.number}
                   </div>
                   <div className="text-sand uppercase tracking-wider text-sm font-medium">{stat.label}</div>

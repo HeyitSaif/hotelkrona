@@ -67,7 +67,7 @@ export default function RoomsPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Accommodations</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Accommodations</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -102,7 +102,7 @@ export default function RoomsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="font-serif text-3xl font-bold text-dark-brown mb-4">
+            <h2 className="font-serif text-3xl font-bold text-deep-bronze mb-4">
               Discover Our Accommodations
             </h2>
             <p className="text-bronze max-w-3xl mx-auto text-lg">
@@ -122,7 +122,7 @@ export default function RoomsPage() {
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center space-x-2">
                 <AdjustmentsHorizontalIcon className="w-5 h-5 text-gold" />
-                <span className="font-medium text-dark-brown uppercase tracking-wide text-sm">Filter & Sort:</span>
+                <span className="font-medium text-deep-bronze uppercase tracking-wide text-sm">Filter & Sort:</span>
               </div>
 
               {/* Category Filter */}
@@ -160,9 +160,9 @@ export default function RoomsPage() {
                   id="balcony-filter"
                   checked={showBalconyOnly}
                   onChange={(e) => setShowBalconyOnly(e.target.checked)}
-                  className="w-5 h-5 rounded border-sand text-gold focus:ring-gold focus:ring-offset-cream cursor-pointer accent-gold"
+                  className="w-5 h-5 rounded border-sand text-gold-darker focus:ring-gold focus:ring-offset-cream cursor-pointer accent-gold"
                 />
-                <label htmlFor="balcony-filter" className="text-dark-brown text-sm font-medium cursor-pointer select-none">
+                <label htmlFor="balcony-filter" className="text-deep-bronze text-sm font-medium cursor-pointer select-none">
                   Balcony Only
                 </label>
               </div>
@@ -173,7 +173,7 @@ export default function RoomsPage() {
               {(filterCategory !== 'all' || showBalconyOnly) && (
                 <button 
                   onClick={() => { setFilterCategory('all'); setShowBalconyOnly(false); }}
-                  className="text-gold hover:text-dark-brown transition-colors font-medium text-xs uppercase"
+                  className="text-gold-darker hover:text-deep-bronze transition-colors font-medium text-xs uppercase"
                 >
                   Reset Filters
                 </button>
@@ -198,7 +198,7 @@ export default function RoomsPage() {
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-gold-light to-gold" />
             
-            <h3 className="font-serif text-2xl font-bold text-dark-brown mb-4 relative z-10">
+            <h3 className="font-serif text-2xl font-bold text-deep-bronze mb-4 relative z-10">
               Find your perfect room and book today
             </h3>
             <p className="text-bronze mb-8 max-w-2xl mx-auto relative z-10">
@@ -223,7 +223,7 @@ export default function RoomsPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-16 bg-sand/20 rounded-2xl p-8 border border-gold/20"
           >
-            <h3 className="font-serif text-xl font-bold text-gold mb-8 text-center">
+            <h3 className="font-serif text-xl font-bold text-gold-darker mb-8 text-center">
               Standard Room Amenities
             </h3>
             <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-6 text-center">
@@ -247,7 +247,7 @@ export default function RoomsPage() {
                   className="text-center group"
                 >
                   <div className="text-2xl mb-2 transform group-hover:scale-110 transition-transform">{amenity.icon}</div>
-                  <div className="text-xs text-dark-brown font-medium group-hover:text-gold transition-colors">
+                  <div className="text-xs text-deep-bronze font-medium group-hover:text-gold-darker transition-colors">
                     {amenity.name}
                   </div>
                 </motion.div>

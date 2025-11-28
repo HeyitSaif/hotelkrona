@@ -40,7 +40,7 @@ export default function PricingPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Transparent Pricing</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Transparent Pricing</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -55,7 +55,7 @@ export default function PricingPage() {
       </section>
 
       {/* Promotional Banner */}
-      <section className="bg-gradient-to-r from-burgundy to-deep-bronze py-4 border-y border-gold/20">
+      <section className="bg-gradient-to-r from-burgundy to-deep-bronze py-4 border-y border-gold-dark/20">
         <div className="container mx-auto px-4 text-center">
           <motion.p
             initial={{ opacity: 0 }}
@@ -63,7 +63,7 @@ export default function PricingPage() {
             transition={{ duration: 0.8 }}
             className="text-ivory font-semibold tracking-wide"
           >
-            🎉 <span className="text-gold font-bold">Special Offer:</span> Book 8+ nights and get <span className="text-gold font-bold">15% OFF</span> your entire stay!
+            🎉 <span className="text-gold-darker font-bold">Special Offer:</span> Book 8+ nights and get <span className="text-gold-darker font-bold">15% OFF</span> your entire stay!
           </motion.p>
         </div>
       </section>
@@ -96,9 +96,9 @@ export default function PricingPage() {
               {pricingPeriods.map((period) => (
                 <div 
                   key={period.id}
-                  className="glass-morphism-dark rounded-lg p-4 text-center border border-gold/10 hover:border-gold/30 transition-colors"
+                  className="glass-morphism-dark rounded-lg p-4 text-center border border-gold-dark/10 hover:border-gold-dark/30 transition-colors"
                 >
-                  <div className="text-gold font-semibold mb-1">{period.name}</div>
+                  <div className="text-gold-darker font-semibold mb-1">{period.name}</div>
                   <div className="text-sand text-sm">{period.dates}</div>
                 </div>
               ))}
@@ -110,12 +110,12 @@ export default function PricingPage() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="overflow-x-auto mb-16 rounded-2xl border border-gold/10 shadow-2xl"
+            className="overflow-x-auto mb-16 rounded-2xl border border-gold-dark/10 shadow-2xl"
           >
             <table className="w-full min-w-[800px] bg-charcoal/80 backdrop-blur-sm">
               <thead>
-                <tr className="border-b border-gold/20 bg-deep-bronze/80">
-                  <th className="text-left py-5 px-6 text-gold font-serif text-lg">Room Type</th>
+                <tr className="border-b border-gold-dark/20 bg-deep-bronze/80">
+                  <th className="text-left py-5 px-6 text-gold-darker font-serif text-lg">Room Type</th>
                   <th className="text-center py-5 px-6 text-ivory font-sans font-medium">Guests</th>
                   {pricingPeriods.map((period) => (
                     <th key={period.id} className="text-center py-5 px-6 text-ivory font-sans font-medium">
@@ -131,7 +131,7 @@ export default function PricingPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="border-b border-gold/5 hover:bg-deep-bronze/40 transition-colors"
+                    className="border-b border-gold-dark/5 hover:bg-deep-bronze/40 transition-colors"
                   >
                     <td className="py-5 px-6">
                       <div className="font-semibold text-ivory mb-1">{room.nameEn}</div>
@@ -140,7 +140,7 @@ export default function PricingPage() {
                     <td className="text-center py-5 px-6 text-ivory">{room.maxGuests}</td>
                     {pricingPeriods.map((period) => (
                       <td key={period.id} className="text-center py-5 px-6">
-                        <span className="text-gold font-bold">
+                        <span className="text-gold-darker font-bold">
                           {formatPrice(Math.round(room.price * period.multiplier))}
                         </span>
                       </td>
@@ -157,9 +157,9 @@ export default function PricingPage() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="glass-morphism-dark rounded-2xl p-8 mb-16 border border-gold/10"
+            className="glass-morphism-dark rounded-2xl p-8 mb-16 border border-gold-dark/10"
           >
-            <h3 className="font-serif text-xl font-bold text-gold mb-8 text-center">
+            <h3 className="font-serif text-xl font-bold text-gold-darker mb-8 text-center">
               All Rates Include
             </h3>
             <div className="grid md:grid-cols-3 gap-8">
@@ -174,7 +174,7 @@ export default function PricingPage() {
                 <div key={index} className="flex items-start space-x-4 group">
                   <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
                   <div>
-                    <div className="text-ivory font-semibold mb-1 group-hover:text-gold transition-colors">{item.title}</div>
+                    <div className="text-ivory font-semibold mb-1 group-hover:text-gold-darker transition-colors">{item.title}</div>
                     <div className="text-sand text-sm leading-relaxed">{item.desc}</div>
                   </div>
                 </div>
@@ -204,10 +204,10 @@ export default function PricingPage() {
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className="flex justify-between items-center glass-morphism-dark rounded-lg p-5 border border-gold/5 hover:border-gold/30 transition-all duration-300"
+                  className="flex justify-between items-center glass-morphism-dark rounded-lg p-5 border border-gold-dark/5 hover:border-gold-dark/30 transition-all duration-300"
                 >
                   <span className="text-ivory font-medium">{item.service}</span>
-                  <span className="text-gold font-bold bg-deep-bronze/50 px-3 py-1 rounded-md">{item.price}</span>
+                  <span className="text-gold-darker font-bold bg-deep-bronze/50 px-3 py-1 rounded-md">{item.price}</span>
                 </div>
               ))}
             </div>
@@ -219,9 +219,9 @@ export default function PricingPage() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-charcoal rounded-2xl p-8 border border-gold/10 shadow-large"
+            className="bg-charcoal rounded-2xl p-8 border border-gold-dark/10 shadow-large"
           >
-            <h3 className="font-serif text-xl font-bold text-gold mb-8 text-center">
+            <h3 className="font-serif text-xl font-bold text-gold-darker mb-8 text-center">
               Booking Policies
             </h3>
             <div className="grid md:grid-cols-2 gap-10">

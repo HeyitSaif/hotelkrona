@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS, HOTEL_INFO } from '@/lib/constants';
-import Button from '@/components/ui/Button';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { NAV_LINKS, HOTEL_INFO } from "@/lib/constants";
+import Button from "@/components/ui/Button";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,18 +18,18 @@ const Header: React.FC = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [isMobileMenuOpen]);
 
@@ -41,56 +41,61 @@ const Header: React.FC = () => {
     <>
       {/* Top Info Bar */}
       <div className="hidden md:block bg-sand border-b border-gold-dark/40">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm py-3">
-          <div className="flex items-center space-x-6">
+        <div className="container mx-auto px-4 flex justify-between items-center text-sm py-3.5">
+          <div className="flex items-center space-x-8">
             <a
               href={`tel:${HOTEL_INFO.contact.phone}`}
-              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px]"
+              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px] font-medium"
             >
-              <span>📞</span>
+              <span className="text-base">📞</span>
               <span>{HOTEL_INFO.contact.phone}</span>
             </a>
             <a
               href={`mailto:${HOTEL_INFO.contact.email}`}
-              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px]"
+              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px] font-medium"
             >
-              <span>✉️</span>
+              <span className="text-base">✉️</span>
               <span>{HOTEL_INFO.contact.email}</span>
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <span className="text-gold-darker font-semibold tracking-wide">Welcome to Hotel Korona</span>
+            <span className="text-gold-darker font-bold tracking-wide text-sm">
+              Welcome to Hotel Korona
+            </span>
           </div>
         </div>
       </div>
 
       {/* Main Header */}
-      <header 
+      <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-lg shadow-elevated border-b border-gold-dark/40' 
-            : 'bg-cream/50'
+          isScrolled
+            ? "bg-white/95 backdrop-blur-lg shadow-elevated border-b border-gold-dark/40"
+            : "bg-cream/50"
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20 md:h-24">
+          <div className="flex items-center justify-between h-20 md:h-28">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 group min-h-[48px]">
+            <Link
+              href="/"
+              className="flex items-center space-x-4 group min-h-[48px]"
+            >
               <div className="relative">
                 <Image
                   src="/logo.png"
                   alt="Hotel Korona Logo"
-                  width={56}
-                  height={56}
-                  className="w-12 h-12 md:w-14 md:h-14 transition-transform duration-300 group-hover:scale-105"
+                  height={80}
+                  width={240}
+                  className="w-auto h-16 md:h-20 transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gold/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div>
-                <h1 className="font-serif text-xl md:text-2xl font-bold text-deep-bronze group-hover:text-gold-dark transition-colors duration-300">
+                <h1 className="font-serif text-xl md:text-3xl font-bold text-deep-bronze group-hover:text-gold-dark transition-colors duration-300">
                   Hotel Korona
                 </h1>
-                <p className="hidden md:block text-[10px] text-gold-darker tracking-[0.15em] uppercase font-bold">
+                <p className="hidden md:block text-[11px] text-gold-darker tracking-[0.15em] uppercase font-bold mt-0.5">
                   Coastal Castle Elegance
                 </p>
               </div>
@@ -104,9 +109,10 @@ const Header: React.FC = () => {
                   href={link.href}
                   className={`
                     font-sans font-semibold text-sm tracking-wider uppercase transition-all duration-300 relative py-2 min-h-[44px] flex items-center
-                    ${pathname === link.href
-                      ? 'text-gold-darker'
-                      : 'text-bronze-dark hover:text-gold-darker'
+                    ${
+                      pathname === link.href
+                        ? "text-gold-darker"
+                        : "text-bronze-dark hover:text-gold-darker"
                     }
                   `}
                 >
@@ -124,7 +130,11 @@ const Header: React.FC = () => {
             {/* CTA Button & Mobile Menu */}
             <div className="flex items-center space-x-4">
               <Link href="/booking" className="hidden md:block">
-                <Button size="md" variant="primary" className="shadow-md hover:shadow-lg">
+                <Button
+                  size="md"
+                  variant="primary"
+                  className="shadow-md hover:shadow-lg"
+                >
                   Book Now
                 </Button>
               </Link>
@@ -137,7 +147,11 @@ const Header: React.FC = () => {
                 aria-expanded={isMobileMenuOpen}
               >
                 <motion.span
-                  animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                  animate={
+                    isMobileMenuOpen
+                      ? { rotate: 45, y: 7 }
+                      : { rotate: 0, y: 0 }
+                  }
                   className="w-7 h-0.5 bg-gold block transition-all duration-300 rounded-full"
                 />
                 <motion.span
@@ -145,7 +159,11 @@ const Header: React.FC = () => {
                   className="w-7 h-0.5 bg-gold block mt-2 transition-all duration-300 rounded-full"
                 />
                 <motion.span
-                  animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                  animate={
+                    isMobileMenuOpen
+                      ? { rotate: -45, y: -7 }
+                      : { rotate: 0, y: 0 }
+                  }
                   className="w-7 h-0.5 bg-gold block mt-2 transition-all duration-300 rounded-full"
                 />
               </button>
@@ -169,9 +187,9 @@ const Header: React.FC = () => {
 
               {/* Menu Panel */}
               <motion.div
-                initial={{ x: '100%' }}
+                initial={{ x: "100%" }}
                 animate={{ x: 0 }}
-                exit={{ x: '100%' }}
+                exit={{ x: "100%" }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 className="fixed top-0 right-0 bottom-0 w-full sm:w-96 bg-white shadow-2xl z-50 overflow-y-auto"
               >
@@ -182,18 +200,20 @@ const Header: React.FC = () => {
                       <Image
                         src="/logo.png"
                         alt="Hotel Korona Logo"
-                        width={40}
-                        height={40}
-                        className="w-10 h-10"
+                        width={48}
+                        height={48}
+                        className="w-12 h-12"
                       />
-                      <span className="font-serif text-lg font-bold text-deep-bronze">Hotel Korona</span>
+                      <span className="font-serif text-xl font-bold text-deep-bronze">
+                        Hotel Korona
+                      </span>
                     </div>
                     <button
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gold-dark/20 transition-colors"
+                      className="w-12 h-12 flex items-center justify-center rounded-full hover:bg-gold-dark/20 transition-colors"
                       aria-label="Close menu"
                     >
-                      <span className="text-gold-darker text-2xl">×</span>
+                      <span className="text-gold-darker text-3xl">×</span>
                     </button>
                   </div>
                 </div>
@@ -213,9 +233,10 @@ const Header: React.FC = () => {
                           onClick={() => setIsMobileMenuOpen(false)}
                           className={`
                             font-sans font-semibold py-4 px-6 rounded-xl transition-all duration-300 min-h-[56px] flex items-center uppercase tracking-wider text-sm
-                            ${pathname === link.href
-                              ? 'text-gold-darker bg-cream border-l-4 border-gold-darker shadow-md'
-                              : 'text-bronze-dark hover:text-gold-darker hover:bg-sand-dark/30 border-l-4 border-transparent'
+                            ${
+                              pathname === link.href
+                                ? "text-gold-darker bg-cream border-l-4 border-gold-darker shadow-md"
+                                : "text-bronze-dark hover:text-gold-darker hover:bg-sand-dark/30 border-l-4 border-transparent"
                             }
                           `}
                         >
@@ -232,8 +253,15 @@ const Header: React.FC = () => {
                     transition={{ delay: 0.3 }}
                     className="pt-6 border-t border-gold-dark/40"
                   >
-                    <Link href="/booking" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button size="lg" variant="primary" className="w-full shadow-lg">
+                    <Link
+                      href="/booking"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <Button
+                        size="lg"
+                        variant="primary"
+                        className="w-full shadow-lg"
+                      >
                         Book Now
                       </Button>
                     </Link>
@@ -246,21 +274,31 @@ const Header: React.FC = () => {
                     transition={{ delay: 0.4 }}
                     className="mt-8 pt-8 border-t border-gold-dark/40 space-y-4"
                   >
-                    <h3 className="text-xs text-gold-darker uppercase tracking-widest font-bold mb-4">Contact Us</h3>
-                    
+                    <h3 className="text-xs text-gold-darker uppercase tracking-widest font-bold mb-4">
+                      Contact Us
+                    </h3>
+
                     <a
                       href={`tel:${HOTEL_INFO.contact.phone}`}
                       className="flex items-center space-x-4 text-bronze-dark hover:text-gold-darker transition-colors group min-h-[48px] bg-cream/50 p-4 rounded-lg"
                     >
-                      <span className="text-xl group-hover:scale-110 transition-transform">📞</span>
-                      <span className="font-semibold">{HOTEL_INFO.contact.phone}</span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">
+                        📞
+                      </span>
+                      <span className="font-semibold">
+                        {HOTEL_INFO.contact.phone}
+                      </span>
                     </a>
                     <a
                       href={`mailto:${HOTEL_INFO.contact.email}`}
                       className="flex items-center space-x-4 text-bronze-dark hover:text-gold-darker transition-colors group min-h-[48px] bg-cream/50 p-4 rounded-lg"
                     >
-                      <span className="text-xl group-hover:scale-110 transition-transform">✉️</span>
-                      <span className="font-semibold text-sm">{HOTEL_INFO.contact.email}</span>
+                      <span className="text-xl group-hover:scale-110 transition-transform">
+                        ✉️
+                      </span>
+                      <span className="font-semibold text-sm">
+                        {HOTEL_INFO.contact.email}
+                      </span>
                     </a>
                   </motion.div>
                 </div>

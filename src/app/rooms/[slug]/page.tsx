@@ -60,11 +60,11 @@ export default function RoomDetailPage() {
       <div className="bg-deep-bronze/50 py-4 border-b border-gold/10">
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-sand hover:text-gold transition-colors">Home</Link>
+            <Link href="/" className="text-sand hover:text-gold-darker transition-colors">Home</Link>
             <span className="text-sand/50">/</span>
-            <Link href="/rooms" className="text-sand hover:text-gold transition-colors">Rooms</Link>
+            <Link href="/rooms" className="text-sand hover:text-gold-darker transition-colors">Rooms</Link>
             <span className="text-sand/50">/</span>
-            <span className="text-gold font-medium">{room.nameEn}</span>
+            <span className="text-gold-darker font-medium">{room.nameEn}</span>
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@ export default function RoomDetailPage() {
                 <h1 className="font-serif text-3xl md:text-4xl font-bold text-ivory mb-2">
                   {room.nameEn}
                 </h1>
-                <p className="text-gold font-medium mb-6 font-sans tracking-wide">{room.nameRu}</p>
+                <p className="text-gold-darker font-medium mb-6 font-sans tracking-wide">{room.nameRu}</p>
 
                 <div className="flex flex-wrap gap-4 md:gap-6 text-sand text-sm md:text-base">
                   <div className="flex items-center gap-2 bg-charcoal/30 px-4 py-2 rounded-full border border-gold/10">
@@ -188,7 +188,7 @@ export default function RoomDetailPage() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
               >
-                <h2 className="font-serif text-2xl text-gold mb-4">About This Room</h2>
+                <h2 className="font-serif text-2xl text-gold-darker mb-4">About This Room</h2>
                 <p className="text-sand leading-relaxed mb-6 text-lg">
                   {room.description}
                 </p>
@@ -205,7 +205,7 @@ export default function RoomDetailPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="glass-morphism-dark rounded-2xl p-8 border border-gold/10"
               >
-                <h2 className="font-serif text-2xl text-gold mb-6">Room Amenities</h2>
+                <h2 className="font-serif text-2xl text-gold-darker mb-6">Room Amenities</h2>
                 <div className="grid grid-cols-3 md:grid-cols-5 gap-6">
                   {ROOM_AMENITIES.map((amenity, index) => (
                     <div key={index} className="text-center group">
@@ -227,7 +227,7 @@ export default function RoomDetailPage() {
               >
                 <div className="text-center mb-6 pb-6 border-b border-gold/10">
                   <div className="text-sm text-sand mb-1 uppercase tracking-widest">Starting from</div>
-                  <div className="text-4xl font-bold text-gold font-serif">{formatPrice(room.price)}</div>
+                  <div className="text-4xl font-bold text-gold-darker font-serif">{formatPrice(room.price)}</div>
                   <div className="text-sm text-sand">per night</div>
                 </div>
 
@@ -313,7 +313,7 @@ export default function RoomDetailPage() {
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="font-serif text-xl text-ivory group-hover:text-gold transition-colors mb-3">
+                      <h3 className="font-serif text-xl text-ivory group-hover:text-gold-darker transition-colors mb-3">
                         {similarRoom.nameEn}
                       </h3>
                       <div className="flex gap-4 text-sm text-sand">

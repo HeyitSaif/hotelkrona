@@ -56,16 +56,16 @@ function BookingForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="glass-morphism-dark rounded-2xl p-12 text-center border border-gold/20"
+        className="glass-morphism-dark rounded-2xl p-12 text-center border border-gold-dark/20"
       >
         <div className="text-6xl mb-6">🎉</div>
-        <h2 className="font-serif text-3xl text-gold mb-4">Booking Request Received!</h2>
+        <h2 className="font-serif text-3xl text-gold-darker mb-4">Booking Request Received!</h2>
         <p className="text-ivory mb-2">Thank you for choosing Hotel Korona.</p>
         <p className="text-sand mb-8">
           Our team will review your request and contact you within 24 hours to confirm your reservation.
         </p>
-        <div className="bg-deep-bronze rounded-xl p-6 mb-8 text-left max-w-md mx-auto border border-gold/10">
-          <h3 className="text-gold font-semibold mb-4">Booking Summary</h3>
+        <div className="bg-deep-bronze rounded-xl p-6 mb-8 text-left max-w-md mx-auto border border-gold-dark/10">
+          <h3 className="text-gold-darker font-semibold mb-4">Booking Summary</h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-sand">Name:</span>
@@ -99,14 +99,14 @@ function BookingForm() {
     );
   }
 
-  const inputClasses = "w-full px-4 py-3 bg-deep-bronze/50 border border-gold/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors placeholder:text-sand/50";
+  const inputClasses = "w-full px-4 py-3 bg-deep-bronze/50 border border-gold-dark/20 rounded-lg text-ivory focus:outline-none focus:border-gold transition-colors placeholder:text-sand/50";
   const labelClasses = "block text-sm font-medium text-ivory mb-2";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Personal Information */}
       <div className="glass-morphism-dark rounded-2xl p-8">
-        <h2 className="font-serif text-xl text-gold mb-6">Personal Information</h2>
+        <h2 className="font-serif text-xl text-gold-darker mb-6">Personal Information</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <Input
             label="Full Name"
@@ -114,7 +114,7 @@ function BookingForm() {
             onChange={(e) => setFormData({...formData, name: e.target.value})}
             required
             placeholder="Your full name"
-            className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
+            className="bg-deep-bronze/50 border-gold-dark/20 text-ivory placeholder:text-sand/50"
           />
           <Input
             label="Phone"
@@ -123,7 +123,7 @@ function BookingForm() {
             onChange={(e) => setFormData({...formData, phone: e.target.value})}
             required
             placeholder="+7 (XXX) XXX-XX-XX"
-            className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
+            className="bg-deep-bronze/50 border-gold-dark/20 text-ivory placeholder:text-sand/50"
           />
           <Input
             label="Email"
@@ -132,14 +132,14 @@ function BookingForm() {
             onChange={(e) => setFormData({...formData, email: e.target.value})}
             required
             placeholder="your@email.com"
-            className="bg-deep-bronze/50 border-gold/20 text-ivory placeholder:text-sand/50"
+            className="bg-deep-bronze/50 border-gold-dark/20 text-ivory placeholder:text-sand/50"
           />
         </div>
       </div>
 
       {/* Stay Details */}
       <div className="glass-morphism-dark rounded-2xl p-8">
-        <h2 className="font-serif text-xl text-gold mb-6">Stay Details</h2>
+        <h2 className="font-serif text-xl text-gold-darker mb-6">Stay Details</h2>
         <div className="grid md:grid-cols-3 gap-6 mb-6">
           <div>
             <label className={labelClasses}>
@@ -239,9 +239,9 @@ function BookingForm() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gold/10 rounded-2xl p-6 border border-gold/30 backdrop-blur-sm"
+          className="bg-gold/10 rounded-2xl p-6 border border-gold-dark/30 backdrop-blur-sm"
         >
-          <h3 className="font-serif text-lg text-gold mb-4">Selected Room</h3>
+          <h3 className="font-serif text-lg text-gold-darker mb-4">Selected Room</h3>
           <div className="flex flex-col md:flex-row gap-6">
             <div className="w-full md:w-48 h-32 bg-charcoal rounded-lg overflow-hidden relative">
               <Image
@@ -272,7 +272,7 @@ function BookingForm() {
 
       {/* Special Requests */}
       <div className="glass-morphism-dark rounded-2xl p-8">
-        <h2 className="font-serif text-xl text-gold mb-6">Special Requests</h2>
+        <h2 className="font-serif text-xl text-gold-darker mb-6">Special Requests</h2>
         <textarea
           value={formData.message}
           onChange={(e) => setFormData({...formData, message: e.target.value})}
@@ -338,7 +338,7 @@ export default function BookingPage() {
           >
             <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
-              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Reservation</span>
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Reservation</span>
               <div className="w-12 h-px bg-gold" />
             </div>
             
@@ -378,23 +378,23 @@ export default function BookingPage() {
             transition={{ duration: 0.8 }}
             className="mt-16 grid md:grid-cols-2 gap-8"
           >
-            <div className="glass-morphism-dark rounded-2xl p-8 border border-gold/20">
-              <h3 className="font-serif text-xl text-gold mb-4">Booking Department</h3>
+            <div className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/20">
+              <h3 className="font-serif text-xl text-gold-darker mb-4">Booking Department</h3>
               <div className="space-y-4">
-                <a href={`tel:${HOTEL_INFO.contact.phone}`} className="flex items-center gap-3 text-ivory hover:text-gold transition-colors">
+                <a href={`tel:${HOTEL_INFO.contact.phone}`} className="flex items-center gap-3 text-ivory hover:text-gold-darker transition-colors">
                   <span>📞</span> {HOTEL_INFO.contact.phone}
                 </a>
-                <a href={`mailto:${HOTEL_INFO.contact.email}`} className="flex items-center gap-3 text-ivory hover:text-gold transition-colors">
+                <a href={`mailto:${HOTEL_INFO.contact.email}`} className="flex items-center gap-3 text-ivory hover:text-gold-darker transition-colors">
                   <span>✉️</span> {HOTEL_INFO.contact.email}
                 </a>
-                <a href={`https://wa.me/${HOTEL_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}`} className="flex items-center gap-3 text-ivory hover:text-gold transition-colors">
+                <a href={`https://wa.me/${HOTEL_INFO.contact.whatsapp.replace(/[^0-9]/g, '')}`} className="flex items-center gap-3 text-ivory hover:text-gold-darker transition-colors">
                   <span>💬</span> {HOTEL_INFO.contact.whatsapp} (WhatsApp)
                 </a>
               </div>
             </div>
 
-            <div className="bg-charcoal/50 backdrop-blur-sm rounded-2xl p-8 border border-gold/10">
-              <h3 className="font-serif text-xl text-gold mb-4">Important Notes</h3>
+            <div className="bg-charcoal/50 backdrop-blur-sm rounded-2xl p-8 border border-gold-dark/10">
+              <h3 className="font-serif text-xl text-gold-darker mb-4">Important Notes</h3>
               <ul className="space-y-3 text-sand text-sm">
                 <li>• Minimum stay: 1 night</li>
                 <li>• 30% deposit required to confirm</li>
