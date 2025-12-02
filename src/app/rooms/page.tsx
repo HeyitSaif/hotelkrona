@@ -1,12 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
-import RoomCard from '@/components/ui/RoomCard';
 import Button from '@/components/ui/Button';
+import RoomCard from '@/components/ui/RoomCard';
 import { ROOM_TYPES } from '@/lib/constants';
+import {
+  AdjustmentsHorizontalIcon,
+  BeakerIcon,
+  FireIcon,
+  PhoneIcon,
+  SparklesIcon,
+  Square3Stack3DIcon,
+  SunIcon,
+  TvIcon,
+  WifiIcon
+} from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function RoomsPage() {
   const [sortBy, setSortBy] = useState<'price' | 'size' | 'guests'>('price');
@@ -46,19 +55,23 @@ export default function RoomsPage() {
   return (
     <div className="min-h-screen bg-cream">
       {/* Hero Section */}
-      <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1920&q=80"
-            alt="Luxury hotel room"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-cream" />
-        </div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/Career.mp4" type="video/mp4" />
+        </video>
 
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-cream z-[1]" />
+
+        {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -70,7 +83,7 @@ export default function RoomsPage() {
               <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Accommodations</span>
               <div className="w-12 h-px bg-gold" />
             </div>
-            
+
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
               Our <span className="text-gold">Rooms</span>
             </h1>
@@ -85,7 +98,7 @@ export default function RoomsPage() {
       {/* Main Content */}
       <section className="py-16 bg-cream relative">
         <div className="absolute inset-0 opacity-5 pointer-events-none">
-           <div 
+           <div
              className="absolute inset-0"
              style={{
                backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
@@ -171,7 +184,7 @@ export default function RoomsPage() {
             <div className="mt-4 text-sm text-bronze flex justify-between items-center border-t border-sand/30 pt-3">
               <span>Showing {filteredRooms.length} of {ROOM_TYPES.length} rooms</span>
               {(filterCategory !== 'all' || showBalconyOnly) && (
-                <button 
+                <button
                   onClick={() => { setFilterCategory('all'); setShowBalconyOnly(false); }}
                   className="text-gold-darker hover:text-deep-bronze transition-colors font-medium text-xs uppercase"
                 >
@@ -197,7 +210,7 @@ export default function RoomsPage() {
             className="text-center bg-white rounded-2xl p-10 border border-gold shadow-large relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-gold-light to-gold" />
-            
+
             <h3 className="font-serif text-2xl font-bold text-deep-bronze mb-4 relative z-10">
               Find your perfect room and book today
             </h3>
@@ -223,20 +236,24 @@ export default function RoomsPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-16 bg-sand/20 rounded-2xl p-8 border border-gold/20"
           >
-            <h3 className="font-serif text-xl font-bold text-gold-darker mb-8 text-center">
-              Standard Room Amenities
-            </h3>
+            <div className="flex items-center justify-center space-x-4 mb-8">
+              <div className="w-12 h-px bg-gold" />
+              <h3 className="font-serif text-xl font-bold text-gold-darker text-center">
+                Standard Room Amenities
+              </h3>
+              <div className="w-12 h-px bg-gold" />
+            </div>
             <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-6 text-center">
               {[
-                { icon: "📺", name: "LCD TV" },
-                { icon: "📶", name: "Free WiFi" },
-                { icon: "🚿", name: "Shower" },
-                { icon: "❄️", name: "A/C" },
-                { icon: "☎️", name: "Phone" },
-                { icon: "💇", name: "Hair Dryer" },
-                { icon: "🧊", name: "Mini Fridge" },
-                { icon: "🛏️", name: "Linens" },
-                { icon: "🧴", name: "Toiletries" }
+                { Icon: TvIcon, name: "LCD TV" },
+                { Icon: WifiIcon, name: "Free WiFi" },
+                { Icon: SparklesIcon, name: "Shower" },
+                { Icon: SunIcon, name: "A/C" },
+                { Icon: PhoneIcon, name: "Phone" },
+                { Icon: FireIcon, name: "Hair Dryer" },
+                { Icon: Square3Stack3DIcon, name: "Mini Fridge" },
+                { Icon: Square3Stack3DIcon, name: "Linens" },
+                { Icon: BeakerIcon, name: "Toiletries" }
               ].map((amenity, index) => (
                 <motion.div
                   key={index}
@@ -246,7 +263,9 @@ export default function RoomsPage() {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   className="text-center group"
                 >
-                  <div className="text-2xl mb-2 transform group-hover:scale-110 transition-transform">{amenity.icon}</div>
+                  <div className="flex justify-center mb-2">
+                    <amenity.Icon className="w-8 h-8 text-gold-darker group-hover:text-gold group-hover:scale-110 transition-all duration-300" />
+                  </div>
                   <div className="text-xs text-deep-bronze font-medium group-hover:text-gold-darker transition-colors">
                     {amenity.name}
                   </div>

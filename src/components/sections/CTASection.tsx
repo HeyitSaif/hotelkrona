@@ -18,7 +18,7 @@ const CTASection: React.FC = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/1390942-uhd_4096_2160_24fps.mp4" type="video/mp4" />
+          <source src="/CTASection.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/75" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" />

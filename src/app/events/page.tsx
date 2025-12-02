@@ -1,56 +1,57 @@
 'use client';
 
-import React from 'react';
+import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
 
 export default function EventsPage() {
   return (
     <div className="min-h-screen bg-charcoal">
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1519167758481-83f29da8fd97?w=1920&q=80"
-            alt="Events at Hotel Korona"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/50 to-charcoal/80" />
-        </div>
+      <section className="relative h-screen overflow-hidden flex items-center">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
+          <source src="/Party.mp4" type="video/mp4" />
+        </video>
 
-        <div className="relative z-10 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-3xl"
-            >
-              <div className="flex items-center space-x-4 mb-6">
-                <div className="w-12 h-px bg-gold" />
-                <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Celebrate With Us</span>
-              </div>
-              
-              <h1 className="font-serif text-5xl md:text-7xl font-bold text-ivory mb-6 text-shadow-strong">
-                Special <span className="text-gold">Events</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-ivory/90 mb-8 text-shadow">
-                Create unforgettable memories at Hotel Korona's stunning seaside venue
-              </p>
-            </motion.div>
-          </div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/50 to-charcoal/80" style={{ zIndex: 1 }} />
+
+        <div className="container mx-auto px-4 relative" style={{ zIndex: 10 }}>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Celebrate With Us</span>
+            </div>
+
+            <h1 className="font-serif text-5xl md:text-7xl font-bold text-ivory mb-6 text-shadow-strong">
+              Special <span className="text-gold">Events</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-ivory/90 mb-8 text-shadow">
+              Create unforgettable memories at Hotel Korona's stunning seaside venue
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Event Types */}
       <section className="py-24 bg-deep-bronze relative">
         <div className="absolute inset-0 opacity-5">
-           <div 
+           <div
              className="absolute inset-0"
              style={{
                backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
@@ -197,28 +198,43 @@ export default function EventsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-deep-bronze relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-           <div className="absolute right-0 bottom-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
-           <div className="absolute left-0 top-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
-        </div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
+      <section className="py-32 relative overflow-hidden min-h-[80vh] flex items-center justify-center">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        >
+          <source src="/Party.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/75" style={{ zIndex: 1 }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" style={{ zIndex: 1 }} />
+
+        <div className="container mx-auto px-4 text-center relative" style={{ zIndex: 10 }}>
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-serif text-4xl font-bold text-ivory mb-4">
-              Ready to Plan Your Event?
+            <div className="flex items-center justify-center space-x-6 mb-8">
+              <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
+              <span className="text-gold-light text-sm tracking-[0.15em] uppercase font-sans font-bold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>Start Planning</span>
+              <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
+            </div>
+
+            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
+              Ready to Plan Your <span className="text-transparent bg-clip-text bg-gradient-to-b from-gold-light via-gold to-white">Event</span>?
             </h2>
-            <p className="text-sand mb-8 max-w-xl mx-auto text-lg">
+            <p className="text-xl md:text-2xl text-white mb-12 leading-relaxed max-w-3xl mx-auto font-light" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
               Contact our events team to discuss your celebration and receive a custom proposal
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <Button size="lg" variant="primary">
+                <Button size="lg" variant="primary" className="text-lg px-12 py-5 shadow-gold hover:shadow-glow min-w-[240px]">
                   Contact Events Team
                 </Button>
               </Link>

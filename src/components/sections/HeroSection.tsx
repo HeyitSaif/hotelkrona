@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover scale-110"
         >
-          <source src="/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+          <source src="/HeroSection.mp4" type="video/mp4" />
         </video>
         {/* Stronger Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
