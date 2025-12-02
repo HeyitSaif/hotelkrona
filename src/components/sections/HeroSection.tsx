@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import Button from '@/components/ui/Button';
 import BookingBar from '@/components/ui/BookingBar';
-import { HOTEL_INFO } from '@/lib/constants';
+import Button from '@/components/ui/Button';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useRef } from 'react';
 
 const HeroSection: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,7 +28,7 @@ const HeroSection: React.FC = () => {
   return (
     <section ref={ref} className="relative h-screen flex items-center justify-center overflow-x-hidden">
       {/* Parallax Background Image */}
-      <motion.div 
+      <motion.div
         style={{ y, opacity }}
         className="absolute inset-0 z-0"
       >
@@ -43,9 +42,9 @@ const HeroSection: React.FC = () => {
         />
         {/* Stronger Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
-        
+
         {/* Decorative pattern overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, #d4a574 1px, transparent 0)`,

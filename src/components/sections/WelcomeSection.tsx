@@ -1,17 +1,17 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 const WelcomeSection: React.FC = () => {
   return (
     <section id="welcome" className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
