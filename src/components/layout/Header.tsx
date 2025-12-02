@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { NAV_LINKS, HOTEL_INFO } from "@/lib/constants";
 import Button from "@/components/ui/Button";
+import { HOTEL_INFO, NAV_LINKS } from "@/lib/constants";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -83,7 +83,7 @@ const Header: React.FC = () => {
             >
               <div className="relative">
                 <Image
-                  src="/logo.png"
+                  src="/crown_Logo.png"
                   alt="Hotel Korona Logo"
                   height={80}
                   width={240}

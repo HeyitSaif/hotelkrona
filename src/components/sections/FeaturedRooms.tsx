@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import RoomCard from '@/components/ui/RoomCard';
 import { ROOM_TYPES } from '@/lib/constants';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import React, { useRef } from 'react';
 
 // All rooms in carousel
 const featuredRooms = ROOM_TYPES;
@@ -19,7 +19,7 @@ const FeaturedRooms: React.FC = () => {
       const cardWidth = 380; // Max card width
       const gap = 32; // md:gap-8 = 2rem = 32px
       const scrollAmount = cardWidth + gap;
-      
+
       scrollContainerRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'

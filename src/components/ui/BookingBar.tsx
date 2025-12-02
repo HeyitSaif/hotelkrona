@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CalendarIcon, UsersIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 import { fetchWeatherClient } from '@/lib/weather';
+import { CalendarIcon, MagnifyingGlassIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface GuestCounts {
   adults: number;
@@ -290,7 +290,7 @@ const BookingBarHero: React.FC = () => {
               className="w-11 h-11 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 rounded-lg flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
               aria-label="Search"
             >
-              <MagnifyingGlassIcon className="w-5 h-5 text-white" />
+              <MagnifyingGlassIcon className="w-5 h-5 text-slate-300" />
             </button>
           </div>
 

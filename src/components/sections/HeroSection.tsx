@@ -4,7 +4,6 @@ import BookingBar from '@/components/ui/BookingBar';
 import Button from '@/components/ui/Button';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 
@@ -27,19 +26,20 @@ const HeroSection: React.FC = () => {
 
   return (
     <section ref={ref} className="relative h-screen flex items-center justify-center overflow-x-hidden">
-      {/* Parallax Background Image */}
+      {/* Parallax Background Video */}
       <motion.div
         style={{ y, opacity }}
         className="absolute inset-0 z-0"
       >
-        <Image
-          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80"
-          alt="Hotel Korona - Luxury Castle Resort"
-          fill
-          className="object-cover scale-110"
-          priority
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-110"
+        >
+          <source src="/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+        </video>
         {/* Stronger Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
 
