@@ -91,14 +91,14 @@ export default function AmenitiesPage() {
               Our <span className="text-gold">Amenities</span>
             </h1>
             <p className="text-xl text-ivory/90 max-w-2xl mx-auto text-shadow">
-              Everything you need for a perfect stay, from fine dining to beach relaxation
+              Discover world-class facilities designed for your comfort and enjoyment
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Amenity Categories */}
-      <section className="py-16 bg-deep-bronze relative">
+      {/* Amenity Cards */}
+      <section className="py-20 bg-deep-bronze relative">
         {/* Subtle pattern */}
         <div className="absolute inset-0 opacity-5">
            <div 
@@ -111,58 +111,53 @@ export default function AmenitiesPage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          {amenityCategories.map((category, index) => (
-            <motion.div
-              key={category.id}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className={`grid lg:grid-cols-2 gap-12 items-center mb-24 ${
-                index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-              }`}
-            >
-              {/* Image */}
-              <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl border border-gold-dark/10">
-                  <Image
-                    src={category.image}
-                    alt={category.title}
-                    fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {amenityCategories.map((category, index) => (
+              <motion.div
+                key={category.id}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative overflow-hidden rounded-2xl shadow-xl aspect-[3/4] cursor-pointer"
+              >
+                {/* Background Image */}
+                <Image
+                  src={category.image}
+                  alt={category.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                
+                {/* Default overlay - minimal */}
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+                
+                {/* Hover overlay - darker for readability */}
+                <div className="absolute inset-0 bg-charcoal/85 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                
+                {/* Content Container */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  {/* Header - Visible by default, hidden on hover */}
+                  <div className="transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-ivory">
+                      {category.title.split(' ')[0]}
+                    </h3>
+                  </div>
+                  
+                  {/* Details - Visible on hover */}
+                  <ul className="space-y-2 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                    {category.features.map((feature: string, idx: number) => (
+                      <li key={idx} className="flex items-start gap-2 text-ivory/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                {/* Floating highlight card */}
-                <div className="absolute -bottom-6 left-6 right-6 glass-morphism-dark rounded-xl p-4 border border-gold-dark/20 shadow-large">
-                  <div className="text-gold-darker font-semibold mb-1">{category.highlight.title}</div>
-                  <div className="text-sand text-sm">{category.highlight.desc}</div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl bg-gold/10 p-3 rounded-lg border border-gold-dark/20">{category.icon}</span>
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-ivory">
-                    {category.title}
-                  </h2>
-                </div>
-                <p className="text-sand mb-6 leading-relaxed text-lg">
-                  {category.description}
-                </p>
-                <ul className="space-y-3 mb-6">
-                  {category.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-ivory/90">
-                      <span className="w-1.5 h-1.5 bg-gold rounded-full shadow-glow" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

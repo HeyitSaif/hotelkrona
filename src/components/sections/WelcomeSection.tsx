@@ -147,40 +147,6 @@ const WelcomeSection: React.FC = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Key Features Grid */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-32"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[
-              { icon: "🏖️", label: "Beachfront", desc: "150m to sea" },
-              { icon: "👑", label: "Castle Design", desc: "Unique architecture" },
-              { icon: "🍽️", label: "Fine Dining", desc: "3 restaurants" },
-              { icon: "🏊", label: "Pool & Spa", desc: "Heated pool" },
-              { icon: "👨‍👩‍👧‍👦", label: "Family Friendly", desc: "Kids welcome" },
-              { icon: "💼", label: "24/7 Service", desc: "Always available" }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="text-center p-6 bg-white rounded-xl border-[1.5px] border-sand-dark hover:border-gold-dark transition-all duration-300 group shadow-elegant hover:shadow-hover-elegant"
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-sm">{feature.icon}</div>
-                <div className="text-sm font-bold text-deep-bronze mb-1 uppercase tracking-wide">{feature.label}</div>
-                <div className="text-xs text-bronze-dark">{feature.desc}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

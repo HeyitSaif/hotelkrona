@@ -181,8 +181,8 @@ export default function RoomsPage() {
             </div>
           </motion.div>
 
-          {/* Rooms Grid */}
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+          {/* Rooms Grid - 2 columns on md, 3 columns on xl */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 mb-16">
             {filteredRooms.map((room, index) => (
               <RoomCard key={room.id} room={room} index={index} />
             ))}

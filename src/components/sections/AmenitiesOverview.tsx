@@ -6,12 +6,40 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { HOTEL_AMENITIES } from '@/lib/constants';
 
-const amenityIcons: Record<string, { icon: string; color: string }> = {
-  dining: { icon: '🍽️', color: 'from-amber-500/20 to-orange-500/20' },
-  wellness: { icon: '🧘', color: 'from-emerald-500/20 to-teal-500/20' },
-  recreation: { icon: '🏊', color: 'from-blue-500/20 to-cyan-500/20' },
-  services: { icon: '🛎️', color: 'from-purple-500/20 to-pink-500/20' },
-};
+const amenityCards = [
+  {
+    id: 'dining',
+    title: 'Dining',
+    icon: '🍽️',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    description: 'Three unique restaurants offering exceptional cuisine',
+    features: HOTEL_AMENITIES.dining
+  },
+  {
+    id: 'wellness',
+    title: 'Wellness',
+    icon: '🧘',
+    image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',
+    description: 'Unwind and rejuvenate with our wellness facilities',
+    features: HOTEL_AMENITIES.wellness
+  },
+  {
+    id: 'recreation',
+    title: 'Recreation',
+    icon: '🏊',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    description: 'Discover endless ways to enjoy your stay',
+    features: HOTEL_AMENITIES.recreation
+  },
+  {
+    id: 'services',
+    title: 'Services',
+    icon: '🛎️',
+    image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80',
+    description: 'Professional service available around the clock',
+    features: HOTEL_AMENITIES.services
+  }
+];
 
 const AmenitiesOverview: React.FC = () => {
   return (
@@ -50,78 +78,54 @@ const AmenitiesOverview: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Amenities Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-          {Object.entries(HOTEL_AMENITIES).map(([category, items], index) => (
+        {/* Amenities Grid - Image Tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          {amenityCards.map((amenity, index) => (
             <motion.div
-              key={category}
+              key={amenity.id}
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group"
+              className="group relative"
             >
-              <div className="bg-sand/10 backdrop-blur-sm rounded-2xl p-8 border border-gold/20 hover:border-gold transition-all duration-500 h-full shadow-soft hover:shadow-xl hover:-translate-y-2 relative overflow-hidden">
-                {/* Hover gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white via-transparent to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-500" />
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{
+                    backgroundImage: `url('${amenity.image}')`
+                  }}
+                />
                 
-                {/* Icon */}
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${amenityIcons[category]?.color || 'from-gold/20 to-gold-light/20'} flex items-center justify-center text-4xl mb-8 group-hover:scale-110 transition-transform duration-500 shadow-inner relative z-10`}>
-                  <span className="filter drop-shadow-sm">{amenityIcons[category]?.icon || '✨'}</span>
+                {/* Default Overlay - Subtle */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                {/* Hover Overlay - Darker for readability */}
+                <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* Title - Visible by default, hidden on hover */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                    {amenity.title}
+                  </h3>
                 </div>
 
-                {/* Title */}
-                <h3 className="font-serif text-2xl font-semibold text-dark-brown mb-6 capitalize relative z-10 group-hover:text-gold transition-colors">
-                  {category}
-                </h3>
-
-                {/* Items */}
-                <ul className="space-y-3 relative z-10">
-                  {items.map((item, idx) => (
-                    <li key={idx} className="flex items-start text-sm text-bronze group-hover:text-dark-brown transition-colors">
-                      <span className="text-gold mr-3 mt-1 text-xs">●</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                {/* Features List - Visible on Hover */}
+                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    {amenity.features.map((feature: string, idx: number) => (
+                      <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Highlight Features */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="bg-cream rounded-3xl p-10 md:p-16 border border-gold/30 shadow-gold relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center relative z-10">
-            {[
-              { icon: '🏖️', value: '150m', label: 'to Beach' },
-              { icon: '🏊', value: 'Heated', label: 'Pool' },
-              { icon: '🍽️', value: '3', label: 'Restaurants' },
-              { icon: '⏰', value: '24/7', label: 'Reception' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group"
-              >
-                <div className="text-5xl mb-4 filter drop-shadow-sm group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
-                <div className="font-serif text-4xl font-bold text-gold mb-2">{stat.value}</div>
-                <div className="text-bronze text-xs uppercase tracking-[0.2em] font-bold">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* CTA */}
         <motion.div

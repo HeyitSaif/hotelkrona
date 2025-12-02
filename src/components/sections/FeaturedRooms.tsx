@@ -3,30 +3,34 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import Button from '@/components/ui/Button';
 import RoomCard from '@/components/ui/RoomCard';
 import { ROOM_TYPES } from '@/lib/constants';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
-// Featured rooms (top 4)
-const featuredRooms = ROOM_TYPES.filter(room => 
-  ['mid-luxury', 'suite', 'luxury', 'standard-plus'].includes(room.category)
-).slice(0, 4);
+// All rooms in carousel
+const featuredRooms = ROOM_TYPES;
 
 const FeaturedRooms: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -400 : 400;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    if (scrollContainerRef.current) {
+      const cardWidth = 380; // Max card width
+      const gap = 32; // md:gap-8 = 2rem = 32px
+      const scrollAmount = cardWidth + gap;
+      
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <section className="py-24 md:py-32 bg-sand relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-sand relative">
       {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
         <div className="absolute top-1/2 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
       </div>
@@ -38,47 +42,53 @@ const FeaturedRooms: React.FC = () => {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16"
+          className="text-center mb-16"
         >
-          <div>
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="gold-line" />
-              <span className="text-gold text-sm tracking-[0.3em] uppercase font-sans font-bold">Accommodations</span>
-            </div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-dark-brown">
-              Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">Rooms</span>
-            </h2>
+          <div className="flex items-center justify-center space-x-4 mb-4">
+            <div className="gold-line" />
+            <span className="text-gold text-sm tracking-[0.3em] uppercase font-sans font-bold">Accommodations</span>
+            <div className="gold-line" />
           </div>
-          
-          <div className="flex items-center space-x-4 mt-8 md:mt-0">
-            <button
-              onClick={() => scroll('left')}
-              className="w-14 h-14 bg-white border border-gold/30 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-dark-brown transition-all duration-300 shadow-medium hover:shadow-lg"
-              aria-label="Previous rooms"
-            >
-              <ChevronLeftIcon className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="w-14 h-14 bg-white border border-gold/30 rounded-full flex items-center justify-center text-gold hover:bg-gold hover:text-dark-brown transition-all duration-300 shadow-medium hover:shadow-lg"
-              aria-label="Next rooms"
-            >
-              <ChevronRightIcon className="w-6 h-6" />
-            </button>
-          </div>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-dark-brown">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">Rooms</span>
+          </h2>
         </motion.div>
 
-        {/* Rooms Carousel */}
-        <div 
-          ref={scrollRef}
-          className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory -mx-4 px-4"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {featuredRooms.map((room, index) => (
-            <div key={room.id} className="flex-shrink-0 w-[340px] md:w-[400px] snap-start">
-              <RoomCard room={room} index={index} />
+        {/* Horizontal Slider with Navigation Arrows */}
+        <div className="relative -mx-4 md:-mx-8">
+          {/* Left Arrow */}
+          <button
+            onClick={() => scroll('left')}
+            className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gold/20"
+            aria-label="Previous rooms"
+          >
+            <ChevronLeftIcon className="w-6 h-6 md:w-7 md:h-7 text-charcoal" />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={() => scroll('right')}
+            className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-110 border border-gold/20"
+            aria-label="Next rooms"
+          >
+            <ChevronRightIcon className="w-6 h-6 md:w-7 md:h-7 text-charcoal" />
+          </button>
+
+          {/* Scrollable Container */}
+          <div
+            ref={scrollContainerRef}
+            className="overflow-x-auto scrollbar-hide scroll-smooth px-12 md:px-20"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {/* Horizontal Flex Row - No Wrap */}
+            <div className="flex gap-6 md:gap-8">
+              {featuredRooms.map((room, index) => (
+                <div key={room.id} className="flex-shrink-0 w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]">
+                  <RoomCard room={room} index={index} />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* View All Link */}
@@ -96,6 +106,13 @@ const FeaturedRooms: React.FC = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Hide scrollbar globally for this section */}
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
