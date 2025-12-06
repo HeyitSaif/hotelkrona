@@ -43,6 +43,9 @@ const HeroSection: React.FC = () => {
         {/* Stronger Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
 
+        {/* Bottom fade to beige - smooth transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-sand/50 to-sand" />
+
         {/* Decorative pattern overlay */}
         <div
           className="absolute inset-0 opacity-10"

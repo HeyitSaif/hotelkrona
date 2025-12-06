@@ -2,15 +2,13 @@
 
 import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function EventsPage() {
   return (
-    <div className="min-h-screen bg-charcoal">
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden flex items-center">
-        {/* Video Background */}
+    <div className="min-h-screen bg-charcoal relative">
+      {/* Fixed Full-Page Video Background - Covers Hero to CTA */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
         <video
           autoPlay
           loop
@@ -18,30 +16,32 @@ export default function EventsPage() {
           playsInline
           preload="auto"
           className="absolute top-0 left-0 w-full h-full object-cover"
-          style={{ zIndex: 0 }}
         >
           <source src="/Party.mp4" type="video/mp4" />
         </video>
+        {/* Global Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/50 to-charcoal/80" style={{ zIndex: 1 }} />
-
-        <div className="container mx-auto px-4 relative" style={{ zIndex: 10 }}>
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl"
           >
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="flex items-center justify-center space-x-4 mb-6">
               <div className="w-12 h-px bg-gold" />
               <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Celebrate With Us</span>
+              <div className="w-12 h-px bg-gold" />
             </div>
 
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-ivory mb-6 text-shadow-strong">
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
               Special <span className="text-gold">Events</span>
             </h1>
-            <p className="text-xl md:text-2xl text-ivory/90 mb-8 text-shadow">
+            <p className="text-xl text-white/95 max-w-2xl mx-auto text-shadow-light font-medium">
               Create unforgettable memories at Hotel Korona's stunning seaside venue
             </p>
           </motion.div>
@@ -49,60 +49,91 @@ export default function EventsPage() {
       </section>
 
       {/* Event Types */}
-      <section className="py-24 bg-deep-bronze relative">
-        <div className="absolute inset-0 opacity-5">
-           <div
-             className="absolute inset-0"
-             style={{
-               backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
-               backgroundSize: '40px 40px'
-             }}
-           />
-        </div>
-
+      <section className="py-24 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
-              Your Perfect <span className="text-gold">Celebration</span>
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Your Perfect Celebration</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+              Everything You <span className="text-gold">Need</span>
             </h2>
-            <p className="text-sand text-lg max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
               From intimate gatherings to grand celebrations, we make every moment special
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Weddings Card */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="group relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/3]"
+              className="group relative"
             >
               <Link href="/events/weddings">
-                <div className="relative h-full">
-                  <Image
-                    src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
-                    alt="Weddings"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: "url('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80')"
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-8">
-                    <div className="text-5xl mb-4">💒</div>
-                    <h3 className="font-serif text-3xl font-bold text-ivory mb-3">Weddings</h3>
-                    <p className="text-sand text-lg mb-4">Elegant seaside ceremonies and receptions</p>
-                    <div className="inline-flex items-center gap-2 text-gold-darker font-semibold group-hover:gap-4 transition-all">
-                      Explore Weddings
-                      <span>→</span>
-                    </div>
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Weddings
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Elegant seaside ceremonies</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Stunning beachfront receptions</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Castle-style venue</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Personalized planning</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Photo-perfect settings</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-gold font-semibold text-sm mt-4">
+                        <span>→</span>
+                        <span>Learn more about our wedding services</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </Link>
@@ -114,26 +145,60 @@ export default function EventsPage() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="group relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/3]"
+              className="group relative"
             >
               <Link href="/events/celebrations">
-                <div className="relative h-full">
-                  <Image
-                    src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80"
-                    alt="Celebrations"
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: "url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80')"
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-8">
-                    <div className="text-5xl mb-4">🎉</div>
-                    <h3 className="font-serif text-3xl font-bold text-ivory mb-3">Celebrations</h3>
-                    <p className="text-sand text-lg mb-4">Birthdays, anniversaries, corporate events</p>
-                    <div className="inline-flex items-center gap-2 text-gold-darker font-semibold group-hover:gap-4 transition-all">
-                      Explore Celebrations
-                      <span>→</span>
-                    </div>
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Celebrations
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">Celebrations</h3>
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Birthday parties</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Anniversary celebrations</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Corporate events</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Custom event menus</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-white/90 text-sm">
+                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                        <span>Dedicated event team</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-gold font-semibold text-sm mt-4">
+                        <span>→</span>
+                        <span>Learn more about our celebration services</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </Link>
@@ -143,76 +208,134 @@ export default function EventsPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 bg-charcoal">
-        <div className="container mx-auto px-4">
+      <section className="py-24 md:py-32 relative overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Content Container */}
+        <div className="relative z-10">
+          <div className="px-4 md:px-8">
+          {/* Section Label and Heading */}
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
-              Why Choose <span className="text-gold">Hotel Korona</span>
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Why Choose Us</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+              Hotel <span className="text-gold">Korona</span>
             </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              World-class facilities and services for your perfect celebration
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Amenities Grid - Image Tiles */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: '🌊',
-                title: 'Seaside Location',
-                description: 'Stunning beachfront setting just 150m from the sea'
+                title: 'Seaside',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+                features: [
+                  'Stunning beachfront setting',
+                  'Just 150m from the sea',
+                  'Crystal-clear waters',
+                  'Private beach access',
+                  'Breathtaking sunset views'
+                ]
               },
               {
-                icon: '🍽️',
-                title: 'Exceptional Catering',
-                description: 'Three restaurants with diverse cuisine options'
+                title: 'Catering',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+                features: [
+                  'Three unique restaurants',
+                  'European & Russian cuisine',
+                  'Central Asian specialties',
+                  'Georgian dining experience',
+                  'Custom event menus'
+                ]
               },
               {
-                icon: '🏰',
-                title: 'Unique Venue',
-                description: 'Castle-style architecture creates memorable atmosphere'
+                title: 'Venue',
+                image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
+                features: [
+                  'Castle-style architecture',
+                  'Elegant event spaces',
+                  'Indoor and outdoor options',
+                  'Memorable atmosphere',
+                  'Photo-perfect settings'
+                ]
               },
               {
-                icon: '👔',
-                title: 'Professional Service',
-                description: 'Dedicated event coordinators and 24/7 staff'
+                title: 'Service',
+                image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80',
+                features: [
+                  'Dedicated event coordinators',
+                  '24/7 staff availability',
+                  'Personalized planning',
+                  'Expert guidance',
+                  'Seamless execution'
+                ]
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 text-center border border-gold-dark/10 hover:border-gold-dark/30 transition-all"
+                className="group relative"
               >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="font-serif text-xl text-gold-darker mb-3">{feature.title}</h3>
-                <p className="text-sand text-sm">{feature.description}</p>
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${feature.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      {feature.title}
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">{feature.title}</h3>
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {feature.features.map((item: string, idx: number) => (
+                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
+      </div>
       </section>
 
       {/* CTA */}
-      <section className="py-32 relative overflow-hidden min-h-[80vh] flex items-center justify-center">
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ zIndex: 0 }}
-        >
-          <source src="/Party.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/75" style={{ zIndex: 1 }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" style={{ zIndex: 1 }} />
-
+      <section className="py-32 relative overflow-hidden" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4 text-center relative" style={{ zIndex: 10 }}>
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -220,24 +343,22 @@ export default function EventsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="flex items-center justify-center space-x-6 mb-8">
-              <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
-              <span className="text-gold-light text-sm tracking-[0.15em] uppercase font-sans font-bold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>Start Planning</span>
-              <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
-            </div>
+            <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-10 md:p-16 border-[1.5px] border-gold-dark shadow-gold max-w-5xl mx-auto relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold-dark via-gold to-gold-dark" />
 
-            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
-              Ready to Plan Your <span className="text-transparent bg-clip-text bg-gradient-to-b from-gold-light via-gold to-white">Event</span>?
-            </h2>
-            <p className="text-xl md:text-2xl text-white mb-12 leading-relaxed max-w-3xl mx-auto font-light" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.8)' }}>
-              Contact our events team to discuss your celebration and receive a custom proposal
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button size="lg" variant="primary" className="text-lg px-12 py-5 shadow-gold hover:shadow-glow min-w-[240px]">
-                  Contact Events Team
-                </Button>
-              </Link>
+              <h3 className="font-serif text-3xl md:text-4xl font-bold text-deep-bronze mb-6">
+                Ready to Plan Your <span className="text-gold">Event</span>?
+              </h3>
+              <p className="text-lg text-bronze-dark mb-10 max-w-2xl mx-auto leading-relaxed">
+                Contact our events team to discuss your celebration and receive a custom proposal
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/contact">
+                  <Button size="lg" variant="primary" className="shadow-gold hover:shadow-glow">
+                    Contact Events Team
+                  </Button>
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>

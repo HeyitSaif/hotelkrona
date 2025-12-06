@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import { EVENT_TYPES, CELEBRATION_PACKAGES, EVENT_SPACES } from '@/lib/constants';
+import { CELEBRATION_PACKAGES, EVENT_SPACES, EVENT_TYPES } from '@/lib/constants';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 export default function CelebrationsPage() {
   const [formData, setFormData] = useState({
@@ -24,87 +24,122 @@ export default function CelebrationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal">
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&q=80"
-            alt="Celebrations at Hotel Korona"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
-        </div>
+    <div className="min-h-screen bg-charcoal relative">
+      {/* Fixed Full-Page Video Background */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          onLoadedMetadata={(e) => {
+            const video = e.target as HTMLVideoElement;
+            video.play().catch(() => {
+              // Autoplay failed, will retry on user interaction
+            });
+          }}
+          onEnded={(e) => {
+            const video = e.target as HTMLVideoElement;
+            video.currentTime = 0;
+            video.play();
+          }}
+        >
+          <source src="/Parties&Celebrations.mp4" type="video/mp4" />
+        </video>
+        {/* Global Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center justify-center space-x-4 mb-6">
-                <div className="w-12 h-px bg-gold" />
-                <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Celebrate in Style</span>
-                <div className="w-12 h-px bg-gold" />
-              </div>
-              
-              <h1 className="font-serif text-5xl md:text-7xl font-bold text-ivory mb-6 text-shadow-strong">
-                Parties & <span className="text-gold">Celebrations</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-ivory/90 mb-10 text-shadow max-w-2xl mx-auto">
-                Birthdays, anniversaries, corporate events and more at Hotel Korona
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact-form">
-                  <Button size="lg" variant="primary">
-                    Request an Offer
-                  </Button>
-                </a>
-                <a href="#event-spaces">
-                  <Button size="lg" variant="secondary">
-                    View Event Spaces
-                  </Button>
-                </a>
-              </div>
-            </motion.div>
-          </div>
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ zIndex: 1 }}>
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Celebrate in Style</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
+              Parties & <span className="text-gold">Celebrations</span>
+            </h1>
+            <p className="text-xl text-white/95 max-w-2xl mx-auto text-shadow-light font-medium">
+              Make your special moments unforgettable at Hotel Korona
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Event Types Overview */}
-      <section className="py-24 bg-cream relative">
-        <div className="container mx-auto px-4">
+      <section className="py-24 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-dark-brown mb-4">
-              Your <span className="text-gold">Celebration</span>
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Event Types</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+              Perfect for Every <span className="text-gold">Occasion</span>
             </h2>
-            <p className="text-bronze text-lg">Whatever the occasion, we make it unforgettable</p>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Whatever the celebration, we make it unforgettable
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {EVENT_TYPES.map((type, index) => (
               <motion.div
                 key={type.id}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-xl transition-all"
+                className="group relative"
               >
-                <div className="text-5xl mb-4">{type.icon}</div>
-                <h3 className="font-serif text-xl text-dark-brown mb-3 font-bold">{type.title}</h3>
-                <p className="text-bronze text-sm leading-relaxed">{type.description}</p>
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${type.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      {type.title}
+                    </h3>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">{type.title}</h3>
+                    <p className="text-white/90 text-sm leading-relaxed transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{type.description}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -112,51 +147,76 @@ export default function CelebrationsPage() {
       </section>
 
       {/* Packages */}
-      <section className="py-24 bg-deep-bronze relative">
-        <div className="absolute inset-0 opacity-5">
-           <div 
-             className="absolute inset-0"
-             style={{
-               backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
-               backgroundSize: '40px 40px'
-             }}
-           />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
-              Packages & <span className="text-gold">Options</span>
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Packages</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+              Celebration <span className="text-gold">Packages</span>
             </h2>
-            <p className="text-sand text-lg">Flexible packages tailored to your celebration</p>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Choose the perfect package for your celebration
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {CELEBRATION_PACKAGES.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10 hover:border-gold-dark/30 transition-all"
+                className="group relative"
               >
-                <h3 className="font-serif text-2xl text-gold-darker mb-3">{pkg.name}</h3>
-                <p className="text-sand text-sm mb-6">{pkg.description}</p>
-                <ul className="space-y-3">
-                  {pkg.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-ivory/90 text-sm">
-                      <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${pkg.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      {pkg.name}
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">{pkg.name}</h3>
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -164,18 +224,29 @@ export default function CelebrationsPage() {
       </section>
 
       {/* Services Details */}
-      <section className="py-24 bg-charcoal">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Services</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Event <span className="text-gold">Services</span>
             </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Comprehensive services for every aspect of your celebration
+            </p>
           </motion.div>
 
           <div className="space-y-24">
@@ -248,15 +319,17 @@ export default function CelebrationsPage() {
                 </div>
 
                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                  <h3 className="font-serif text-3xl text-gold-darker mb-6">{service.title}</h3>
-                  <ul className="space-y-3">
-                    {service.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-ivory/90">
-                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-2 flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 border border-gold-dark/20">
+                    <h3 className="font-serif text-3xl text-deep-bronze mb-6">{service.title}</h3>
+                    <ul className="space-y-3">
+                      {service.items.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-bronze-dark">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-2 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -265,43 +338,72 @@ export default function CelebrationsPage() {
       </section>
 
       {/* Event Spaces */}
-      <section id="event-spaces" className="py-24 bg-deep-bronze relative">
-        <div className="container mx-auto px-4">
+      <section id="event-spaces" className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Venues</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Event <span className="text-gold">Spaces</span>
             </h2>
-            <p className="text-sand text-lg">Choose the perfect setting for your celebration</p>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Choose the perfect setting for your celebration
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {EVENT_SPACES.map((space, index) => (
               <motion.div
                 key={space.id}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl aspect-[16/10] shadow-2xl"
+                className="group relative"
               >
-                <Image
-                  src={space.image}
-                  alt={space.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="font-serif text-2xl text-ivory mb-2">{space.name}</h3>
-                  <p className="text-gold-darker font-semibold mb-2">Up to {space.capacity} guests</p>
-                  <p className="text-sand text-sm">{space.description}</p>
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${space.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg mb-2">
+                      {space.name}
+                    </h3>
+                    <p className="text-gold-darker font-semibold">Up to {space.capacity} guests</p>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-serif text-2xl text-gold mb-3">{space.name}</h3>
+                      <p className="text-gold-darker font-semibold mb-4">Up to {space.capacity} guests</p>
+                      <p className="text-white/90 text-sm leading-relaxed">{space.description}</p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -310,18 +412,29 @@ export default function CelebrationsPage() {
       </section>
 
       {/* Gallery & Testimonials */}
-      <section className="py-24 bg-charcoal">
-        <div className="container mx-auto px-4">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Gallery</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Real <span className="text-gold">Celebrations</span>
             </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Celebrations we've had the honor to host
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -348,10 +461,13 @@ export default function CelebrationsPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
             ))}
           </div>
+        </div>
 
+        <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               {
@@ -369,9 +485,9 @@ export default function CelebrationsPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10"
+                className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 border border-gold-dark/20"
               >
-                <p className="text-ivory/90 italic mb-4">&ldquo;{testimonial.quote}&rdquo;</p>
+                <p className="text-bronze-dark italic mb-4">&ldquo;{testimonial.quote}&rdquo;</p>
                 <p className="text-gold-darker font-semibold">— {testimonial.author}</p>
               </motion.div>
             ))}
@@ -380,13 +496,8 @@ export default function CelebrationsPage() {
       </section>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-24 bg-deep-bronze relative">
-        <div className="absolute inset-0 opacity-10">
-           <div className="absolute right-0 bottom-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
-           <div className="absolute left-0 top-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
+      <section id="contact-form" className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -395,13 +506,21 @@ export default function CelebrationsPage() {
             className="max-w-3xl mx-auto"
           >
             <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Get In Touch</span>
+                <div className="h-px w-12 bg-gold"></div>
+              </div>
+
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
                 Plan Your <span className="text-gold">Celebration</span>
               </h2>
-              <p className="text-sand text-lg">Tell us about your event and we'll create a custom proposal</p>
+              <p className="text-base md:text-lg text-ivory/90 leading-relaxed">
+                Tell us about your event and we'll create a custom proposal
+              </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="glass-morphism-dark rounded-2xl p-8 md:p-12 border border-gold-dark/10">
+            <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 md:p-12 border border-gold-dark/20 shadow-2xl">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <Input
                   label="Your Name"
@@ -427,11 +546,11 @@ export default function CelebrationsPage() {
                   required
                 />
                 <div>
-                  <label className="block text-sand mb-2 font-semibold">Type of Event</label>
+                  <label className="block text-deep-bronze mb-2 font-semibold">Type of Event</label>
                   <select
                     value={formData.eventType}
                     onChange={(e) => setFormData({ ...formData, eventType: e.target.value })}
-                    className="w-full bg-charcoal/50 border border-gold-dark/20 rounded-lg px-4 py-3 text-ivory focus:outline-none focus:border-gold transition-colors"
+                    className="w-full bg-white border border-gold-dark/30 rounded-lg px-4 py-3 text-deep-bronze focus:outline-none focus:border-gold transition-colors"
                     required
                   >
                     <option value="">Select event type</option>
@@ -461,12 +580,12 @@ export default function CelebrationsPage() {
               </div>
 
               <div className="mb-8">
-                <label className="block text-sand mb-2 font-semibold">Additional Details</label>
+                <label className="block text-deep-bronze mb-2 font-semibold">Additional Details</label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
-                  className="w-full bg-charcoal/50 border border-gold-dark/20 rounded-lg px-4 py-3 text-ivory focus:outline-none focus:border-gold transition-colors"
+                  className="w-full bg-white border border-gold-dark/30 rounded-lg px-4 py-3 text-deep-bronze focus:outline-none focus:border-gold transition-colors"
                   placeholder="Tell us about your celebration plans, special requests, or questions..."
                   required
                 />
@@ -481,7 +600,7 @@ export default function CelebrationsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-charcoal">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -490,9 +609,17 @@ export default function CelebrationsPage() {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="font-serif text-4xl font-bold text-ivory mb-12 text-center">
-              Common <span className="text-gold">Questions</span>
-            </h2>
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">FAQ</span>
+                <div className="h-px w-12 bg-gold"></div>
+              </div>
+
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+                Common <span className="text-gold">Questions</span>
+              </h2>
+            </div>
 
             <div className="space-y-6">
               {[
@@ -519,10 +646,10 @@ export default function CelebrationsPage() {
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="glass-morphism-dark rounded-xl p-6 border border-gold-dark/10"
+                  className="bg-white/95 backdrop-blur-xl rounded-xl p-6 border border-gold-dark/20"
                 >
-                  <h3 className="font-serif text-lg text-gold-darker mb-3">{faq.q}</h3>
-                  <p className="text-sand">{faq.a}</p>
+                  <h3 className="font-serif text-lg text-deep-bronze mb-3">{faq.q}</h3>
+                  <p className="text-bronze-dark">{faq.a}</p>
                 </motion.div>
               ))}
             </div>

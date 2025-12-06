@@ -15,22 +15,22 @@
   --color-bronze: #8a6e3d;
   --color-bronze-light: #b5905e;
   --color-bronze-dark: #6b5127;
-  
+
   /* Deep accents for contrast */
   --color-deep-bronze: #3d2e1a;
   --color-charcoal: #2a2420;
-  
+
   /* Derived Colors */
   --color-white: #ffffff;
   --color-ivory: #faf7f2;
   --color-dark-brown: #5a4a2a;
   --color-burgundy: #8b3a3a;
-  
+
   /* Strategic Accent Colors */
   --color-teal-elegant: #2d5f5f;
   --color-sage: #7a8e7e;
   --color-warm-gray: #8b8178;
-  
+
   /* CSS Variables for use in custom classes (aliases) */
   --cream: #e9d9c3;
   --cream-dark: #d4c2a8;
@@ -52,17 +52,17 @@
   --teal-elegant: #2d5f5f;
   --sage: #7a8e7e;
   --warm-gray: #8b8178;
-  
+
   /* Font Families */
   --font-family-serif: var(--font-playfair-display), Georgia, serif;
   --font-family-body: var(--font-lora), Georgia, serif;
   --font-family-sans: var(--font-montserrat), system-ui, sans-serif;
-  
+
   /* Font variables (aliases) */
   --font-playfair: var(--font-playfair-display);
   --font-lora: var(--font-lora);
   --font-montserrat: var(--font-montserrat);
-  
+
   /* Shadows - Enhanced with better contrast */
   --shadow-soft: 0 2px 4px rgba(61, 46, 26, 0.08), 0 1px 2px rgba(61, 46, 26, 0.06);
   --shadow-medium: 0 4px 6px rgba(61, 46, 26, 0.1), 0 2px 4px rgba(61, 46, 26, 0.08);
@@ -130,8 +130,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary {
   @apply btn-base;
-  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
-  color: var(--color-deep-bronze);
+  background-image: linear-gradient(to right, var(--gold-dark), var(--gold));
+  background-color: var(--gold);
+  color: var(--deep-bronze);
   padding: 0.75rem 2rem;
   border: none;
   box-shadow: var(--shadow-gold);
@@ -139,8 +140,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(157, 126, 58, 0.45);
-  background: linear-gradient(135deg, var(--color-gold-dark) 0%, var(--color-gold) 100%);
+  box-shadow: var(--shadow-glow);
+  background-image: linear-gradient(to right, var(--gold), var(--gold-light));
 }
 
 .btn-primary:active {
@@ -450,21 +451,21 @@ h1, h2, h3, h4, h5, h6 {
 .text-medium-contrast { color: var(--color-bronze-dark) !important; }
 
 /* Elegant Borders */
-.border-elegant { 
-  border-width: 1.5px !important; 
-  border-color: var(--color-sand-dark) !important; 
+.border-elegant {
+  border-width: 1.5px !important;
+  border-color: var(--color-sand-dark) !important;
 }
-.border-elegant-gold { 
-  border-width: 1.5px !important; 
-  border-color: var(--color-gold-dark) !important; 
+.border-elegant-gold {
+  border-width: 1.5px !important;
+  border-color: var(--color-gold-dark) !important;
 }
 
 /* Refined Shadows */
-.shadow-elegant { 
-  box-shadow: 0 4px 6px rgba(61, 46, 26, 0.08), 0 2px 4px rgba(61, 46, 26, 0.06) !important; 
+.shadow-elegant {
+  box-shadow: 0 4px 6px rgba(61, 46, 26, 0.08), 0 2px 4px rgba(61, 46, 26, 0.06) !important;
 }
-.shadow-hover-elegant { 
-  box-shadow: 0 12px 24px rgba(61, 46, 26, 0.12), 0 6px 12px rgba(61, 46, 26, 0.08) !important; 
+.shadow-hover-elegant {
+  box-shadow: 0 12px 24px rgba(61, 46, 26, 0.12), 0 6px 12px rgba(61, 46, 26, 0.08) !important;
 }
 
 /* Spacing Utilities (Explicit for override safety) */

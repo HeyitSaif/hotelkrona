@@ -179,12 +179,15 @@ const CareersPage: React.FC = () => {
                 </div>
 
                 {/* Description - Visible on Hover */}
-                <div className="absolute inset-0 p-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <p className="text-white/90 text-base leading-relaxed transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    We foster a supportive and collaborative environment where every team
-                    member is valued. Join a diverse group of professionals who share a
-                    passion for hospitality and excellence.
-                  </p>
+                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-serif text-2xl text-gold mb-4">Team Culture</h3>
+                    <p className="text-white/90 text-base leading-relaxed">
+                      We foster a supportive and collaborative environment where every team
+                      member is valued. Join a diverse group of professionals who share a
+                      passion for hospitality and excellence.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -220,12 +223,15 @@ const CareersPage: React.FC = () => {
                 </div>
 
                 {/* Description - Visible on Hover */}
-                <div className="absolute inset-0 p-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <p className="text-white/90 text-base leading-relaxed transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    Work in a beautiful coastal location just 150 meters from the beach.
-                    Enjoy staff meals, competitive wages, live in the hotel for free, and the opportunity to be part
-                    of Crimea's premier hospitality destination.
-                  </p>
+                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-serif text-2xl text-gold mb-4">Location & Benefits</h3>
+                    <p className="text-white/90 text-base leading-relaxed">
+                      Work in a beautiful coastal location just 150 meters from the beach.
+                      Enjoy staff meals, competitive wages, live in the hotel for free, and the opportunity to be part
+                      of Crimea's premier hospitality destination.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

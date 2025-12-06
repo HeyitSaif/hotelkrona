@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
+import Button from '@/components/ui/Button';
+import { HOTEL_AMENITIES, RESTAURANTS } from '@/lib/constants';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
-import { HOTEL_AMENITIES, RESTAURANTS } from '@/lib/constants';
 
 const amenityCategories = [
   {
@@ -86,7 +85,7 @@ export default function AmenitiesPage() {
               <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Hotel Facilities</span>
               <div className="w-12 h-px bg-gold" />
             </div>
-            
+
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6 text-shadow-strong">
               Our <span className="text-gold">Amenities</span>
             </h1>
@@ -101,7 +100,7 @@ export default function AmenitiesPage() {
       <section className="py-20 bg-deep-bronze relative">
         {/* Subtle pattern */}
         <div className="absolute inset-0 opacity-5">
-           <div 
+           <div
              className="absolute inset-0"
              style={{
                backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
@@ -110,7 +109,7 @@ export default function AmenitiesPage() {
            />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="px-4 md:px-8 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {amenityCategories.map((category, index) => (
               <motion.div
@@ -129,26 +128,26 @@ export default function AmenitiesPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                
+
                 {/* Default overlay - minimal */}
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
-                
+
                 {/* Hover overlay - darker for readability */}
                 <div className="absolute inset-0 bg-charcoal/85 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                
-                {/* Content Container */}
-                <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  {/* Header - Visible by default, hidden on hover */}
-                  <div className="transition-all duration-300 opacity-100 group-hover:opacity-0">
-                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-ivory">
-                      {category.title.split(' ')[0]}
-                    </h3>
-                  </div>
-                  
-                  {/* Details - Visible on hover */}
-                  <ul className="space-y-2 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+
+                {/* Title - Visible by default, hidden on hover */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                    {category.title}
+                  </h3>
+                </div>
+
+                {/* Features List - Visible on Hover */}
+                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <h3 className="font-serif text-2xl text-gold mb-4">{category.title}</h3>
+                  <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     {category.features.map((feature: string, idx: number) => (
-                      <li key={idx} className="flex items-start gap-2 text-ivory/90 text-sm">
+                      <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
                         <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
@@ -162,24 +161,40 @@ export default function AmenitiesPage() {
       </section>
 
       {/* Restaurants Preview */}
-      <section className="py-16 bg-charcoal">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-charcoal relative">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}
+          />
+        </div>
+
+        <div className="px-4 md:px-8 relative z-10">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="font-serif text-3xl font-bold text-ivory mb-4">
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold text-sm tracking-[0.2em] uppercase font-sans">Taste the World</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-ivory mb-4">
               Three <span className="text-gold">Restaurants</span>
             </h2>
-            <p className="text-sand max-w-xl mx-auto">
-              A culinary journey through European, Central Asian, and Georgian cuisines
+            <p className="text-ivory/80 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+              A culinary journey awaits you. At the Korona Hotel, we invite you to explore three different culinary worlds, each reflecting the rich flavors and traditions of its culture, brought to life through thoughtful design and captivating culinary experiences.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {RESTAURANTS.map((restaurant, index) => (
               <motion.div
                 key={restaurant.id}
@@ -187,14 +202,56 @@ export default function AmenitiesPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10 text-center hover:border-gold-dark/30 transition-all duration-300 group"
+                className="group relative"
               >
-                <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {restaurant.id === 'romanov' ? '🍷' : restaurant.id === 'uzbek-tatar' ? '🥘' : '🍇'}
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: restaurant.id === 'romanov'
+                        ? "url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80')"
+                        : restaurant.id === 'uzbek-tatar'
+                        ? "url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80')"
+                        : "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80')"
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg mb-2">
+                      {restaurant.name}
+                    </h3>
+                    <p className="text-gold-light font-medium text-sm uppercase tracking-wide">{restaurant.cuisine}</p>
+                  </div>
+
+                  {/* Details - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex-1">
+                      <h3 className="font-serif text-2xl text-gold mb-3">{restaurant.name}</h3>
+                      <p className="text-gold-light font-semibold text-sm uppercase tracking-wide mb-4">{restaurant.cuisine}</p>
+                      <p className="text-white/90 text-base leading-relaxed mb-6">{restaurant.atmosphere}</p>
+                    </div>
+                    <div className="flex gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                      <Link href="/contact" className="flex-1">
+                        <button className="w-full px-4 py-2.5 bg-gold hover:bg-gold-light text-charcoal rounded-lg font-semibold text-sm transition-colors duration-200">
+                          Menu
+                        </button>
+                      </Link>
+                      <Link href="/booking" className="flex-1">
+                        <button className="w-full px-4 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-lg font-semibold text-sm transition-colors duration-200">
+                          Reserve
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-serif text-xl text-gold-darker mb-2">{restaurant.name}</h3>
-                <p className="text-sand font-medium text-sm mb-4 uppercase tracking-wide">{restaurant.cuisine}</p>
-                <p className="text-ivory/70 text-sm italic">{restaurant.atmosphere}</p>
               </motion.div>
             ))}
           </div>
@@ -207,7 +264,7 @@ export default function AmenitiesPage() {
            <div className="absolute right-0 bottom-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
            <div className="absolute left-0 top-0 w-96 h-96 bg-gold rounded-full blur-[100px]" />
         </div>
-        
+
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ y: 30, opacity: 0 }}

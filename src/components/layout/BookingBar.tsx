@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDownIcon, CalendarIcon, UsersIcon } from '@heroicons/react/24/outline';
 import Button from '@/components/ui/Button';
+import { CalendarIcon, ChevronDownIcon, UsersIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 interface BookingBarProps {
   className?: string;
@@ -107,7 +107,12 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                 </div>
 
                 <div>
-                  <Button type="submit" size="lg" variant="primary" className="shadow-lg hover:shadow-xl whitespace-nowrap">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    variant="primary"
+                    className="text-base px-10 py-4 shadow-gold hover:shadow-glow min-w-[200px] bg-gradient-to-r from-gold-dark to-gold hover:from-gold hover:to-gold-light hover:scale-105 active:scale-95 transform transition-all duration-300 whitespace-nowrap"
+                  >
                     Check Availability
                   </Button>
                 </div>
@@ -193,7 +198,12 @@ const BookingBar: React.FC<BookingBarProps> = ({ className = "" }) => {
                         </select>
                       </div>
 
-                      <Button type="submit" size="lg" variant="primary" className="w-full shadow-lg py-4">
+                      <Button
+                        type="submit"
+                        size="lg"
+                        variant="primary"
+                        className="w-full text-base px-10 py-4 shadow-gold hover:shadow-glow bg-gradient-to-r from-gold-dark to-gold hover:from-gold hover:to-gold-light hover:scale-105 active:scale-95 transform transition-all duration-300"
+                      >
                         Check Availability
                       </Button>
                     </form>

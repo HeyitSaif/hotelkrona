@@ -308,25 +308,29 @@ export const EVENT_TYPES = [
     id: 'birthdays',
     title: 'Birthdays',
     description: 'From intimate dinners to big milestone parties',
-    icon: '🎂'
+    icon: '🎂',
+    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80'
   },
   {
     id: 'anniversaries',
     title: 'Anniversaries',
     description: 'Romantic dinners or family celebrations',
-    icon: '💍'
+    icon: '💍',
+    image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&q=80'
   },
   {
     id: 'corporate',
     title: 'Corporate Events',
     description: 'Team dinners, product launches, cocktail receptions',
-    icon: '🤝'
+    icon: '🤝',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80'
   },
   {
     id: 'private',
     title: 'Private Gatherings',
     description: 'Baby showers, reunions, bachelor/bachelorette nights',
-    icon: '🎉'
+    icon: '🎉',
+    image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80'
   }
 ];
 
@@ -336,6 +340,7 @@ export const CELEBRATION_PACKAGES = [
     id: 'dinner-drinks',
     name: 'Dinner & Drinks',
     description: 'Perfect for sit-down celebrations',
+    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80',
     features: [
       'Set menu or buffet options',
       'Welcome drink for guests',
@@ -348,6 +353,7 @@ export const CELEBRATION_PACKAGES = [
     id: 'cocktail-party',
     name: 'Cocktail Party',
     description: 'Stand-up reception with entertainment',
+    image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&q=80',
     features: [
       'Canapés & finger food selection',
       'Premium bar packages',
@@ -360,6 +366,7 @@ export const CELEBRATION_PACKAGES = [
     id: 'custom',
     name: 'Custom Celebration',
     description: 'Tailored to your unique vision',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',
     features: [
       'Personalized event concept',
       'Custom menu creation',

@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import { WEDDING_PACKAGES, EVENT_SPACES } from '@/lib/constants';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 export default function WeddingsPage() {
   const [formData, setFormData] = useState({
@@ -25,105 +23,158 @@ export default function WeddingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-charcoal">
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80"
-            alt="Weddings at Hotel Korona"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/80" />
-        </div>
+    <div className="min-h-screen bg-charcoal relative">
+      {/* Fixed Full-Page Video Background */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/Wedding.mp4" type="video/mp4" />
+        </video>
+        {/* Global Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center justify-center space-x-4 mb-6">
-                <div className="w-12 h-px bg-gold" />
-                <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Say I Do</span>
-                <div className="w-12 h-px bg-gold" />
-              </div>
-              
-              <h1 className="font-serif text-5xl md:text-7xl font-bold text-ivory mb-6 text-shadow-strong">
-                Weddings at <span className="text-gold">Hotel Korona</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-ivory/90 mb-10 text-shadow max-w-2xl mx-auto">
-                Elegant seaside celebrations for up to 100 guests
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact-form">
-                  <Button size="lg" variant="primary">
-                    Request a Proposal
-                  </Button>
-                </a>
-                <Button size="lg" variant="secondary">
-                  Download Wedding Brochure
-                </Button>
-              </div>
-            </motion.div>
-          </div>
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ zIndex: 1 }}>
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Say I Do</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
+              Weddings at <span className="text-gold">Hotel Korona</span>
+            </h1>
+            <p className="text-xl text-white/95 max-w-2xl mx-auto text-shadow-light font-medium">
+              Elegant seaside celebrations for up to 100 guests
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Why This Venue */}
-      <section className="py-24 bg-cream relative">
-        <div className="container mx-auto px-4">
+      <section className="py-24 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-dark-brown mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Why Choose Us</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Why Choose <span className="text-gold">Our Venue</span>
             </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Everything you need for your perfect wedding day
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: '🌊',
                 title: 'Ceremony by the Sea',
-                description: 'Private beachfront deck available for stunning seaside ceremonies'
+                image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+                features: [
+                  'Private beachfront deck',
+                  'Stunning seaside views',
+                  'Perfect photo opportunities',
+                  'Sunset ceremonies available'
+                ]
               },
               {
-                icon: '🏰',
                 title: 'All-in-One Venue',
-                description: 'Ceremony, dinner, and party all in one beautiful location'
+                image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
+                features: [
+                  'Ceremony & reception',
+                  'Castle-style architecture',
+                  'Multiple event spaces',
+                  'Seamless transitions'
+                ]
               },
               {
-                icon: '👔',
                 title: 'Dedicated Planner',
-                description: 'Personal wedding coordinator to manage every detail of your day'
+                image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80',
+                features: [
+                  'Personal coordinator',
+                  'Full-service planning',
+                  'Day-of coordination',
+                  'Every detail managed'
+                ]
               },
               {
-                icon: '🛏️',
                 title: 'Guest Accommodation',
-                description: 'Special room rates for guests and complimentary bridal suite'
+                image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80',
+                features: [
+                  'Special room rates',
+                  'Complimentary bridal suite',
+                  'Room blocks available',
+                  'Late checkout options'
+                ]
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 30, opacity: 0 }}
+                initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-xl transition-shadow"
+                className="group relative"
               >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="font-serif text-xl text-dark-brown mb-3 font-bold">{feature.title}</h3>
-                <p className="text-bronze text-sm leading-relaxed">{feature.description}</p>
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${feature.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      {feature.title}
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {feature.features.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -131,90 +182,159 @@ export default function WeddingsPage() {
       </section>
 
       {/* Wedding Packages */}
-      <section className="py-24 bg-deep-bronze relative">
-        <div className="absolute inset-0 opacity-5">
-           <div 
-             className="absolute inset-0"
-             style={{
-               backgroundImage: `radial-gradient(circle at 2px 2px, #d4a574 1px, transparent 0)`,
-               backgroundSize: '40px 40px'
-             }}
-           />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
-              Wedding <span className="text-gold">Packages</span>
-            </h2>
-            <p className="text-sand text-lg">Choose the perfect package for your celebration</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {WEDDING_PACKAGES.map((pkg, index) => (
-              <motion.div
-                key={pkg.id}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`glass-morphism-dark rounded-2xl p-8 border ${
-                  pkg.popular ? 'border-gold shadow-2xl scale-105' : 'border-gold-dark/10'
-                } hover:border-gold-dark/30 transition-all relative`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-charcoal px-4 py-1 rounded-full text-sm font-bold">
-                    Most Popular
-                  </div>
-                )}
-                <h3 className="font-serif text-2xl text-gold-darker mb-3">{pkg.name}</h3>
-                <p className="text-sand text-sm mb-4">{pkg.description}</p>
-                <div className="text-ivory font-semibold mb-6">{pkg.priceFrom}</div>
-                <ul className="space-y-3">
-                  {pkg.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-ivory/90 text-sm">
-                      <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
+        <div className="px-4 md:px-8">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <a href="#contact-form" className="text-gold-darker hover:text-gold transition-colors font-semibold inline-flex items-center gap-2">
-              Compare all inclusions
-              <span>→</span>
-            </a>
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Packages</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+              Wedding <span className="text-gold">Packages</span>
+            </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Choose the perfect package for your celebration
+            </p>
           </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                id: 'elopement',
+                name: 'Intimate Elopement',
+                description: 'Perfect for small, intimate ceremonies',
+                image: 'https://images.unsplash.com/photo-1522413452208-996ff3f3e740?w=800&q=80',
+                features: [
+                  'Ceremony setup for 2-10 guests',
+                  'Romantic beachfront location',
+                  'Private dinner service',
+                  'Professional photography (2 hours)',
+                  'Bouquet & boutonniere',
+                  'Celebration champagne'
+                ]
+              },
+              {
+                id: 'premium',
+                name: 'Premium Package',
+                description: 'Enhanced celebration with premium services',
+                image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+                features: [
+                  'Venue rental & ceremony setup',
+                  'Upgraded floral décor',
+                  'Professional photographer (6 hours)',
+                  'Live music or DJ',
+                  'Extended premium bar',
+                  'Wedding cake',
+                  'Bridal suite accommodation'
+                ],
+                popular: true
+              },
+              {
+                id: 'classic',
+                name: 'Classic Package',
+                description: 'Everything you need for a beautiful celebration',
+                image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80',
+                features: [
+                  'Venue rental for ceremony & reception',
+                  'Basic décor and setup',
+                  '3-course wedding menu',
+                  'Standard bar package',
+                  'Tables, chairs & linens',
+                  'Event coordinator'
+                ]
+              }
+            ].map((pkg, index) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative"
+              >
+                <div className={`relative h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${
+                  pkg.popular ? 'ring-2 ring-gold' : ''
+                }`}>
+                  {pkg.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-charcoal px-4 py-1 rounded-full text-sm font-bold z-20">
+                      Most Popular
+                    </div>
+                  )}
+
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('${pkg.image}')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      {pkg.name}
+                    </h3>
+                  </div>
+
+                  {/* Features List - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">{pkg.name}</h3>
+                    <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Detailed Services */}
-      <section className="py-24 bg-charcoal">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Services</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Wedding <span className="text-gold">Services</span>
             </h2>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Comprehensive services for every aspect of your wedding
+            </p>
           </motion.div>
 
           <div className="space-y-24">
@@ -287,15 +407,17 @@ export default function WeddingsPage() {
                 </div>
 
                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                  <h3 className="font-serif text-3xl text-gold-darker mb-6">{service.title}</h3>
-                  <ul className="space-y-3">
-                    {service.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-ivory/90">
-                        <span className="w-1.5 h-1.5 bg-gold rounded-full mt-2 flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 border border-gold-dark/20">
+                    <h3 className="font-serif text-3xl text-deep-bronze mb-6">{service.title}</h3>
+                    <ul className="space-y-3">
+                      {service.items.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-bronze-dark">
+                          <span className="w-1.5 h-1.5 bg-gold rounded-full mt-2 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -304,19 +426,29 @@ export default function WeddingsPage() {
       </section>
 
       {/* Real Weddings Gallery */}
-      <section className="py-24 bg-deep-bronze relative">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            transition={{ duration: 0.6 }}
+            className="mb-16 flex flex-col items-center justify-center text-center"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+            {/* Label with lines */}
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="h-px w-12 bg-gold"></div>
+              <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Gallery</span>
+              <div className="h-px w-12 bg-gold"></div>
+            </div>
+
+            {/* Main Heading */}
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
               Real <span className="text-gold">Weddings</span>
             </h2>
-            <p className="text-sand text-lg">Celebrations we've had the honor to host</p>
+            <p className="text-base md:text-lg text-ivory/90 leading-relaxed max-w-3xl mx-auto">
+              Celebrations we've had the honor to host
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -355,18 +487,18 @@ export default function WeddingsPage() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="glass-morphism-dark rounded-2xl p-8 border border-gold-dark/10 max-w-3xl mx-auto"
+            className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 border border-gold-dark/20 max-w-3xl mx-auto"
           >
-            <p className="text-ivory/90 text-lg italic text-center mb-4">
+            <p className="text-bronze-dark text-lg italic text-center mb-4">
               "Our wedding at Hotel Korona was absolutely magical. The beachfront ceremony was stunning, the food was incredible, and the staff took care of every detail. Our guests are still talking about it!"
             </p>
-            <p className="text-gold-darker text-center font-semibold">— Sofia & Alex</p>
+            <p className="text-gold text-center font-semibold">— Sofia & Alex</p>
           </motion.div>
         </div>
       </section>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-24 bg-charcoal">
+      <section id="contact-form" className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -376,13 +508,21 @@ export default function WeddingsPage() {
             className="max-w-3xl mx-auto"
           >
             <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-ivory mb-4">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Get In Touch</span>
+                <div className="h-px w-12 bg-gold"></div>
+              </div>
+
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
                 Plan Your <span className="text-gold">Wedding</span>
               </h2>
-              <p className="text-sand text-lg">Tell us about your dream wedding and we'll create a custom proposal</p>
+              <p className="text-base md:text-lg text-ivory/90 leading-relaxed">
+                Tell us about your dream wedding and we'll create a custom proposal
+              </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="glass-morphism-dark rounded-2xl p-8 md:p-12 border border-gold-dark/10">
+            <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-xl rounded-2xl p-8 md:p-12 border border-gold-dark/20 shadow-2xl">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <Input
                   label="Your Name"
@@ -427,12 +567,12 @@ export default function WeddingsPage() {
               </div>
 
               <div className="mb-8">
-                <label className="block text-sand mb-2 font-semibold">Tell us about your wedding</label>
+                <label className="block text-deep-bronze mb-2 font-semibold">Tell us about your wedding</label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
-                  className="w-full bg-charcoal/50 border border-gold-dark/20 rounded-lg px-4 py-3 text-ivory focus:outline-none focus:border-gold transition-colors"
+                  className="w-full bg-white border border-gold-dark/30 rounded-lg px-4 py-3 text-deep-bronze focus:outline-none focus:border-gold transition-colors"
                   placeholder="Share your vision, special requests, or questions..."
                   required
                 />
@@ -447,7 +587,7 @@ export default function WeddingsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-deep-bronze">
+      <section className="py-24 md:py-32 relative" style={{ zIndex: 1 }}>
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
@@ -456,9 +596,17 @@ export default function WeddingsPage() {
             transition={{ duration: 0.8 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="font-serif text-4xl font-bold text-ivory mb-12 text-center">
-              Frequently Asked <span className="text-gold">Questions</span>
-            </h2>
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">FAQ</span>
+                <div className="h-px w-12 bg-gold"></div>
+              </div>
+
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ivory mb-4">
+                Frequently Asked <span className="text-gold">Questions</span>
+              </h2>
+            </div>
 
             <div className="space-y-6">
               {[
@@ -485,20 +633,20 @@ export default function WeddingsPage() {
                   whileInView={{ y: 0, opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="glass-morphism-dark rounded-xl p-6 border border-gold-dark/10"
+                  className="bg-white/95 backdrop-blur-xl rounded-xl p-6 border border-gold-dark/20"
                 >
-                  <h3 className="font-serif text-lg text-gold-darker mb-3">{faq.q}</h3>
-                  <p className="text-sand">{faq.a}</p>
+                  <h3 className="font-serif text-lg text-deep-bronze mb-3">{faq.q}</h3>
+                  <p className="text-bronze-dark">{faq.a}</p>
                 </motion.div>
               ))}
             </div>
 
-            <div className="mt-12 text-center glass-morphism-dark rounded-xl p-8 border border-gold-dark/10">
-              <h3 className="font-serif text-xl text-ivory mb-2">Wedding Coordinator</h3>
-              <p className="text-sand mb-4">Contact our dedicated wedding specialist</p>
-              <p className="text-gold-darker font-semibold">Marina Petrova</p>
-              <p className="text-sand">weddings@hotelkorona.com</p>
-              <p className="text-sand">+7 (978) 705 33 34</p>
+            <div className="mt-12 text-center bg-white/95 backdrop-blur-xl rounded-xl p-8 border border-gold-dark/20">
+              <h3 className="font-serif text-xl text-deep-bronze mb-2">Wedding Coordinator</h3>
+              <p className="text-bronze-dark mb-4">Contact our dedicated wedding specialist</p>
+              <p className="text-gold font-semibold">Marina Petrova</p>
+              <p className="text-bronze-dark">weddings@hotelkorona.com</p>
+              <p className="text-bronze-dark">+7 (978) 705 33 34</p>
             </div>
           </motion.div>
         </div>

@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
 
 const galleryImages = [
   { src: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80', category: 'exterior', title: 'Hotel Exterior' },
@@ -33,8 +33,8 @@ export default function GalleryPage() {
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const filteredImages = filter === 'all' 
-    ? galleryImages 
+  const filteredImages = filter === 'all'
+    ? galleryImages
     : galleryImages.filter(img => img.category === filter);
 
   const openLightbox = (index: number) => {
@@ -86,7 +86,7 @@ export default function GalleryPage() {
               <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Photo Gallery</span>
               <div className="w-12 h-px bg-gold" />
             </div>
-            
+
             <h1 className="font-serif text-4xl md:text-6xl font-bold text-ivory mb-6 text-shadow-strong">
               Our <span className="text-gold">Gallery</span>
             </h1>
@@ -121,7 +121,7 @@ export default function GalleryPage() {
       {/* Gallery Grid */}
       <section className="py-12 bg-deep-bronze min-h-[50vh]">
         <div className="container mx-auto px-4">
-          <motion.div 
+          <motion.div
             layout
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
