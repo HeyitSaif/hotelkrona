@@ -418,6 +418,7 @@ export interface JobPosition {
   employmentType: 'Full-time' | 'Part-time' | 'Seasonal';
   location: string;
   description: string;
+  hoverDescription?: string;
   responsibilities: string[];
   requirements: string[];
   weOffer: string[];
@@ -433,6 +434,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona, Utyos, Crimea',
     description: 'We are looking for a friendly and professional Front Desk Receptionist to be the first point of contact for our guests. You will handle check-ins, reservations, and ensure every guest feels welcome.',
+    hoverDescription: 'Be the first smile guests see when they arrive at the Black Sea and the last friendly face when they leave.',
     responsibilities: [
       'Greet and assist guests during check-in and check-out',
       'Handle reservations and room assignments',
@@ -462,6 +464,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona, Utyos, Crimea',
     description: 'Join our maintenance team to ensure our hotel facilities and guest rooms are in perfect condition. You will handle repairs, preventive maintenance, and technical support.',
+    hoverDescription: 'Keep our "castle by the sea" running smoothly – from small repairs to regular checks that keep guests safe and happy.',
     responsibilities: [
       'Perform routine maintenance and repairs on hotel facilities',
       'Respond to maintenance requests from guests and staff',
@@ -491,6 +494,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona Restaurants, Utyos, Crimea',
     description: 'We are seeking enthusiastic Restaurant Servers to join our dining team. You will provide excellent service to our guests while creating memorable dining experiences.',
+    hoverDescription: 'Turn good food into great evenings by serving our guests with energy, charm, and professionalism.',
     responsibilities: [
       'Take orders and serve food and beverages to guests',
       'Provide menu recommendations and answer questions',
@@ -520,6 +524,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona, Utyos, Crimea',
     description: 'We need dedicated Housekeepers to maintain the cleanliness and comfort of our guest rooms and public areas. Your attention to detail will ensure our guests enjoy a spotless environment.',
+    hoverDescription: 'Help create the feeling guests remember most a clean, fresh, comfortable room they are happy to return to every night.',
     responsibilities: [
       'Clean and organize guest rooms to hotel standards',
       'Change linens, replenish amenities, and remove trash',
@@ -549,6 +554,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona Restaurants, Utyos, Crimea',
     description: 'We are looking for an experienced Chef to lead our kitchen team and create delicious dishes for our guests. You will oversee menu development, food preparation, and kitchen operations.',
+    hoverDescription: 'Cook in a professional kitchen where guests come specifically for good food and where your ideas and quality are noticed.',
     responsibilities: [
       'Plan and execute menu items for our restaurants',
       'Supervise kitchen staff and coordinate food preparation',
@@ -578,6 +584,7 @@ export const JOB_POSITIONS: JobPosition[] = [
     employmentType: 'Full-time',
     location: 'Hotel Korona Restaurants, Utyos, Crimea',
     description: 'Join our kitchen team as a Kitchen Assistant and support our chefs in preparing high-quality meals. This is a great opportunity to learn and grow in the culinary field.',
+    hoverDescription: 'Start your kitchen career at the seaside no experience needed, just energy and willingness to learn.',
     responsibilities: [
       'Assist chefs with food preparation and cooking',
       'Maintain cleanliness and organization in the kitchen',

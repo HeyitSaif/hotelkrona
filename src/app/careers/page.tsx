@@ -2,10 +2,25 @@
 
 import JobCard from '@/components/ui/JobCard';
 import { HOTEL_INFO, JOB_POSITIONS } from '@/lib/constants';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useRef } from 'react';
 
 const CareersPage: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const cardWidth = 340;
+      const gap = 24;
+      const scrollAmount = cardWidth + gap;
+
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
   // Generate JSON-LD structured data for job postings
   const jobPostingsSchema = {
     "@context": "https://schema.org",
@@ -48,199 +63,395 @@ const CareersPage: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-sand-light">
+    <div className="min-h-screen bg-charcoal relative">
       {/* SEO: JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingsSchema) }}
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-bronze-dark via-deep-bronze to-bronze-dark text-white overflow-hidden">
-        {/* Background Image Overlay */}
-        <div
-          className="absolute inset-0 opacity-20 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&q=80')"
-          }}
-        />
+      {/* Fixed Full-Page Video Background */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        >
+          <source src="/Career.mp4" type="video/mp4" />
+        </video>
+        {/* Global Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
-        <div className="relative container mx-auto px-4 py-20 md:py-32">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Careers at Hotel Korona
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-gold-darker text-sm tracking-[0.2em] uppercase font-sans">Join Our Team</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+
+            <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 text-shadow-strong">
+              Work where others go on <span className="text-gold">holiday</span>
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed text-sand-light">
-              Join our team and help us create unforgettable stays for our guests.
-              We offer a friendly work environment, fair pay, and opportunities to
-              grow within the hotel.
+            <p className="text-xl text-white/95 max-w-2xl mx-auto text-shadow-light font-medium">
+              Join the Hotel Korona team in Utyos, Crimea – live by the sea, grow in hospitality, and work with a team that treats you like family, not a number.
             </p>
           </motion.div>
-        </div>
-
-        {/* Decorative Bottom Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg className="w-full h-12 md:h-20" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path
-              d="M0,0 C150,60 350,0 600,40 C850,80 1050,20 1200,60 L1200,120 L0,120 Z"
-              fill="#FAF8F3"
-            />
-          </svg>
         </div>
       </section>
 
       {/* Open Positions Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
+      <section id="positions" className="py-24 md:py-32 bg-sand relative overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Left: Hero Image - 37.5% width, full height from viewport edge */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="hidden md:block absolute inset-y-0 left-0 w-[37.5%]"
+        >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            transition={{ duration: 0.8 }}
+            className="h-full"
           >
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-bronze-dark mb-4">
-              Open Positions
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our current job openings and find your perfect role at Hotel Korona
-            </p>
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80')`,
+              }}
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
           </motion.div>
+        </motion.div>
 
-          {/* Job Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {JOB_POSITIONS.map((job, index) => (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <JobCard job={job} />
-              </motion.div>
-            ))}
-          </div>
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
+          <div className="absolute top-1/2 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
         </div>
-      </section>
 
-      {/* Working at Hotel Korona Section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-bronze-dark mb-4">
-              Working at Hotel Korona
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Discover what makes our hotel a great place to build your career
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {/* Team Culture */}
+        {/* Content Container */}
+        <div className="relative z-10">
+          <div className="md:ml-[30%] px-4 md:px-8">
+            {/* Section Label and Heading */}
             <motion.div
-              initial={{ y: 50, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="group relative"
+              transition={{ duration: 0.6 }}
+              className="mb-10 flex flex-col items-center justify-center text-center"
             >
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                {/* Background Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80')`
-                  }}
-                />
-
-                {/* Default Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Title - Visible by default */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                    Team Culture
-                  </h3>
-                </div>
-
-                {/* Description - Visible on Hover */}
-                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="font-serif text-2xl text-gold mb-4">Team Culture</h3>
-                    <p className="text-white/90 text-base leading-relaxed">
-                      We foster a supportive and collaborative environment where every team
-                      member is valued. Join a diverse group of professionals who share a
-                      passion for hospitality and excellence.
-                    </p>
-                  </div>
-                </div>
+              {/* Label with lines */}
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Opportunities</span>
+                <div className="h-px w-12 bg-gold"></div>
               </div>
+
+              {/* Main Heading */}
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-dark-brown">
+                Open <span className="text-gold">Positions</span>
+              </h2>
             </motion.div>
 
-            {/* Location & Benefits */}
+            {/* Carousel */}
             <motion.div
-              initial={{ y: 50, opacity: 0 }}
+              initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="group relative"
+              className="relative mb-10"
             >
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                {/* Background Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80')`
-                  }}
-                />
+              {/* Left Arrow */}
+              <button
+                onClick={() => scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 bg-white/95 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                aria-label="Previous positions"
+              >
+                <ChevronLeftIcon className="w-5 h-5 text-charcoal" />
+              </button>
 
-                {/* Default Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+              {/* Right Arrow */}
+              <button
+                onClick={() => scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-11 md:h-11 bg-white/95 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                aria-label="Next positions"
+              >
+                <ChevronRightIcon className="w-5 h-5 text-charcoal" />
+              </button>
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Title - Visible by default */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
-                  <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                    Location & Benefits
-                  </h3>
-                </div>
-
-                {/* Description - Visible on Hover */}
-                <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="font-serif text-2xl text-gold mb-4">Location & Benefits</h3>
-                    <p className="text-white/90 text-base leading-relaxed">
-                      Work in a beautiful coastal location just 150 meters from the beach.
-                      Enjoy staff meals, competitive wages, live in the hotel for free, and the opportunity to be part
-                      of Crimea's premier hospitality destination.
-                    </p>
-                  </div>
+              {/* Scrollable Container */}
+              <div
+                ref={scrollContainerRef}
+                className="overflow-x-auto scrollbar-hide scroll-smooth px-12"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                <div className="flex gap-6">
+                  {JOB_POSITIONS.map((job, index) => (
+                    <div
+                      key={job.id}
+                      className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px]"
+                    >
+                      <JobCard job={job} />
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
+
+        {/* Hide scrollbar globally for this section */}
+        <style jsx>{`
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden min-h-[80vh] flex items-center justify-center">
+      {/* Benefits Section - Amenities Style */}
+      <section className="py-24 md:py-32 bg-sand relative overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Right: Hero Image - 37.5% width, full height from viewport edge */}
+        <div className="hidden md:block absolute inset-y-0 right-0 w-[37.5%]">
+          <motion.div
+            initial={{ x: 50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="h-full"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&q=80')`,
+              }}
+            />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent" />
+          </motion.div>
+        </div>
+
+        {/* Background decoration */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
+          <div className="absolute top-1/2 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -translate-y-1/2" />
+        </div>
+
+        {/* Content Container */}
+        <div className="relative z-10">
+          <div className="md:mr-[30%] px-4 md:px-8">
+            {/* Section Label and Heading */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-10 flex flex-col items-center justify-center text-center"
+            >
+              {/* Label with lines */}
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="h-px w-12 bg-gold"></div>
+                <span className="text-gold text-xs tracking-[0.25em] uppercase font-sans font-bold">Why Join Us</span>
+                <div className="h-px w-12 bg-gold"></div>
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-dark-brown">
+                Why your next job should be by the <span className="text-gold">sea</span>
+              </h2>
+            </motion.div>
+
+            {/* Benefits Grid - Image Tiles */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Life by the Sea */}
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="group relative"
+              >
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Life by the Sea
+                    </h3>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 overflow-y-auto">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-serif text-2xl text-gold mb-4">Life by the Sea</h3>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        Work in a beautiful coastal location just 150 meters from the Black Sea – with beaches and mountains only a short walk away. Start your shift with sea air instead of city smog and finish the day where other people come only for vacation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Pay & Perks You Can Trust */}
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="group relative"
+              >
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/photo-1554224311-beee460ae6ba?w=800&q=80')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Pay & Perks You Can Trust
+                    </h3>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 overflow-y-auto">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-serif text-2xl text-gold mb-4">Pay & Perks You Can Trust</h3>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        Enjoy fair, on‑time salary with transparent conditions for seasonal and long‑term contracts. Get hot staff meals during your shifts and live in the hotel for free or in nearby staff housing, so moving here is easy and low‑stress.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Growth & Training */}
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group relative"
+              >
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Growth & Training
+                    </h3>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 overflow-y-auto">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-serif text-2xl text-gold mb-4">Growth & Training</h3>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        No experience? No problem. We offer training for entry‑level candidates and show you our standards step by step. From kitchen helper to cook or from cleaner to supervisor – there are clear, realistic paths to grow into more senior roles if you show commitment.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Real Team Culture */}
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="group relative"
+              >
+                <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Background Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80')`
+                    }}
+                  />
+
+                  {/* Default Overlay - Subtle */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60 transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Hover Overlay - Darker for readability */}
+                  <div className="absolute inset-0 bg-charcoal/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Title - Visible by default, hidden on hover */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                    <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                      Real Team Culture
+                    </h3>
+                  </div>
+
+                  {/* Description - Visible on Hover */}
+                  <div className="absolute inset-0 p-6 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 overflow-y-auto">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <h3 className="font-serif text-2xl text-gold mb-4">Real Team Culture</h3>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        We foster a supportive, collaborative environment where every team member is valued and seen. Managers are on site, approachable, and work closely with the team, so your ideas are heard and good performance is noticed quickly – not lost in a big chain.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Video Background */}
+      <section className="relative overflow-hidden min-h-[90vh] flex items-center justify-center" style={{ zIndex: 1 }}>
         {/* Background Video */}
         <div className="absolute inset-0 z-0">
           <video
@@ -256,7 +467,7 @@ const CareersPage: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-20">
+        <div className="container mx-auto px-4 relative z-20 py-32">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -267,7 +478,9 @@ const CareersPage: React.FC = () => {
             {/* Section Label */}
             <div className="flex items-center justify-center space-x-6 mb-8">
               <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
-              <span className="text-gold-light text-sm tracking-[0.15em] uppercase font-sans font-bold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>Join Our Team</span>
+              <span className="text-gold-light text-sm tracking-[0.15em] uppercase font-sans font-bold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
+                Join Our Team
+              </span>
               <div className="w-20 h-px bg-gradient-to-r from-transparent via-gold-light to-transparent" />
             </div>
 
@@ -344,7 +557,7 @@ const CareersPage: React.FC = () => {
         <div className="absolute bottom-12 left-12 w-32 h-32 border-l-[2px] border-b-[2px] border-gold-light/50 z-20 hidden md:block" />
         <div className="absolute bottom-12 right-12 w-32 h-32 border-r-[2px] border-b-[2px] border-gold-light/50 z-20 hidden md:block" />
       </section>
-    </main>
+    </div>
   );
 };
 

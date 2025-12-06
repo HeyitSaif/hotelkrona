@@ -164,10 +164,11 @@ export default function WeddingsPage() {
                   </div>
 
                   {/* Features List - Visible on Hover */}
-                  <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <div className="absolute inset-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex flex-col justify-center">
+                    <h3 className="font-serif text-2xl text-gold mb-4">{feature.title}</h3>
                     <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       {feature.features.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm">
+                        <li key={idx} className="flex items-start gap-2 text-white/90 text-sm leading-relaxed">
                           <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
                           <span>{item}</span>
                         </li>

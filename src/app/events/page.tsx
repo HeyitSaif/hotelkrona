@@ -108,6 +108,7 @@ export default function EventsPage() {
 
                   {/* Features List - Visible on Hover */}
                   <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <h3 className="font-serif text-2xl text-gold mb-4">Weddings</h3>
                     <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <li className="flex items-start gap-2 text-white/90 text-sm">
                         <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
@@ -166,13 +167,13 @@ export default function EventsPage() {
                   {/* Title - Visible by default, hidden on hover */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10 transition-all duration-300 opacity-100 group-hover:opacity-0">
                     <h3 className="font-serif text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-                      Celebrations
+                      Parties & Celebrations
                     </h3>
                   </div>
 
                   {/* Features List - Visible on Hover */}
                   <div className="absolute inset-0 p-6 pt-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                    <h3 className="font-serif text-2xl text-gold mb-4">Celebrations</h3>
+                    <h3 className="font-serif text-2xl text-gold mb-4">Parties & Celebrations</h3>
                     <ul className="space-y-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                       <li className="flex items-start gap-2 text-white/90 text-sm">
                         <span className="w-1.5 h-1.5 bg-gold rounded-full mt-1.5 flex-shrink-0" />
