@@ -39,33 +39,6 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* Top Info Bar */}
-      <div className="hidden md:block bg-sand border-b border-gold-dark/40">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm py-3.5">
-          <div className="flex items-center space-x-8">
-            <a
-              href={`tel:${HOTEL_INFO.contact.phone}`}
-              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px] font-medium"
-            >
-              <span className="text-base">📞</span>
-              <span>{HOTEL_INFO.contact.phone}</span>
-            </a>
-            <a
-              href={`mailto:${HOTEL_INFO.contact.email}`}
-              className="flex items-center space-x-2 text-bronze-dark hover:text-gold-darker transition-colors duration-300 min-h-[36px] font-medium"
-            >
-              <span className="text-base">✉️</span>
-              <span>{HOTEL_INFO.contact.email}</span>
-            </a>
-          </div>
-          <div className="flex items-center space-x-4">
-            <span className="text-gold-darker font-bold tracking-wide text-sm">
-              Welcome to Hotel Korona
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
       <header
         className={`sticky top-0 z-50 transition-all duration-500 ${
@@ -83,7 +56,7 @@ const Header: React.FC = () => {
             >
               <div className="relative">
                 <Image
-                  src="/crown_Logo.png"
+                  src="/logo_without_text.png"
                   alt="Hotel Korona Logo"
                   height={80}
                   width={240}
@@ -198,7 +171,7 @@ const Header: React.FC = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
                       <Image
-                        src="/logo.png"
+                        src="/logo_without_text.png"
                         alt="Hotel Korona Logo"
                         width={48}
                         height={48}

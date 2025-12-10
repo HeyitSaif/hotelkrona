@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
 import { JobPosition } from '@/lib/constants';
+import Link from 'next/link';
+import React from 'react';
 import Button from './Button';
 
 interface JobCardProps {
@@ -53,7 +53,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
       <div className="absolute inset-0 flex flex-col justify-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
         <div className="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
           <h3 className="font-serif text-2xl md:text-3xl text-gold-light mb-6">{job.title}</h3>
-          
+
           {/* Hover Description */}
           <p className="text-lg md:text-xl text-white/95 leading-relaxed mb-8">
             {job.hoverDescription || job.description}
@@ -61,8 +61,8 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
           {/* Apply Button */}
           <Link href={`/careers/${job.id}`}>
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               className="w-full bg-gradient-to-r from-gold-dark to-gold hover:from-gold hover:to-gold-light"
             >
               View Details & Apply
